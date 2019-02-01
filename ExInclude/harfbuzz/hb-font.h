@@ -535,7 +535,7 @@ hb_font_get_empty (void);
 HB_EXTERN hb_font_t *
 hb_font_reference (hb_font_t *font);
 
-HB_EXTERN void __cdecl
+HB_EXTERN void
 hb_font_destroy (hb_font_t *font);
 
 HB_EXTERN hb_bool_t

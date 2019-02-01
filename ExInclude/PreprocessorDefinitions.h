@@ -6,15 +6,17 @@
 #include <cstdarg>
 #include <ctime>
 
+#include <stdint.h>
+
 template <typename T>
-T __sync_add_and_fetch( volatile T *oldValue, T value )
+T __sync_add_and_fetch( volatile T *oldValue, int value )
 {
   *oldValue += value;
   return *oldValue;
 }
 
 template <typename T>
-T __sync_sub_and_fetch( volatile T *oldValue, T value )
+T __sync_sub_and_fetch( volatile T *oldValue, int value )
 {
   *oldValue -= value;
   return *oldValue;

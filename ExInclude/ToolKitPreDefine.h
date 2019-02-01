@@ -26,5 +26,7 @@ static int rand_r(unsigned int *seed)
 typedef int( __stdcall* _InternalCoreCrtNonSecureSearchSortCompareFunction )( void const*, void const* );
 void __cdecl qsort( void*  _Base, unsigned int _NumOfElements, unsigned int _SizeOfElements, _InternalCoreCrtNonSecureSearchSortCompareFunction _CompareFunction );
 
+typedef size_t ssize_t;
+
 #endif
 #endif

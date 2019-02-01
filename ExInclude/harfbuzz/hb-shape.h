@@ -40,7 +40,7 @@
 HB_BEGIN_DECLS
 
 
-HB_EXTERN void __cdecl
+HB_EXTERN void
 hb_shape (hb_font_t           *font,
 	  hb_buffer_t         *buffer,
 	  const hb_feature_t  *features,

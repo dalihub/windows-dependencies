@@ -24,6 +24,13 @@ int __cdecl setsockopt( int s, int level, int optname, unsigned int * optval, un
 
 int __cdecl setsockopt( int s, int level, int optname, int * optval, unsigned int optlen );
 
+void InternalFree( void* _Block );
+#define free InternalFree
+
+extern int setenv( const char *__name, const char *__value, int __replace );
+
+extern const char* app_get_data_path();
+
 #endif
 
 #endif
