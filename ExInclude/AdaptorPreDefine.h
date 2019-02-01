@@ -24,6 +24,9 @@ int __cdecl setsockopt( int s, int level, int optname, unsigned int * optval, un
 
 int __cdecl setsockopt( int s, int level, int optname, int * optval, unsigned int optlen );
 
+void InternalFree( void* _Block );
+#define free InternalFree
+
 #endif
 
 #endif

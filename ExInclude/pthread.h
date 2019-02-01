@@ -557,7 +557,7 @@ extern "C"
 	* the DLL and application, then you can probably define this as a null string.
 	* Remember that pthread.h (this file) is used for both the DLL and application builds.
 	*/
-#define PTW32_CDECL __cdecl
+#define PTW32_CDECL __stdcall
 
 #if defined(_UWIN) && PTW32_LEVEL >= PTW32_LEVEL_MAX
 #   include     <sys/types.h>

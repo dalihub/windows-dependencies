@@ -1,5 +1,3 @@
-#include <Win32WindowSystem.h>
-
 #define CRYPTO_LOCK 0xFFFFFFFF
 
 int CRYPTO_num_locks()

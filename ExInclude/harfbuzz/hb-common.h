@@ -142,7 +142,7 @@ hb_direction_to_string (hb_direction_t direction);
 
 typedef const struct hb_language_impl_t *hb_language_t;
 
-HB_EXTERN hb_language_t __cdecl
+HB_EXTERN hb_language_t
 hb_language_from_string (const char *str, int len);
 
 HB_EXTERN const char *
