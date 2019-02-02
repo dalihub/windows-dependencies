@@ -386,6 +386,7 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\input-method-context-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\key-grab.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\key-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\keyboard.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\long-press-gesture-detector.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\pan-gesture-detector-base.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\pan-gesture-detector.cpp" />
@@ -406,6 +407,7 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\sensor\common\tilt-sensor-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\styling\common\style-monitor-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\abort-handler.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\color-controller-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\command-line-options.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\environment-options.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\fps-tracker.cpp" />
@@ -431,7 +433,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\widget-application-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\logging.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\callback-manager-win.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\color-controller-impl-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\file-closer-win.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
     </ClCompile>

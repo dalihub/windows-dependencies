@@ -526,9 +526,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-builder-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\color-controller-impl-win.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\image-loader-plugin-proxy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -572,6 +569,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\window-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\color-controller-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -271,6 +271,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\base64-encoding.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\builder.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\json-parser.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\tree-node.cpp" />
@@ -288,6 +289,7 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\page-turn-view\page-turn-view.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\confirmation-popup.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\popup.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scene3d-view\scene3d-view.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\shadow-view\shadow-view.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\super-blur-view\super-blur-view.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-editor-devel.cpp" />
@@ -296,6 +298,7 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-selection-toolbar.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\tool-bar\tool-bar.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\web-view\web-view.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\drag-drop-detector\drag-and-drop-detector.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\focus-manager\keyinput-focus-manager.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\focus-manager\keyboard-focus-manager-devel.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\async-image-loader-devel.cpp" />
@@ -333,7 +336,10 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\style.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\tree-node-manipulator.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\replacement.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\gltf-loader.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\scene3d-view-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\web-view\web-view-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\drag-drop-detector\drag-and-drop-detector-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\bin-layout-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\grid-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\grid-locations.cpp" />

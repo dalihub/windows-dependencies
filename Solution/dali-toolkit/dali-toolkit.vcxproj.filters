@@ -802,6 +802,24 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\animated-vector-image-visual.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\drag-drop-detector\drag-and-drop-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\drag-drop-detector\drag-and-drop-detector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\scene3d-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\gltf-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scene3d-view\scene3d-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\base64-encoding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
