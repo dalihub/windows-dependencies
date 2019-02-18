@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-adaptor.dir\Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-adaptor.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-adaptor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-adaptor.dir\Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-adaptor.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-adaptor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-adaptor.dir\MinSizeRel\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-adaptor.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-adaptor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-adaptor.dir\RelWithDebInfo\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-adaptor.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-adaptor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
@@ -120,8 +120,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>../../../bin/Debug/dali-adaptor.lib</ImportLibrary>
-      <ProgramDataBaseFile>../../../bin/Debug/dali-adaptor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-adaptor.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-adaptor.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -130,13 +130,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\windows-dependencies\ExInclude;..\..\windows-dependencies\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <ForcedIncludeFiles>../windows-dependencies/ExInclude/PreprocessorDefinitions.h;../windows-dependencies/ExInclude/AdaptorPreDefine.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h</ForcedIncludeFiles>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MaxSpeed</Optimization>
@@ -144,7 +144,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="Release";dali_adaptor_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="Release";dali_adaptor_EXPORTS;WIN_CALLBACK_EVENT=9999;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -163,12 +163,12 @@
     </Midl>
     <Link>
       <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../dali-adaptor/../windows-dependencies/ExLib;../../dali-adaptor/../windows-dependencies/ExLib/$(Configuration);../../dali-adaptor/../bin;../../dali-adaptor/../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>../../../bin/Release/dali-adaptor.lib</ImportLibrary>
-      <ProgramDataBaseFile>../../../bin/Release/dali-adaptor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-adaptor.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-adaptor.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -177,13 +177,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\windows-dependencies\ExInclude;..\..\windows-dependencies\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <ForcedIncludeFiles>../windows-dependencies/ExInclude/PreprocessorDefinitions.h;../windows-dependencies/ExInclude/AdaptorPreDefine.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h</ForcedIncludeFiles>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MinSpace</Optimization>
@@ -191,7 +191,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="MinSizeRel";dali_adaptor_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="MinSizeRel";dali_adaptor_EXPORTS;WIN_CALLBACK_EVENT=9999;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -210,12 +210,12 @@
     </Midl>
     <Link>
       <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../dali-adaptor/../windows-dependencies/ExLib;../../dali-adaptor/../windows-dependencies/ExLib/$(Configuration);../../dali-adaptor/../bin;../../dali-adaptor/../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>../../../bin/MinSizeRel/dali-adaptor.lib</ImportLibrary>
-      <ProgramDataBaseFile>../../../bin/MinSizeRel/dali-adaptor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-adaptor.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-adaptor.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -224,14 +224,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\windows-dependencies\ExInclude;..\..\windows-dependencies\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <ForcedIncludeFiles>../windows-dependencies/ExInclude/PreprocessorDefinitions.h;../windows-dependencies/ExInclude/AdaptorPreDefine.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h</ForcedIncludeFiles>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MaxSpeed</Optimization>
@@ -239,7 +239,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="RelWithDebInfo";dali_adaptor_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="RelWithDebInfo";dali_adaptor_EXPORTS;WIN_CALLBACK_EVENT=9999;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
@@ -256,12 +256,12 @@
     </Midl>
     <Link>
       <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../dali-adaptor/../windows-dependencies/ExLib;../../dali-adaptor/../windows-dependencies/ExLib/$(Configuration);../../dali-adaptor/../bin;../../dali-adaptor/../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>../../../bin/RelWithDebInfo/dali-adaptor.lib</ImportLibrary>
-      <ProgramDataBaseFile>../../../bin/RelWithDebInfo/dali-adaptor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-adaptor.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-adaptor.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -284,9 +284,15 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\file-loader.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\image-loading.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\gif-loading.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\input-method-context.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\input-method-options.cpp" />
@@ -318,17 +324,17 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-adaptor-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-gesture-detector.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\windows\accessibility-adaptor-impl-win.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\generic\accessibility-adaptor-impl-generic.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-builder-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\lifecycle-controller-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\application-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\combined-update-render-controller.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\windows\adaptor-impl-win.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\generic\adaptor-impl-generic.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\windows\framework-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\common\clipboard-event-notifier-impl.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\windows\clipboard-impl-win.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\generic\clipboard-impl-generic.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\graphics\gles\egl-debug.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\graphics\gles\egl-graphics-factory.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\graphics\gles\egl-graphics.cpp" />
@@ -348,6 +354,9 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\http-utils.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\image-loader.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\image-operations.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\loader-astc.cpp">
@@ -377,6 +386,9 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\pixel-manipulation.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\windows\curl-environment-win.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\windows\file-download-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\windows\native-image-source-factory-win.cpp" />
@@ -398,7 +410,10 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\windows\key-mapping-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\windows\virtual-keyboard-impl-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\legacy\common\tizen-platform-abstraction.cpp">
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/FMemOpen.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/../ExInclude/PreprocessorDefinitions.h;../ExInclude/FMemOpen.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/../ExInclude/PreprocessorDefinitions.h;../ExInclude/FMemOpen.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/../ExInclude/PreprocessorDefinitions.h;../ExInclude/FMemOpen.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/../ExInclude/PreprocessorDefinitions.h;../ExInclude/FMemOpen.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\legacy\tizen\data-compression.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\network\common\socket-factory.cpp" />
@@ -435,6 +450,9 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\callback-manager-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\file-closer-win.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/AdaptorPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\system-settings-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\timer-impl-win.cpp" />

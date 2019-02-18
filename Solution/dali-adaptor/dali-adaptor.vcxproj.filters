@@ -10,9 +10,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-adaptor-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\windows\accessibility-adaptor-impl-win.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-gesture-detector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -20,9 +17,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\windows\adaptor-impl-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\alpha-mask.cpp">
@@ -59,9 +53,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\common\clipboard-event-notifier-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\windows\clipboard-impl-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\color-controller.cpp">
@@ -575,6 +566,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\generic\accessibility-adaptor-impl-generic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\generic\adaptor-impl-generic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\generic\clipboard-impl-generic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

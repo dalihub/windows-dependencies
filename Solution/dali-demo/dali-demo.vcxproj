@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-demo.dir\Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\Dali\bin\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-demo.dir\Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\Dali\bin\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-demo.dir\MinSizeRel\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\Dali\bin\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-demo.dir\RelWithDebInfo\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
@@ -119,8 +119,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>E:/Dali/bin/Debug/dali-demo.lib</ImportLibrary>
-      <ProgramDataBaseFile>E:/Dali/bin/Debug/dali-demo.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -161,12 +161,12 @@
     </Midl>
     <Link>
       <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:/Dali/windows-dependencies/SampleSolution/../ExLib;E:/Dali/windows-dependencies/SampleSolution/../ExLib/$(Configuration);E:/Dali/windows-dependencies/SampleSolution/../../bin;E:/Dali/windows-dependencies/SampleSolution/../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>E:/Dali/bin/Release/dali-demo.lib</ImportLibrary>
-      <ProgramDataBaseFile>E:/Dali/bin/Release/dali-demo.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -175,7 +175,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -207,12 +207,12 @@
     </Midl>
     <Link>
       <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:/Dali/windows-dependencies/SampleSolution/../ExLib;E:/Dali/windows-dependencies/SampleSolution/../ExLib/$(Configuration);E:/Dali/windows-dependencies/SampleSolution/../../bin;E:/Dali/windows-dependencies/SampleSolution/../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>E:/Dali/bin/MinSizeRel/dali-demo.lib</ImportLibrary>
-      <ProgramDataBaseFile>E:/Dali/bin/MinSizeRel/dali-demo.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -221,7 +221,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -252,12 +252,12 @@
     </Midl>
     <Link>
       <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:/Dali/windows-dependencies/SampleSolution/../ExLib;E:/Dali/windows-dependencies/SampleSolution/../ExLib/$(Configuration);E:/Dali/windows-dependencies/SampleSolution/../../bin;E:/Dali/windows-dependencies/SampleSolution/../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>E:/Dali/bin/RelWithDebInfo/dali-demo.lib</ImportLibrary>
-      <ProgramDataBaseFile>E:/Dali/bin/RelWithDebInfo/dali-demo.pdb</ProgramDataBaseFile>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
