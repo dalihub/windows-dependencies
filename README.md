@@ -10,7 +10,6 @@ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-co
 cd dali-core
 git checkout devel/master
 git pull
-git fetch https://review.tizen.org/gerrit/p/platform/core/uifw/dali-core refs/changes/68/199068/2 && git cherry-pick FETCH_HEAD
 cd ..
 
 git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
@@ -24,7 +23,7 @@ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-to
 cd dali-toolkit
 git checkout devel/master
 git pull
-git fetch https://review.tizen.org/gerrit/p/platform/core/uifw/dali-toolkit refs/changes/01/199101/1 && git cherry-pick FETCH_HEAD
+git fetch https://review.tizen.org/gerrit/p/platform/core/uifw/dali-toolkit refs/changes/01/199101/2 && git cherry-pick FETCH_HEAD
 cd ..
 
 git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-demo
