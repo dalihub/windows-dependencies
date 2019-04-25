@@ -1,49 +1,38 @@
 #ifndef __gl2platform_h_
 #define __gl2platform_h_
 
-/* $Revision: #1 $ on $Date: 2010/09/27 $ */
-
 /*
- * This document is licensed under the SGI Free Software B License Version
- * 2.0. For details, see http://oss.sgi.com/projects/FreeB/ .
- */
+** Copyright (c) 2017 The Khronos Group Inc.
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
 
 /* Platform-specific types and definitions for OpenGL ES 2.X  gl2.h
- * Last modified on 2008/12/19
  *
  * Adopters may modify khrplatform.h and this file to suit their platform.
- * You are encouraged to submit all modifications to the Khronos group so that
- * they can be included in future versions of this file.  Please submit changes
- * by sending them to the public Khronos Bugzilla (http://khronos.org/bugzilla)
- * by filing a bug against product "OpenGL-ES" component "Registry".
+ * Please contribute modifications back to Khronos as pull requests on the
+ * public github repository:
+ *      https://github.com/KhronosGroup/OpenGL-Registry
  */
 
-#include <KHR/khrplatform.h>
+#include "KHR/khrplatform.h"
 
-
-#if (defined(_WIN32) || defined(__VC32__)) && !defined(_WIN32_WCE) /* Win32 */
-#   if defined (_DLL_EXPORTS)
-#       define GL_APICALL __declspec(dllexport)
-#   else
-#       define GL_APICALL __declspec(dllimport)
-#   endif
-#elif defined(_WIN32_WCE)             /* WinCE */
-#   define GL_APICALL
-#elif defined (__ARMCC_VERSION)                      /* ADS */
-#   define GL_APICALL
-#elif defined (__SYMBIAN32__) && defined (__GCC32__) /* Symbian GCC */
-#   define GL_APICALL __declspec(dllexport)
-#elif defined (__GNUC__)                             /* GCC dependencies (kludge) */
-#   define GL_APICALL
+#ifndef GL_APICALL
+#define GL_APICALL  KHRONOS_APICALL
 #endif
 
-
-#if (defined(_WIN32) || defined(__VC32__)) && !defined(_WIN32_WCE) /* Win32 */
-#define GL_APIENTRY __stdcall
-#else
-#define GL_APIENTRY
+#ifndef GL_APIENTRY
+#define GL_APIENTRY KHRONOS_APIENTRY
 #endif
-
-
 
 #endif /* __gl2platform_h_ */
