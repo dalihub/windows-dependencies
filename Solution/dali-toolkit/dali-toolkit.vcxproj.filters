@@ -820,6 +820,15 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\base64-encoding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-embedded-item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\text-utils-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\bitmap-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

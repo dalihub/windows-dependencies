@@ -83,7 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;..\..\ExInclude\cairo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -115,7 +115,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;cairo.lib;pixman.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;..\..\ExInclude\cairo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -162,10 +162,10 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;cairo.lib;pixman.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>../../../bin/$(Configuration)/dali-adaptor.lib</ImportLibrary>
       <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-adaptor.pdb</ProgramDataBaseFile>
@@ -177,7 +177,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;..\..\ExInclude\cairo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -209,7 +209,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;cairo.lib;pixman.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -224,7 +224,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-adaptor\.;..\..\..\dali-adaptor\..\dali-core;..\..\ExInclude;..\..\ExInclude\OpenGL\Include;..\..\ExInclude\cairo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -255,7 +255,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dali-core.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;cairo.lib;pixman.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -271,7 +271,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-adaptor.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\application-devel.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\application-extensions.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\bitmap-saver.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\clipboard.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\clipboard-event-notifier.cpp" />
@@ -313,6 +312,7 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\web-engine.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\window-devel.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\bidirectional-support.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\bitmap-font.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\font-client.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\font-list.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\font-metrics.cpp" />
@@ -320,6 +320,8 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\script.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\segmentation.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\shaping.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\text-renderer-layout-helper.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\text-abstraction\text-renderer.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-factory.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-adaptor-impl.cpp" />
@@ -329,7 +331,12 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\lifecycle-controller-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-impl.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\application-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\application-impl.cpp">
+      <UndefinePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </UndefinePreprocessorDefinitions>
+      <UndefineAllPreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</UndefineAllPreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_WINDOWS;DALI_ADAPTOR_COMPILATION;_NSIG=65;FT_FACE_FLAG_COLOR=16384;NON_POWER_OF_TWO_TEXTURES;HAVE_STRUCT_TIMESPEC;CURL_STATICLIB=0;LC_MESSAGES=0;BUILDING_DALI_ADAPTOR;CMAKE_INTDIR="Debug";dali_adaptor_EXPORTS;WIN_CALLBACK_EVENT=9999;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\common\combined-update-render-controller.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\generic\adaptor-impl-generic.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\windows\framework-win.cpp" />
@@ -461,11 +468,13 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\widget-application-impl-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\widget-controller-win.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\bidirectional-support-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\cairo-renderer.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\font-client-helper.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\font-client-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\font-client-plugin-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\segmentation-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\shaping-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\text\text-abstraction\text-renderer-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\thread\common\thread-settings-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\trace\common\trace-factory.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\trace\common\trace-manager-impl.cpp" />
@@ -475,7 +484,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\web-engine\common\web-engine-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\display-connection.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\event-handler.cpp" />
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\indicator-buffer.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\native-render-surface-factory.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\orientation-impl.cpp" />
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\window-base.cpp" />

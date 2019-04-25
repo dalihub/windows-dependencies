@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-toolkit.dir\Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-toolkit.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-toolkit</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-toolkit.dir\Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-toolkit.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-toolkit</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-toolkit.dir\MinSizeRel\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-toolkit.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-toolkit</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-toolkit.dir\RelWithDebInfo\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-toolkit.dir\$(Configuration)\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-toolkit</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
@@ -132,13 +132,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-toolkit\.;..\..\..\dali-toolkit\..\dali-core;..\..\..\dali-toolkit\..\dali-adaptor;..\..\windows-dependencies\ExInclude;..\..\..\dali-toolkit\..\dali-env\opt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-toolkit;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\ExInclude;..\..\..\dali-env\opt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <ForcedIncludeFiles>../windows-dependencies/ExInclude/PreprocessorDefinitions.h;../windows-dependencies/ExInclude/ToolKitPreDefine.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/ToolKitPreDefine.h</ForcedIncludeFiles>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MaxSpeed</Optimization>
@@ -146,7 +146,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../dali-env";DALI_DATA_READ_ONLY_DIR=DALI_ENV"/opt/share/dali";DALI_IMAGE_DIR=DALI_ENV"/opt/share/dali/toolkit/images/";DALI_STYLE_DIR=DALI_ENV"/opt/share/dali/toolkit/styles/";DALI_SOUND_DIR=DALI_ENV"/opt/share/dali/toolkit/sounds/";DALI_STYLE_IMAGE_DIR=DALI_ENV"/opt/share/dali/toolkit/styles/images/";CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;CMAKE_INTDIR="Release";dali_toolkit_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="*DaliEnv*";DALI_DATA_READ_ONLY_DIR=DALI_ENV"/opt/share/dali";DALI_IMAGE_DIR=DALI_ENV"/opt/share/dali/toolkit/images/";DALI_STYLE_DIR=DALI_ENV"/opt/share/dali/toolkit/styles/";DALI_SOUND_DIR=DALI_ENV"/opt/share/dali/toolkit/sounds/";DALI_STYLE_IMAGE_DIR=DALI_ENV"/opt/share/dali/toolkit/styles/images/";CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;CMAKE_INTDIR="Release";dali_toolkit_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -164,10 +164,10 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dlfcn.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../dali-toolkit/../bin;../../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>../../../bin/Release/dali-toolkit.lib</ImportLibrary>
       <ProgramDataBaseFile>../../../bin/Release/dali-toolkit.pdb</ProgramDataBaseFile>
@@ -179,13 +179,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-toolkit\.;..\..\..\dali-toolkit\..\dali-core;..\..\..\dali-toolkit\..\dali-adaptor;..\..\windows-dependencies\ExInclude;..\..\..\dali-toolkit\..\dali-env\opt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-toolkit;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\ExInclude;..\..\..\dali-env\opt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <ForcedIncludeFiles>../windows-dependencies/ExInclude/PreprocessorDefinitions.h;../windows-dependencies/ExInclude/ToolKitPreDefine.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/ToolKitPreDefine.h</ForcedIncludeFiles>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MinSpace</Optimization>
@@ -211,7 +211,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dlfcn.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -226,7 +226,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\dali-toolkit\.;..\..\..\dali-toolkit\..\dali-core;..\..\..\dali-toolkit\..\dali-adaptor;..\..\windows-dependencies\ExInclude;..\..\..\dali-toolkit\..\dali-env\opt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\dali-toolkit;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\ExInclude;..\..\..\dali-env\opt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CallingConvention>StdCall</CallingConvention>
@@ -257,8 +257,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dlfcn.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../dali-toolkit/../bin;../../../dali-toolkit/../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dlfcn.lib;Win32File.lib;WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -318,6 +318,8 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-controller.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\scripting\script.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\styling\style-manager-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\bitmap-font.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\text-utils-devel.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-cross-effect.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-effect.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-fold-effect.cpp" />
@@ -352,6 +354,7 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\linear-layout-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\flex-layout-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\absolute-layout-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-embedded-item.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\animated-image-visual.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\image-cache.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\fixed-image-cache.cpp" />

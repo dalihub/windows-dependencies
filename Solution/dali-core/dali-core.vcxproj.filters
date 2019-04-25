@@ -526,9 +526,6 @@
     <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\renderer-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-frame-buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-geometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -664,12 +661,6 @@
     <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\stage-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\integration-api\system-overlay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\system-overlay-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\public-api\events\tap-gesture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -800,6 +791,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\integration-api\render-task-list-integ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\events\touch-data-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\scene-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-surface-frame-buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-texture-frame-buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
