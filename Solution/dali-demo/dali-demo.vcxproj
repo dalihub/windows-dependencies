@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AAA4B4BE-CCCC-3314-BB96-4B2719F44E96}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>dali-demo</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-demo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-demo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-demo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-demo.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-demo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/DaliDemoPreDefine.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DALI_ENV="*DaliEnv*";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;DALI_ENV=\"../../dali-env/\";APP_DATA_RES_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res\";IMAGES_DIR=APP_DATA_RES_DIR\"/images/\";STYLE_DIR=APP_DATA_RES_DIR\"/style/\";DEMO_THEME_PATH=STYLE_DIR\"demo-theme.json\";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV\"/opt/share/dali/\";daliimagedir=dataReadOnlyDir\"toolkit/images/\";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR\"/style/\";APPLICATION_RESOURCE_PATH=DDALI_ENV\"/opt/share/com.samsung.dali-demo/res\";DEMO_VIDEO_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/videos/\";DEMO_MODEL_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/models/\";DEMO_SHADER_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/shaders/\";DEMO_SCRIPT_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/scripts/\";DEMO_GAME_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/game\";ssize_t=size_t;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/DaliDemoPreDefine.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../dali-env/";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV=\"../../dali-env/\";APP_DATA_RES_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res\";IMAGES_DIR=APP_DATA_RES_DIR\"/images/\";STYLE_DIR=APP_DATA_RES_DIR\"/style/\";DEMO_THEME_PATH=STYLE_DIR\"demo-theme.json\";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV\"/opt/share/dali/\";daliimagedir=dataReadOnlyDir\"toolkit/images/\";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR\"/style/\";APPLICATION_RESOURCE_PATH=DDALI_ENV\"/opt/share/com.samsung.dali-demo/res\";DEMO_VIDEO_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/videos/\";DEMO_MODEL_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/models/\";DEMO_SHADER_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/shaders/\";DEMO_SCRIPT_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/scripts/\";DEMO_GAME_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/game\";ssize_t=size_t;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/DaliDemoPreDefine.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../dali-env/";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV=\"../../dali-env/\";APP_DATA_RES_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res\";IMAGES_DIR=APP_DATA_RES_DIR\"/images/\";STYLE_DIR=APP_DATA_RES_DIR\"/style/\";DEMO_THEME_PATH=STYLE_DIR\"demo-theme.json\";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV\"/opt/share/dali/\";daliimagedir=dataReadOnlyDir\"toolkit/images/\";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR\"/style/\";APPLICATION_RESOURCE_PATH=DDALI_ENV\"/opt/share/com.samsung.dali-demo/res\";DEMO_VIDEO_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/videos/\";DEMO_MODEL_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/models/\";DEMO_SHADER_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/shaders/\";DEMO_SCRIPT_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/scripts/\";DEMO_GAME_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/game\";ssize_t=size_t;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-demo;..\..\..\dali-env\opt\include;..\..\..\dali-demo\examples\text-label-emojis;..\..\..\dali-core;..\..\..\dali-adaptor;..\..\..\dali-toolkit;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h;../ExInclude/DaliDemoPreDefine.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../dali-env/";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV=\"../../dali-env/\";APP_DATA_RES_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res\";IMAGES_DIR=APP_DATA_RES_DIR\"/images/\";STYLE_DIR=APP_DATA_RES_DIR\"/style/\";DEMO_THEME_PATH=STYLE_DIR\"demo-theme.json\";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV\"/opt/share/dali/\";daliimagedir=dataReadOnlyDir\"toolkit/images/\";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR\"/style/\";APPLICATION_RESOURCE_PATH=DDALI_ENV\"/opt/share/com.samsung.dali-demo/res\";DEMO_VIDEO_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/videos/\";DEMO_MODEL_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/models/\";DEMO_SHADER_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/shaders/\";DEMO_SCRIPT_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/scripts/\";DEMO_GAME_DIR=DALI_ENV\"/opt/share/com.samsung.dali-demo/res/game\";ssize_t=size_t;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-env\opt\include;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-demo\examples\text-label-emojis;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-core;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-adaptor;E:\Dali\windows-dependencies\SampleSolution\..\..\dali-toolkit;E:\Dali\windows-dependencies\SampleSolution\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>dali-core.lib;dali-adaptor.lib;dali-toolkit.lib;Win32File.lib;WindowsPlatform.lib;libjpeg.lib;libcurl_a.lib;turbojpeg.lib;getopt.lib;giflib.lib;libEGL.lib;libexif.lib;libGLESv2.lib;pthread.lib;libpng.lib;zlibstat.lib;legacy_stdio_definitions.lib;freetype.lib;FontConfig.lib;libexpat.lib;fribidi.lib;harfbuzz-1.4.7.lib;dlfcn.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);../../../bin;../../../bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main-example.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

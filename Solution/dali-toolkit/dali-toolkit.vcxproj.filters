@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\absolute-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\absolute-layout-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\accessibility-manager\accessibility-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\accessibility-manager\accessibility-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\alignment\alignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\alignment\alignment-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-gradient\animated-gradient-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\animated-image-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\image-loader\async-image-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\async-image-loader-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\image-loader\async-image-loader-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\atlas\atlas-glyph-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\atlas\atlas-glyph-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\atlas\atlas-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\atlas\atlas-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\atlas\atlas-mesh-factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\image-loader\atlas-packer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\atlas-upload-observer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\bidirectional-support.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\bloom-view\bloom-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\bloom-view\bloom-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\filters\blur-two-pass-filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\border\border-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\bouncing-effect-actor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\bubble-effect\bubble-emitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\bubble-effect\bubble-emitter-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\bubble-effect\bubble-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\builder-animations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\builder-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\builder-impl-debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\builder-set-property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\builder-signals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\buttons\button-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\character-set-conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\check-box-button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\buttons\check-box-button-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\helpers\color-conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\color-segmentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\color\color-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\confirmation-popup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\popup\confirmation-popup-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\control.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\control\control-data-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\control\control-debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\control-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\control-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\control-wrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\control-wrapper-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-cross-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-cross-effect-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-effect-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-fold-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-fold-effect-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-wave-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-wave-effect-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\cursor-helper-functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\dali-toolkit-version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\item-view\default-item-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\item-view\depth-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\effects-view\effects-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\effects-view\effects-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\filters\emboss-filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\enums.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\feedback\feedback-style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\fixed-image-cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\flex-container\flex-container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\flex-container\flex-container-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\flex-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\flex-layout-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\gaussian-blur-view\gaussian-blur-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\gaussian-blur-view\gaussian-blur-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\glyph-metrics-helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\gradient\gradient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\gradient\gradient-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\item-view\grid-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\hidden-text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\image-atlas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\image-loader\image-atlas-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\image-atlas-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\image-cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\filters\image-filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\image-loader\image-load-thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\image-view\image-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\image-view\image-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\image\image-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\item-view\item-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\item-view\item-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\item-view\item-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\json-parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\json-parser-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\json-parser-state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\focus-manager\keyboard-focus-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\focus-manager\keyboard-focus-manager-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\focus-manager\keyboard-focus-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\focus-manager\keyinput-focus-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\focus-manager\keyinput-focus-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\layout-controller-debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\layout-controller-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\layouts\layout-engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\layout-group-data-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-group-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\layout-item-data-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-item-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\gradient\linear-gradient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\linear-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\linear-layout-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\logical-model-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\magnifier\magnifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\magnifier\magnifier-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-helper-functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\mesh\mesh-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\model3d-view\model3d-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\model3d-view\model3d-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\multi-language-helper-functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\multi-language-support.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\multi-language-support-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvg.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvgrast.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\navigation-view\navigation-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\navigation-view\navigation-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\npatch-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\npatch\npatch-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\model3d-view\obj-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\page-turn-view\page-turn-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\page-turn-view\page-turn-landscape-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\page-turn-view\page-turn-landscape-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\page-turn-view\page-turn-portrait-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\page-turn-view\page-turn-portrait-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\page-turn-view\page-turn-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\page-turn-view\page-turn-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\popup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\popup\popup-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\primitive\primitive-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\progress-bar\progress-bar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\progress-bar\progress-bar-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\helpers\property-helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\property-string-parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\push-button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\buttons\push-button-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\gradient\radial-gradient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\radio-button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\buttons\radio-button-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\replacement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-gif-image-cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-image-cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\scripting\script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\scripting\script-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\scripting\script-plugin-proxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scrollable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\scrollable-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scroll-bar\scroll-bar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scroll-bar\scroll-bar-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\scroll-view\scroll-base-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\scroll-view\scroll-overshoot-indicator-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scroll-view\scroll-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scroll-view\scroll-view-constraints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scroll-view\scroll-view-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\scroll-view\scroll-view-effect-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\scroll-view\scroll-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scroll-view\scroll-view-page-path-effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\scroll-view\scroll-view-page-path-effect-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\segmentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\shadow-view\shadow-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\shadow-view\shadow-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\shaper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\slider\slider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\slider\slider-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scrollable\item-view\spiral-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\filters\spread-filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\styling\style-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\styling\style-manager-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\styling\style-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\super-blur-view\super-blur-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\super-blur-view\super-blur-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\svg\svg-rasterize-thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\svg\svg-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\image-loader\sync-image-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\table-view\table-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\table-view\table-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\atlas\text-atlas-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\text-backend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\text-backend-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\decorator\text-decorator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\text-controls\text-editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-editor-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\text-controls\text-editor-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-effects-style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-enumerations-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\text-controls\text-field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-field-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\text-controls\text-field-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-font-style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\text-controls\text-label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\text-controls\text-label-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\text-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-scroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-selection-popup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\text-controls\text-selection-popup-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-selection-toolbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\text-controls\text-selection-toolbar-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\text-typesetter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\texture-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\texture-manager-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\texture-upload-observer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-vertical-scroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\text-view-interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\text\text-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\buttons\toggle-button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\buttons\toggle-button-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\tool-bar\tool-bar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\tool-bar\tool-bar-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\tooltip\tooltip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\visual-factory\transition-data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\transition-data-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\tree-node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\tree-node-manipulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\video-view\video-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\video-view\video-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\rendering\view-model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\visual-factory\visual-base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\visual-base-data-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\visual-base-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\visual-factory\visual-factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\visual-factory-cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\visual-factory-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\visual-model-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\visual-string-constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\visual-url.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\wireframe\wireframe-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\xhtml-entities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGEnums.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGFloatOptional.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGNodePrint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGStyle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\Yoga.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\image-visual-shader-factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\grid-locations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\grid-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\size-negotiation-mapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\layout-transition-data-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\layouting\bin-layout-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\bin-layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\layout-transition-data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\web-view\web-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\web-view\web-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-rasterize-thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\animated-vector-image-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\drag-drop-detector\drag-and-drop-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\drag-drop-detector\drag-and-drop-detector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\scene3d-view-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\gltf-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scene3d-view\scene3d-view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\base64-encoding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-embedded-item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\text-utils-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\bitmap-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EFDBE0C9-FF26-3C30-BA90-5916E19580C1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

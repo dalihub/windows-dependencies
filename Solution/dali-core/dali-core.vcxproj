@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6517E691-3A75-3CF9-B432-27A54ACDDDD0}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>dali-core</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-core.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dali-core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-core.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dali-core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-core.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">dali-core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">..\..\..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-core.dir\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">dali-core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;BUILDING_DALI_CORE;CMAKE_INTDIR="Debug";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;BUILDING_DALI_CORE;CMAKE_INTDIR=\"Debug\";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-core.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../ExInclude/PreprocessorDefinitions.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BUILDING_DALI_CORE;CMAKE_INTDIR="Release";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BUILDING_DALI_CORE;CMAKE_INTDIR=\"Release\";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-core.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../../ExInclude/PreprocessorDefinitions.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BUILDING_DALI_CORE;CMAKE_INTDIR="MinSizeRel";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BUILDING_DALI_CORE;CMAKE_INTDIR=\"MinSizeRel\";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-core.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForcedIncludeFiles>../../ExInclude/PreprocessorDefinitions.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BUILDING_DALI_CORE;CMAKE_INTDIR="RelWithDebInfo";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BUILDING_DALI_CORE;CMAKE_INTDIR=\"RelWithDebInfo\";dali_core_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>..\..\..\dali-core\.;..\..\ExInclude;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>WindowsPlatform.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../ExLib;../../ExLib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>../../../bin/$(Configuration)/dali-core.lib</ImportLibrary>
+      <ProgramDataBaseFile>../../../bin/$(Configuration)/dali-core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\actors\actor-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\actors\custom-actor-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\animation\animation-data.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\animation\animation-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\animation\path-constrainer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\common\hash.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\common\stage-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\events\hit-test-algorithm.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\events\touch-data-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\images\distance-field.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\images\texture-set-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\images\nine-patch-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\object\handle-devel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\object\csharp-type-registry.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\scripting\scripting.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\signals\signal-delegate.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\threading\conditional-wait.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\threading\mutex.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\threading\thread.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\update\frame-callback-interface.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\update\update-proxy.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\bitmap.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\core.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\debug.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\profiling.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\input-options.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\render-task-list-integ.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\scene.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\lockless-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\gesture-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\hover-event-integ.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\key-event-integ.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\long-press-gesture-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\wheel-event-integ.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\multi-point-event-integ.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\pan-gesture-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\pinch-gesture-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\point.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\tap-gesture-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\touch-event-combiner.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\touch-event-integ.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\scene-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-surface-frame-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-texture-frame-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\frame-callback-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\scene-graph-frame-callback.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\update-proxy-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\actors\actor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\actors\camera-actor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\actors\custom-actor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\actors\custom-actor-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\actors\layer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\animation.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\alpha-function.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\constraint.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\constraint-source.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\key-frames.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\linear-constrainer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\path.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\animation\time-period.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\common\constants.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\common\dali-common.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\common\dali-vector.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\common\extents.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\common\stage.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\gesture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\hover-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\key-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\long-press-gesture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\long-press-gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\wheel-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\pan-gesture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\pan-gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\pinch-gesture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\pinch-gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\tap-gesture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\tap-gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\touch-point.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\touch-event.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\events\touch-data.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\pixel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\pixel-data.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\buffer-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\frame-buffer-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\encoded-buffer-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\resource-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\images\native-image.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\compile-time-math.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\degree.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\matrix.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\matrix3.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\quaternion.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\vector2.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\vector3.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\math\vector4.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\any.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\base-handle.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\handle.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\base-object.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\object-registry.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-array.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-conditions.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-input.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-key.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-map.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-notification.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-types.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\property-value.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\ref-object.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\render-tasks\render-task.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\render-tasks\render-task-list.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\frame-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\geometry.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\property-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\texture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\texture-set.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\renderer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\sampler.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\shader.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\callback.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\connection-tracker.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\connection-tracker-interface.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\signal-slot-connections.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\signal-slot-observers.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\base-signal.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\signals\functor-delegate.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\type-info.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\type-registry.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\object\weak-handle.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\public-api\dali-core-version.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\integration-api\trace.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\blending-options.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\core-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\internal-constants.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\math.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\message-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\mutex-trace.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\image-sampler.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\image-attributes.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\common\fixed-size-memory-pool.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\actors\actor-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\actors\custom-actor-internal.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\actors\layer-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\actors\layer-list.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\actors\camera-actor-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\animation-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\animation-playlist.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\constrainer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\constraint-base.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\key-frames-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\linear-constrainer-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\path-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\animation\path-constrainer-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\event-thread-services.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\notification-manager.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\object-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\object-registry-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\projection.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\property-buffer-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\property-conditions-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\property-metadata.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\property-notification-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\property-notification-manager.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\property-helper.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\stage-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\thread-local-storage.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\type-info-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\type-registry-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\effects\shader-factory.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\actor-gesture-data.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\actor-observer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\event-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\key-event-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\key-event-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\gesture-detector-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\gesture-event-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\gesture-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\hit-test-algorithm-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\hover-event-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture-detector-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\wheel-event-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\multi-point-event-util.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture-detector-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture-detector-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture-detector-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\touch-data-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\touch-event-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\bitmap-packed-pixel.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\bitmap-compressed.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\buffer-image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\frame-buffer-image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\encoded-buffer-image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\nine-patch-image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\resource-image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\native-image-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\images\pixel-data-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\render-tasks\render-task-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\render-tasks\render-task-list-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\frame-buffer-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\geometry-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\texture-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\texture-set-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\renderer-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\sampler-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\rendering\shader-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\size-negotiation\memory-pool-relayout-container.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\size-negotiation\relayout-controller-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-algorithms.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-debug.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-instruction.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-instruction-container.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-item.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-tracker.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\common\render-manager.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\data-providers\render-data-provider.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\gl-resources\context.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\gl-resources\frame-buffer-state-cache.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\gl-resources\gl-call-debug.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\gl-resources\gpu-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\queue\render-queue.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-geometry.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-property-buffer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-renderer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-texture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\shaders\program.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\shaders\program-controller.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\render\shaders\scene-graph-shader.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\animation\scene-graph-animation.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\animation\scene-graph-constraint-base.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\discard-queue.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\property-base.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\property-owner-messages.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\property-condition-functions.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\property-condition-step-functions.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\property-condition-variable-step-functions.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\property-owner.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\scene-graph-buffers.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\scene-graph-connection-change-propagator.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\scene-graph-property-notification.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\common\uniform-map.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\controllers\render-message-dispatcher.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\controllers\scene-controller-impl.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\gestures\pan-gesture-profiling.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\gestures\scene-graph-pan-gesture.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\queue\update-message-queue.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\render-instruction-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\render-task-processor.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\transform-manager.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\update-algorithms.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\update-manager.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\manager\update-manager-debug.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\render-tasks\scene-graph-camera.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\nodes\node.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\nodes\node-messages.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\nodes\scene-graph-layer.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\render-tasks\scene-graph-render-task.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\render-tasks\scene-graph-render-task-list.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\rendering\scene-graph-texture-set.cpp" />
+    <ClCompile Include="..\..\..\dali-core\dali\internal\update\rendering\scene-graph-renderer.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
