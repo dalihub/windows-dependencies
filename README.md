@@ -1,45 +1,50 @@
-Steps for using Dali demo Windows backend
+DALi Windows Backend
+====================
 
-Step1:
-mkdir [YourDaliDir]
-cd [YourDaliDir]
+Follow the steps below to build the DALi Windows backend:
+
+Step 1:
+
+    mkdir [YourDaliDir]
+    cd [YourDaliDir]
 
 Step2:
-Download the code of dali
-git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-core
-cd dali-core
-git checkout devel/master
-git pull
-cd ..
+Clone all DALi repos and move to the correct branch:
 
-git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
-cd dali-adaptor
-git checkout devel/master
-git pull
-git fetch https://review.tizen.org/gerrit/p/platform/core/uifw/dali-adaptor refs/changes/09/172009/67 && git cherry-pick FETCH_HEAD
-cd ..
+    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-core
+    cd dali-core
+    git checkout devel/master
+    git pull
+    cd ..
 
-git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-toolkit
-cd dali-toolkit
-git checkout devel/master
-git pull
-git fetch https://review.tizen.org/gerrit/p/platform/core/uifw/dali-toolkit refs/changes/01/199101/2 && git cherry-pick FETCH_HEAD
-cd ..
+    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
+    cd dali-adaptor
+    git checkout devel/master
+    git pull
+    cd ..
 
-git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-demo
-cd dali-demo
-git checkout devel/master
-git pull
-cd ..
+    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-toolkit
+    cd dali-toolkit
+    git checkout devel/master
+    git pull
+    cd ..
+
+    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-demo
+    cd dali-demo
+    git checkout devel/master
+    git pull
+    cd ..
 
 Step3:
-Download the VS projects and solution
-git clone https://github.com/AdunFang/windows-dependencies.git
-git checkout AddThirdPartLib
+Download the windows dependencies repo which also contains the Visual Studio projects and solution:
+
+    git clone https://github.com/dalihub/windows-dependencies.git
 
 Step4:
 Run the .bat files to config the enviorment
-windows-dependencies\prebuild.bat and windows-dependencies\setenv.bat
+
+    windows-dependencies\prebuild.bat
+    windows-dependencies\setenv.bat
 
 Step5:
-Open the windows-dependencies\Solution\dali.sln, build and run.
+Open **windows-dependencies\Solution\dali.sln**, build and run.
