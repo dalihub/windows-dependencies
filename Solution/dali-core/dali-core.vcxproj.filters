@@ -199,9 +199,6 @@
     <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\gesture-detector-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\gesture-event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\gesture-event-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -298,15 +295,6 @@
     <ClCompile Include="..\..\..\dali-core\dali\public-api\events\long-press-gesture-detector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture-detector-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\long-press-gesture-event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture-processor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\internal\common\math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -370,15 +358,6 @@
     <ClCompile Include="..\..\..\dali-core\dali\public-api\events\pan-gesture-detector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture-detector-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\pan-gesture-event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture-processor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\internal\update\gestures\pan-gesture-profiling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -398,15 +377,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\public-api\events\pinch-gesture-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture-detector-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\pinch-gesture-event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\public-api\images\pixel.cpp">
@@ -667,15 +637,6 @@
     <ClCompile Include="..\..\..\dali-core\dali\public-api\events\tap-gesture-detector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture-detector-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\integration-api\events\tap-gesture-event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture-processor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\public-api\rendering\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -806,6 +767,78 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-core\dali\internal\render\renderers\render-texture-frame-buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\gesture-event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\threading\thread-pool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\events\key-event-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-recognizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture\pan-gesture-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture\pan-gesture-event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture\pan-gesture-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pan-gesture\pan-gesture-recognizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-recognizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-recognizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\events\rotation-gesture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\devel-api\events\rotation-gesture-detector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-detector-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-recognizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

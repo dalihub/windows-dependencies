@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{97C8A24E-4A9A-4D47-8797-8125633EE762}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\ExLib\$(Configuration)</OutDir>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\ExLib\$(Configuration)</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;PTW32_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;PTW32_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="cleanup.c" />
+    <ClCompile Include="create.c" />
+    <ClCompile Include="global.c" />
+    <ClCompile Include="pthread_attr_destroy.c" />
+    <ClCompile Include="pthread_attr_getdetachstate.c" />
+    <ClCompile Include="pthread_attr_getinheritsched.c" />
+    <ClCompile Include="pthread_attr_getschedparam.c" />
+    <ClCompile Include="pthread_attr_getschedpolicy.c" />
+    <ClCompile Include="pthread_attr_getscope.c" />
+    <ClCompile Include="pthread_attr_getstackaddr.c" />
+    <ClCompile Include="pthread_attr_getstacksize.c" />
+    <ClCompile Include="pthread_attr_init.c" />
+    <ClCompile Include="pthread_attr_setdetachstate.c" />
+    <ClCompile Include="pthread_attr_setinheritsched.c" />
+    <ClCompile Include="pthread_attr_setschedparam.c" />
+    <ClCompile Include="pthread_attr_setschedpolicy.c" />
+    <ClCompile Include="pthread_attr_setscope.c" />
+    <ClCompile Include="pthread_attr_setstackaddr.c" />
+    <ClCompile Include="pthread_attr_setstacksize.c" />
+    <ClCompile Include="pthread_barrierattr_destroy.c" />
+    <ClCompile Include="pthread_barrierattr_getpshared.c" />
+    <ClCompile Include="pthread_barrierattr_init.c" />
+    <ClCompile Include="pthread_barrierattr_setpshared.c" />
+    <ClCompile Include="pthread_barrier_destroy.c" />
+    <ClCompile Include="pthread_barrier_init.c" />
+    <ClCompile Include="pthread_barrier_wait.c" />
+    <ClCompile Include="pthread_cancel.c" />
+    <ClCompile Include="pthread_condattr_destroy.c" />
+    <ClCompile Include="pthread_condattr_getpshared.c" />
+    <ClCompile Include="pthread_condattr_init.c" />
+    <ClCompile Include="pthread_condattr_setpshared.c" />
+    <ClCompile Include="pthread_cond_destroy.c" />
+    <ClCompile Include="pthread_cond_init.c" />
+    <ClCompile Include="pthread_cond_signal.c" />
+    <ClCompile Include="pthread_cond_wait.c" />
+    <ClCompile Include="pthread_delay_np.c" />
+    <ClCompile Include="pthread_detach.c" />
+    <ClCompile Include="pthread_equal.c" />
+    <ClCompile Include="pthread_exit.c" />
+    <ClCompile Include="pthread_getconcurrency.c" />
+    <ClCompile Include="pthread_getschedparam.c" />
+    <ClCompile Include="pthread_getspecific.c" />
+    <ClCompile Include="pthread_getw32threadhandle_np.c" />
+    <ClCompile Include="pthread_join.c" />
+    <ClCompile Include="pthread_key_create.c" />
+    <ClCompile Include="pthread_key_delete.c" />
+    <ClCompile Include="pthread_kill.c" />
+    <ClCompile Include="pthread_mutexattr_destroy.c" />
+    <ClCompile Include="pthread_mutexattr_getkind_np.c" />
+    <ClCompile Include="pthread_mutexattr_getpshared.c" />
+    <ClCompile Include="pthread_mutexattr_gettype.c" />
+    <ClCompile Include="pthread_mutexattr_init.c" />
+    <ClCompile Include="pthread_mutexattr_setkind_np.c" />
+    <ClCompile Include="pthread_mutexattr_setpshared.c" />
+    <ClCompile Include="pthread_mutexattr_settype.c" />
+    <ClCompile Include="pthread_mutex_destroy.c" />
+    <ClCompile Include="pthread_mutex_init.c" />
+    <ClCompile Include="pthread_mutex_lock.c" />
+    <ClCompile Include="pthread_mutex_timedlock.c" />
+    <ClCompile Include="pthread_mutex_trylock.c" />
+    <ClCompile Include="pthread_mutex_unlock.c" />
+    <ClCompile Include="pthread_num_processors_np.c" />
+    <ClCompile Include="pthread_once.c" />
+    <ClCompile Include="pthread_rwlockattr_destroy.c" />
+    <ClCompile Include="pthread_rwlockattr_getpshared.c" />
+    <ClCompile Include="pthread_rwlockattr_init.c" />
+    <ClCompile Include="pthread_rwlockattr_setpshared.c" />
+    <ClCompile Include="pthread_rwlock_destroy.c" />
+    <ClCompile Include="pthread_rwlock_init.c" />
+    <ClCompile Include="pthread_rwlock_rdlock.c" />
+    <ClCompile Include="pthread_rwlock_timedrdlock.c" />
+    <ClCompile Include="pthread_rwlock_timedwrlock.c" />
+    <ClCompile Include="pthread_rwlock_tryrdlock.c" />
+    <ClCompile Include="pthread_rwlock_trywrlock.c" />
+    <ClCompile Include="pthread_rwlock_unlock.c" />
+    <ClCompile Include="pthread_rwlock_wrlock.c" />
+    <ClCompile Include="pthread_self.c" />
+    <ClCompile Include="pthread_setcancelstate.c" />
+    <ClCompile Include="pthread_setcanceltype.c" />
+    <ClCompile Include="pthread_setconcurrency.c" />
+    <ClCompile Include="pthread_setschedparam.c" />
+    <ClCompile Include="pthread_setspecific.c" />
+    <ClCompile Include="pthread_spin_destroy.c" />
+    <ClCompile Include="pthread_spin_init.c" />
+    <ClCompile Include="pthread_spin_lock.c" />
+    <ClCompile Include="pthread_spin_trylock.c" />
+    <ClCompile Include="pthread_spin_unlock.c" />
+    <ClCompile Include="pthread_testcancel.c" />
+    <ClCompile Include="pthread_timechange_handler_np.c" />
+    <ClCompile Include="pthread_win32_attach_detach_np.c" />
+    <ClCompile Include="ptw32_calloc.c" />
+    <ClCompile Include="ptw32_callUserDestroyRoutines.c" />
+    <ClCompile Include="ptw32_cond_check_need_init.c" />
+    <ClCompile Include="ptw32_getprocessors.c" />
+    <ClCompile Include="ptw32_InterlockedCompareExchange.c" />
+    <ClCompile Include="ptw32_is_attr.c" />
+    <ClCompile Include="ptw32_MCS_lock.c" />
+    <ClCompile Include="ptw32_mutex_check_need_init.c" />
+    <ClCompile Include="ptw32_new.c" />
+    <ClCompile Include="ptw32_processInitialize.c" />
+    <ClCompile Include="ptw32_processTerminate.c" />
+    <ClCompile Include="ptw32_relmillisecs.c" />
+    <ClCompile Include="ptw32_reuse.c" />
+    <ClCompile Include="ptw32_rwlock_cancelwrwait.c" />
+    <ClCompile Include="ptw32_rwlock_check_need_init.c" />
+    <ClCompile Include="ptw32_semwait.c" />
+    <ClCompile Include="ptw32_spinlock_check_need_init.c" />
+    <ClCompile Include="ptw32_threadDestroy.c" />
+    <ClCompile Include="ptw32_threadStart.c" />
+    <ClCompile Include="ptw32_throw.c" />
+    <ClCompile Include="ptw32_timespec.c" />
+    <ClCompile Include="ptw32_tkAssocCreate.c" />
+    <ClCompile Include="ptw32_tkAssocDestroy.c" />
+    <ClCompile Include="sched_getscheduler.c" />
+    <ClCompile Include="sched_get_priority_max.c" />
+    <ClCompile Include="sched_get_priority_min.c" />
+    <ClCompile Include="sched_setscheduler.c" />
+    <ClCompile Include="sched_yield.c" />
+    <ClCompile Include="sem_close.c" />
+    <ClCompile Include="sem_destroy.c" />
+    <ClCompile Include="sem_getvalue.c" />
+    <ClCompile Include="sem_init.c" />
+    <ClCompile Include="sem_open.c" />
+    <ClCompile Include="sem_post.c" />
+    <ClCompile Include="sem_post_multiple.c" />
+    <ClCompile Include="sem_timedwait.c" />
+    <ClCompile Include="sem_trywait.c" />
+    <ClCompile Include="sem_unlink.c" />
+    <ClCompile Include="sem_wait.c" />
+    <ClCompile Include="w32_CancelableWait.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="config.h" />
+    <ClInclude Include="implement.h" />
+    <ClInclude Include="need_errno.h" />
+    <ClInclude Include="pthread.h" />
+    <ClInclude Include="sched.h" />
+    <ClInclude Include="semaphore.h" />
+    <ClInclude Include="tests\benchtest.h" />
+    <ClInclude Include="tests\test.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

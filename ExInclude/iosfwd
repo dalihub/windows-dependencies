@@ -647,6 +647,7 @@ typedef basic_stringstream<char, char_traits<char>,
 typedef basic_filebuf<char, char_traits<char> > filebuf;
 
 const char* GetRealName( const char *name );
+int GetRealFileMode(const char *path, int _Mode);
 
 template<class _Elem, class _Traits>
 class IFStream : public basic_ifstream<_Elem, _Traits>
@@ -660,7 +661,7 @@ public:
 
   IFStream( const char *path, int _Mode )
     :
-    basic_ifstream( GetRealName( path ), _Mode )
+    basic_ifstream( GetRealName( path ), GetRealFileMode(path, _Mode))
   {
   }
 };

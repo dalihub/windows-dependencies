@@ -418,15 +418,6 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-image-cache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\scripting\script.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\scripting\script-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\scripting\script-plugin-proxy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scrollable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -758,6 +749,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\bitmap-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\flex-node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\control\control-renderers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-task.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-thread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

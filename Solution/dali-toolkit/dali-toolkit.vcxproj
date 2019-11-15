@@ -305,7 +305,7 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\atlas-upload-observer.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\image-atlas.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\image-loader\texture-manager.cpp" />
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\scripting\script.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\layouting\flex-node.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\styling\style-manager-devel.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\bitmap-font.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\devel-api\text\text-utils-devel.cpp" />
@@ -327,7 +327,14 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\style.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\tree-node-manipulator.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\builder\replacement.cpp" />
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\gltf-loader.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\control\control-renderers.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\gltf-loader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">InternalFileOperation.h</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">InternalFileOperation.h</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">InternalFileOperation.h</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/PreprocessorDefinitions.h;../ExInclude/ToolKitPreDefine.h;../ExInclude/InternalFileOperation.h</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\scene3d-view\scene3d-view-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\controls\web-view\web-view-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\drag-drop-detector\drag-and-drop-detector-impl.cpp" />
@@ -338,6 +345,8 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-image-cache.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-gif-image-cache.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\animated-vector-image-visual.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-task.cpp" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-thread.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-rasterize-thread.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\border\border-visual.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\visuals\color\color-visual.cpp" />
@@ -477,8 +486,6 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-cross-effect-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-fold-effect-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\transition-effects\cube-transition-wave-effect-impl.cpp" />
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\scripting\script-impl.cpp" />
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\scripting\script-plugin-proxy.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\internal\text\xhtml-entities.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\control-impl.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\controls\control.cpp" />
@@ -513,7 +520,9 @@
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\focus-manager\keyboard-focus-manager.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\dali-toolkit-version.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\public-api\enums.cpp" />
-    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvg.cc" />
+    <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvg.cc">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../ExInclude/InternalFileOperation.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvgrast.cc" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\Yoga.cpp" />
     <ClCompile Include="..\..\..\dali-toolkit\dali-toolkit\third-party\yoga\YGStyle.cpp" />

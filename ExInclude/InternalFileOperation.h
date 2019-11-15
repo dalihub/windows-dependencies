@@ -3,43 +3,18 @@
 
 #include <cstdio>
 
-#define fopen Dali::Internal::Platform::InternalFile::FOpen
+#include <CustomFile.h>
 
-#define fread Dali::Internal::Platform::InternalFile::FRead
-#define fwrite Dali::Internal::Platform::InternalFile::FWrite
-#define fseek Dali::Internal::Platform::InternalFile::FSeek
+#define fopen CustomFile::FOpen
 
-#define fclose Dali::Internal::Platform::InternalFile::FClose
-#define ftell Dali::Internal::Platform::InternalFile::FTell
-#define feof Dali::Internal::Platform::InternalFile::FEof
+#define fread CustomFile::FRead
+#define fwrite CustomFile::FWrite
+#define fseek CustomFile::FSeek
 
-#define fmemopen Dali::Internal::Platform::InternalFile::FMemopen
+#define fclose CustomFile::FClose
+#define ftell CustomFile::FTell
+#define feof CustomFile::FEof
 
-namespace Dali
-{
-namespace Internal
-{
-namespace Platform
-{
-namespace InternalFile
-{
-  FILE* FOpen( const char *name, const char *mode );
-
-  FILE *FMemopen( void *__s, size_t __len, const char *__modes );
-
-  size_t FRead( void*  _Buffer, size_t _ElementSize, size_t _ElementCount, FILE*  _Stream );
-  int FClose( FILE *__stream );
-
-  void FWrite( void *buf, int size, int count, FILE *fp );
-
-  int FSeek( FILE *fp, int offset, int origin );
-
-  int FTell( FILE *fp );
-
-  bool FEof( FILE *fp );
-}
-}
-}
-}
+#define fmemopen CustomFile::FMemopen
 
 #endif

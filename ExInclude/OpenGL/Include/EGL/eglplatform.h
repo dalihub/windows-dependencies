@@ -2,7 +2,7 @@
 #define __eglplatform_h_
 
 /*
-** Copyright (c) 2007-2016 The Khronos Group Inc.
+** Copyright (c) 2007-2013 The Khronos Group Inc.
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a
 ** copy of this software and/or associated documentation files (the
@@ -25,7 +25,7 @@
 */
 
 /* Platform-specific types and definitions for egl.h
- * $Revision: 30994 $ on $Date: 2015-04-30 13:36:48 -0700 (Thu, 30 Apr 2015) $
+ * $Revision: 23432 $ on $Date: 2013-10-09 00:57:24 -0700 (Wed, 09 Oct 2013) $
  *
  * Adopters may modify khrplatform.h and this file to suit their platform.
  * You are encouraged to submit all modifications to the Khronos group so that
@@ -34,7 +34,7 @@
  * by filing a bug against product "EGL" component "Registry".
  */
 
-#include "KHR/khrplatform.h"
+#include <KHR/khrplatform.h>
 
 /* Macros used in EGL function prototype declarations.
  *
@@ -73,27 +73,11 @@
 #endif
 #include <windows.h>
 
-#ifdef CopyMemory
-#undef CopyMemory
-#endif
-
-#ifdef TRANSPARENT
-#undef TRANSPARENT
-#endif
-
-#ifdef TRUE
-#undef TRUE
-#endif
-
-#ifdef FALSE
-#undef FALSE
-#endif
-
 typedef HDC     EGLNativeDisplayType;
 typedef HBITMAP EGLNativePixmapType;
 typedef HWND    EGLNativeWindowType;
 
-#elif defined(__APPLE__) || defined(__WINSCW__) || defined(__SYMBIAN32__)  /* Symbian */
+#elif defined(__WINSCW__) || defined(__SYMBIAN32__)  /* Symbian */
 
 typedef int   EGLNativeDisplayType;
 typedef void *EGLNativeWindowType;
@@ -109,7 +93,7 @@ typedef struct ANativeWindow*           EGLNativeWindowType;
 typedef struct egl_native_pixmap_t*     EGLNativePixmapType;
 typedef void*                           EGLNativeDisplayType;
 
-#elif defined(SUPPORT_X11)
+#elif defined(__unix__) || defined(__APPLE__)
 
 /* X11 (tentative)  */
 #include <X11/Xlib.h>
@@ -120,17 +104,7 @@ typedef Pixmap   EGLNativePixmapType;
 typedef Window   EGLNativeWindowType;
 
 #else
-
-#if defined(_WIN64) ||  __WORDSIZE == 64
-typedef khronos_int64_t EGLNativeDisplayType;
-#else
-typedef int EGLNativeDisplayType;
-#endif
-
-typedef void *EGLNativeWindowType;
-typedef void *EGLNativePixmapType;
-
-
+#error "Platform not recognized"
 #endif
 
 /* EGL 1.2 types, renamed for consistency in EGL 1.3 */
@@ -147,13 +121,5 @@ typedef EGLNativeWindowType  NativeWindowType;
  * integer type.
  */
 typedef khronos_int32_t EGLint;
-
-
-/* C++ / C typecast macros for special EGL handle values */
-#if defined(__cplusplus)
-#define EGL_CAST(type, value) (static_cast<type>(value))
-#else
-#define EGL_CAST(type, value) ((type) (value))
-#endif
 
 #endif /* __eglplatform_h */

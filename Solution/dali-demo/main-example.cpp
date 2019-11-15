@@ -2,8 +2,8 @@
 //#include "examples/Animated-images/Animated-images-example.cpp"
 //#include "examples/Animated-Shapes/Animated-Shapes-example.cpp"
 //#include "examples/Benchmark/Benchmark.cpp"
-//#include "examples/Blocks/Blocks-example.cpp"
-#include "examples/Bubble-Effect/Bubble-Effect-example.cpp"
+#include "examples/Blocks/Blocks-example.cpp"
+//#include "examples/Bubble-Effect/Bubble-Effect-example.cpp"
 //#include "examples/Buttons/Buttons-example.cpp"
 
 //#include "examples/Clipping/Clipping-example.cpp"
@@ -17,6 +17,7 @@
 //#include "examples/Contact-Cards/contact-card.cpp"
 //#include "examples/Contact-Cards/contact-card-layouter.cpp"
 //#include "examples/Contact-Cards/contact-data.cpp"
+//#include "examples/Contact-Cards/masked-image.cpp"
 
 //#include "examples/compressed-texture-formats/compressed-texture-formats-example.cpp"
 
@@ -34,6 +35,9 @@
 //#include "examples/Fpp-Game/game-scene.cpp"
 //#include "examples/Fpp-Game/game-texture.cpp"
 //#include "examples/Fpp-Game/game-utils.cpp"
+
+//#include "examples/frame-callback/frame-callback.cpp"
+//#include "examples/frame-callback/frame-callback-example.cpp"
 
 //#include "examples/Gradients/Gradients-example.cpp"
 //#include "examples/Hello-World/Hello-World-example.cpp"

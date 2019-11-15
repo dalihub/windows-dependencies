@@ -1,0 +1,3 @@
+LIBRARY libdlog.so
+EXPORTS
+dlog_print @1

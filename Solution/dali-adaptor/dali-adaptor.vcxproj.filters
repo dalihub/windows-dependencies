@@ -76,12 +76,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\windows\display-connection-impl-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\drag-and-drop-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\drag-and-drop-detector-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\graphics\windows-gl\egl-image-extensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -107,9 +101,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\haptics\common\feedback-plugin-proxy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\windows\file-closer-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\file-loader.cpp">
@@ -146,9 +137,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\gaussian-blur.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\gesture-manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\gif-loading.cpp">
@@ -259,9 +247,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\logging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\long-press-gesture-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\imaging\common\native-bitmap-buffer-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -275,12 +260,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\window-system\common\orientation-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\pan-gesture-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\pan-gesture-detector-base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\performance-interface-factory.cpp">
@@ -302,9 +281,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\physical-keyboard-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\pinch-gesture-detector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\pixel-buffer.cpp">
@@ -373,9 +349,6 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\system-trace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\common\tap-gesture-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\system\common\thread-controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -431,9 +404,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\input\windows\virtual-keyboard-impl-win.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\graphics\windows\vsync-monitor-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\dali-adaptor\dali\public-api\adaptor-framework\widget.cpp">
@@ -586,7 +556,34 @@
     <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor\generic\adaptor-impl-generic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\clipboard\generic\clipboard-impl-generic.cpp">
+    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\key-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor-framework\generic\file-loader-impl-generic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\file-stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\adaptor-framework\generic\file-stream-impl-generic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\internal\graphics\gles\egl-context-helper-implementation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\integration-api\adaptor-framework\scene-holder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\dali\integration-api\adaptor-framework\scene-holder-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\third-party\libunibreak\unibreakbase.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dali-adaptor\third-party\libunibreak\unibreakdef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="system-cache-path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

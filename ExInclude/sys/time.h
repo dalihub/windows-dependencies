@@ -2,12 +2,16 @@
 #define TIME_INCLUDE
 
 #include <time.h>
+#include <windows.h>
+#include <winsock.h>
 
-struct timeval
-{
-  long tv_sec;
-  long tv_usec;
-};
+#undef OPAQUE
+#undef TRANSPARENT
+
+#undef ERROR
+
+#undef TRUE
+#undef FALSE
 
 static int gettimeofday( struct timeval *tp, void *tzp )
 {
