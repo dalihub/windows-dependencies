@@ -15,3 +15,12 @@ int vasprintf( char **ptr, const char *format, va_list ap )
 
   return _vsprintf_p( *ptr, len, format, ap );
 }
+
+int asprintf(char **strp, const char *fmt, ...)
+{
+	va_list ap;
+	va_start(ap, fmt);
+	int r = vasprintf(strp, fmt, ap);
+	va_end(ap);
+	return r;
+}

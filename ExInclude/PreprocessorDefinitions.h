@@ -129,6 +129,7 @@ static unsigned int __sync_fetch_and_xor( unsigned int *originalValue, int value
 #define _CPP11
 
 extern int vasprintf( char **ptr, const char *format, va_list ap );
+extern int asprintf(char** strp, const char* fmt, ...);
 
 #define CLOCK_MONOTONIC 0
 #define TIMER_ABSTIME 0

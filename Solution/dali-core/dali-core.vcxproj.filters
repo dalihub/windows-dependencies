@@ -841,6 +841,9 @@
     <ClCompile Include="..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-recognizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\dali-core\dali\internal\event\common\demangler-windows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

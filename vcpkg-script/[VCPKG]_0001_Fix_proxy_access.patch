@@ -1,0 +1,133 @@
+diff --git a/scripts/cmake/vcpkg_download_distfile.cmake b/scripts/cmake/vcpkg_download_distfile.cmake
+index 1fbff40e5..d74ca5b94 100644
+--- a/scripts/cmake/vcpkg_download_distfile.cmake
++++ b/scripts/cmake/vcpkg_download_distfile.cmake
+@@ -120,10 +120,24 @@ function(vcpkg_download_distfile VAR)
+                     list(APPEND request_headers "--header=${header}")
+                 endforeach()
+             endif()
+-            _execute_process(
++            message(STATUS "_execute_process(
+                 COMMAND ${ARIA2} ${vcpkg_download_distfile_URLS}
+                 -o temp/${vcpkg_download_distfile_FILENAME}
+                 -l download-${vcpkg_download_distfile_FILENAME}-detailed.log
++				-https-proxy=https://106.1.18.35:8080/
++				-http-proxy=http://106.1.18.35:8080/
++                ${request_headers}
++                OUTPUT_FILE download-${vcpkg_download_distfile_FILENAME}-out.log
++                ERROR_FILE download-${vcpkg_download_distfile_FILENAME}-err.log
++                RESULT_VARIABLE error_code
++                WORKING_DIRECTORY ${DOWNLOADS}
++            )")
++			_execute_process(
++                COMMAND ${ARIA2} ${vcpkg_download_distfile_URLS}
++                -o temp/${vcpkg_download_distfile_FILENAME}
++                -l download-${vcpkg_download_distfile_FILENAME}-detailed.log
++				-https-proxy=https://106.1.18.35:8080/
++				-http-proxy=http://106.1.18.35:8080/
+                 ${request_headers}
+                 OUTPUT_FILE download-${vcpkg_download_distfile_FILENAME}-out.log
+                 ERROR_FILE download-${vcpkg_download_distfile_FILENAME}-err.log
+diff --git a/toolsrc/src/vcpkg/base/downloads.cpp b/toolsrc/src/vcpkg/base/downloads.cpp
+index df6b1be09..8dc8d1a7e 100644
+--- a/toolsrc/src/vcpkg/base/downloads.cpp
++++ b/toolsrc/src/vcpkg/base/downloads.cpp
+@@ -4,11 +4,11 @@
+ #include <vcpkg/base/hash.h>
+ #include <vcpkg/base/system.process.h>
+ #include <vcpkg/base/util.h>
++#include <vcpkg/base/system.h>
++#include <vcpkg/base/system.print.h>
+ 
+ #if defined(_WIN32)
+ #include <VersionHelpers.h>
+-#else
+-#include <vcpkg/base/system.h>
+ #endif
+ 
+ namespace vcpkg::Downloads
+@@ -35,37 +35,53 @@ namespace vcpkg::Downloads
+                            target_file_path,
+                            std::to_string(err));
+ 
+-        auto hSession = WinHttpOpen(L"vcpkg/1.0",
+-                                    IsWindows8Point1OrGreater() ? WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY
+-                                                                : WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
+-                                    WINHTTP_NO_PROXY_NAME,
+-                                    WINHTTP_NO_PROXY_BYPASS,
+-                                    0);
+-        Checks::check_exit(VCPKG_LINE_INFO, hSession, "WinHttpOpen() failed: %d", GetLastError());
+-
+-        // Win7 IE Proxy fallback
+-        if (IsWindows7OrGreater() && !IsWindows8Point1OrGreater())
+-        {
+-            // First check if any proxy has been found automatically
+-            WINHTTP_PROXY_INFO proxyInfo;
+-            DWORD proxyInfoSize = sizeof(WINHTTP_PROXY_INFO);
+-            auto noProxyFound = !WinHttpQueryOption(hSession, WINHTTP_OPTION_PROXY, &proxyInfo, &proxyInfoSize) ||
+-                                proxyInfo.dwAccessType == WINHTTP_ACCESS_TYPE_NO_PROXY;
+-
+-            // If no proxy was found automatically, use IE's proxy settings, if any
+-            if (noProxyFound)
+-            {
+-                WINHTTP_CURRENT_USER_IE_PROXY_CONFIG ieProxy;
+-                if (WinHttpGetIEProxyConfigForCurrentUser(&ieProxy) && ieProxy.lpszProxy != nullptr)
+-                {
+-                    WINHTTP_PROXY_INFO proxy;
+-                    proxy.dwAccessType = WINHTTP_ACCESS_TYPE_NAMED_PROXY;
+-                    proxy.lpszProxy = ieProxy.lpszProxy;
+-                    proxy.lpszProxyBypass = ieProxy.lpszProxyBypass;
+-                    WinHttpSetOption(hSession, WINHTTP_OPTION_PROXY, &proxy, sizeof(proxy));
+-                }
+-            }
+-        }
++		HINTERNET hSession = 0;
++		auto vcpkg_proxy = System::get_environment_variable("VCPKG_PROXY");
++		if ( vcpkg_proxy.get() && vcpkg_proxy.get()->length() > 1 ) {
++
++			StringView tmp(*vcpkg_proxy.get());
++			auto proxy = Strings::to_utf16(tmp);
++			hSession =  WinHttpOpen(L"vcpkg/1.0",
++									WINHTTP_ACCESS_TYPE_NAMED_PROXY,
++									proxy.c_str(),
++									WINHTTP_NO_PROXY_BYPASS,
++									0);
++			Checks::check_exit(VCPKG_LINE_INFO, hSession, "WinHttpOpen() failed: %d %s", GetLastError(), proxy.c_str());
++		}
++		else
++		{
++			auto hSession = WinHttpOpen(L"vcpkg/1.0",
++										IsWindows8Point1OrGreater() ? WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY
++																	: WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
++										WINHTTP_NO_PROXY_NAME,
++										WINHTTP_NO_PROXY_BYPASS,
++										0);
++			Checks::check_exit(VCPKG_LINE_INFO, hSession, "WinHttpOpen() failed: %d", GetLastError());
++
++			// Win7 IE Proxy fallback
++			if (IsWindows7OrGreater() && !IsWindows8Point1OrGreater())
++			{
++				// First check if any proxy has been found automatically
++				WINHTTP_PROXY_INFO proxyInfo;
++				DWORD proxyInfoSize = sizeof(WINHTTP_PROXY_INFO);
++				auto noProxyFound = !WinHttpQueryOption(hSession, WINHTTP_OPTION_PROXY, &proxyInfo, &proxyInfoSize) ||
++									proxyInfo.dwAccessType == WINHTTP_ACCESS_TYPE_NO_PROXY;
++
++				// If no proxy was found automatically, use IE's proxy settings, if any
++				if (noProxyFound)
++				{
++					WINHTTP_CURRENT_USER_IE_PROXY_CONFIG ieProxy;
++					if (WinHttpGetIEProxyConfigForCurrentUser(&ieProxy) && ieProxy.lpszProxy != nullptr)
++					{
++						WINHTTP_PROXY_INFO proxy;
++						proxy.dwAccessType = WINHTTP_ACCESS_TYPE_NAMED_PROXY;
++						proxy.lpszProxy = ieProxy.lpszProxy;
++						proxy.lpszProxyBypass = ieProxy.lpszProxyBypass;
++						WinHttpSetOption(hSession, WINHTTP_OPTION_PROXY, &proxy, sizeof(proxy));
++					}
++				}
++			}
++		}
+ 
+         // Use Windows 10 defaults on Windows 7
+         DWORD secure_protocols(WINHTTP_FLAG_SECURE_PROTOCOL_SSL3 | WINHTTP_FLAG_SECURE_PROTOCOL_TLS1 |
