@@ -1,0 +1,33 @@
+diff --git a/ports/angle/portfile.cmake b/ports/angle/portfile.cmake
+index 527874d72..fc523ff7e 100644
+--- a/ports/angle/portfile.cmake
++++ b/ports/angle/portfile.cmake
+@@ -24,6 +24,7 @@ vcpkg_from_github(
+     SHA512 037ebe356371924088563180c4a37a31eaffa41ca21c42554391672c28e62fabc19d787516b88baa192b771e05c370c5a6cfec0863b70e08d65216f41d89923f
+     PATCHES 
+         001-fix-uwp.patch
+         002-fix-builder-error.patch
++        003_Fix_glInvalidateFramebuffer_crash.patch
+ )
+ 
+ file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
+diff --git a/ports/angle/003_Fix_glInvalidateFramebuffer_crash.patch b/ports/angle/003_Fix_glInvalidateFramebuffer_crash.patch
+new file mode 100644
+index 000000000..a52b16cb0
+--- /dev/null
++++ b/ports/angle/003_Fix_glInvalidateFramebuffer_crash.patch
+@@ -0,0 +1,14 @@
++diff -ruN a/src/libANGLE/Context.cpp b/src/libANGLE/Context.cpp
++--- a/src/libANGLE/Context.cpp	2019-09-16 09:46:58.000000000 +0100
+++++ b/src/libANGLE/Context.cpp	2019-11-20 14:30:20.612384000 +0000
++@@ -4125,6 +4125,10 @@
++                                     GLsizei numAttachments,
++                                     const GLenum *attachments)
++ {
+++    // VCC
+++    // This call causes a crash. return added.
+++    return;
+++
++     // Only sync the FBO
++     ANGLE_CONTEXT_TRY(mState.syncDirtyObject(this, target));
++ 

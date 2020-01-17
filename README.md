@@ -47,4 +47,12 @@ Run the .bat files to config the enviorment
     windows-dependencies\setenv.bat
 
 Step5:
+Install vcpkg to build all the third-party dependecies: go to vcpkg-script, read the Readme.md file for more instructions,
+open a git bash shell for MS Windows (installed with git) and execute the script to install vcpkg.
+
+    build-deps.sh
+
+More info on vcpkg can be found here https://github.com/microsoft/vcpkg and here https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
+
+Step6:
 Open **windows-dependencies\Solution\dali.sln**, build and run.
