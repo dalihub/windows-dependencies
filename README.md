@@ -41,7 +41,7 @@ Download the windows dependencies repo which also contains the Visual Studio pro
     git clone https://github.com/dalihub/windows-dependencies.git
 
 Step4:
-Run the .bat files to config the enviorment
+Run the .bat files to config the enviorment. Note the dali-env folder has to be at the same level than dali-core, dali-adaptor, dali-toolkit and dali-demo in the filesystem hierarchy.
 
     windows-dependencies\prebuild.bat
     windows-dependencies\setenv.bat
@@ -55,4 +55,4 @@ open a git bash shell for MS Windows (installed with git) and execute the script
 More info on vcpkg can be found here https://github.com/microsoft/vcpkg and here https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
 
 Step6:
-Open **windows-dependencies\Solution\dali.sln**, build and run.
+Open **windows-dependencies\Solution\vc2017\DALi.sln**, set dali-demo as start-up project, build and run.

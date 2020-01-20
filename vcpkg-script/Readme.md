@@ -1,7 +1,10 @@
 # Instructions to build the third-party dependencies
 
-## 0. Note
-Due to different architectures, platforms, configurations, etc the script might need to be modified in order to be able to install the third-party dependencies.
+## 0. Notes and troubleshootings
+- Due to different architectures, platforms, configurations, etc the script might need to be modified in order to be able to install the third-party dependencies.
+- It might happen that the script gets stuck downloading or building a package, usually it can be detected if in the Performance tab of the Windows Task Manager
+  the CPU or the ETHERNET graphics show no activity.
+  In that case restart the script again. It's safe just press ENTER when the script asks to reapply the patches.
 
 ## 1. Prerequisites
 
