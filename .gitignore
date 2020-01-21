@@ -5,3 +5,12 @@
 /Solution/dali-demo/dali-demo.dir/
 /Solution/dali-demo/dali-demo.vcxproj.user
 /Solution/dali-toolkit/dali-toolkit.dir/
+*.pdb
+*.dll
+*.ilk
+*.exe
+*.tlog
+*.obj
+*.idb
+*.cache*
+*.log
