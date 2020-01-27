@@ -5,6 +5,8 @@
 - It might happen that the script gets stuck downloading or building a package, usually it can be detected if in the Performance tab of the Windows Task Manager
   the CPU or the ETHERNET graphics show no activity.
   In that case restart the script again. It's safe just press ENTER when the script asks to reapply the patches.
+- On the debug configuration the pthreadVC3.dll file fails to be copied into the executable folder. It can be copied manually from the vcpkg/installed folder of the
+  executable folder of the release configuration. This issue needs to be investigated.
 
 ## 1. Prerequisites
 
