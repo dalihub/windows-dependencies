@@ -16,7 +16,8 @@ pkg_list=( winsock2
 	   fontconfig
 	   freetype
 	   harfbuzz
-	   fribidi )
+	   fribidi
+)
 
 patch_files=( 	'../[VCPKG]_0001_Fix_proxy_access.patch'
       '../[VCPKG]_0002_Fix_Windows_toolchain_bigobj.patch'

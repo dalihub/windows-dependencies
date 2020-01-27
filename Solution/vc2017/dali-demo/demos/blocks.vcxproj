@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug-VCPKG|Win32">
+      <Configuration>Debug-VCPKG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug-VCPKG|x64">
+      <Configuration>Debug-VCPKG</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-VCPKG|Win32">
+      <Configuration>Release-VCPKG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-VCPKG|x64">
+      <Configuration>Release-VCPKG</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A27F6F2E-40DF-4F69-9EFA-894BC27DEAD6}</ProjectGuid>
+    <RootNamespace>blocks</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName).example</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName).example</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName).example</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName).example</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG_ENABLED;DALI_ENV="../../../../dali-env";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\..\..\include;..\..\..\..\..\dali-core;..\..\..\..\..\dali-adaptor;..\..\..\..\..\dali-toolkit;..\..\..\..\..\dali-demo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>dali-core-msvc.lib;dali-adaptor-msvc.lib;dali-toolkit-msvc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG_ENABLED;DALI_ENV="../../../../dali-env";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\dali-demo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../../../dali-env";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\..\..\include;..\..\..\..\..\dali-core;..\..\..\..\..\dali-adaptor;..\..\..\..\..\dali-toolkit;..\..\..\..\..\dali-demo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../../$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dali-core-msvc.lib;dali-adaptor-msvc.lib;dali-toolkit-msvc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../../../dali-env";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\dali-demo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\dali-demo\examples\blocks\blocks-example.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
