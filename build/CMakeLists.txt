@@ -50,6 +50,18 @@ SET_TARGET_PROPERTIES( ${name} PROPERTIES VERSION 1.0 )
  
 TARGET_LINK_LIBRARIES( ${name} )
 
+# Deployment folder should come from spec file or command line:
+SET( PREFIX ${CMAKE_INSTALL_PREFIX})
+
+# Set up the include dir
+SET( INCLUDE_DIR $ENV{includedir} )
+IF( NOT INCLUDE_DIR )
+  SET( INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR} )
+ENDIF()
+IF( NOT INCLUDE_DIR )
+  SET( INCLUDE_DIR ${PREFIX}/include )
+ENDIF()
+
 INSTALL(FILES ${INCLUDE_HEADERS} DESTINATION include )
 INSTALL(FILES ${INCLUDE_DALI_HEADERS} DESTINATION include/dali )
 

@@ -4,7 +4,8 @@
 
   * [Build Instructions for MS Windows](#build-instructions)
       * [1. Build DALi and DALi Demo with Visual Studio](#1-build-with-visual-studio)
-      * [2. Build DALi Demo with Visual Studio using DALi VCPKG ports](#2-buil-with-vcpkg)
+      * [2. Build DALi Demo with Visual Studio using DALi VCPKG ports](#2-build-with-vcpkg)
+      * [3. Build DALi windows dependencies with CMake](#3-build-with-cmake)
 
 # Build Instructions for MS Windows
 
@@ -93,3 +94,33 @@ More info on vcpkg can be found here https://github.com/microsoft/vcpkg and here
 
 ### Step4:
 Open **windows-dependencies\Solution\vc2017\DALi-VCPKG.sln**, set dali-demo as start-up project, build and run.
+
+## 3. Build DALi windows dependencies with CMake
+
+DALi can be built with CMake. In this section there are the instructions to build the windows dependencies. See dali-core, dali-adaptor, dali-toolkit and dali-demo README.md files for more instructions.
+
+  * Requirements
+    It's required the version 3.12.2 of CMake and a Git Bash Shell.
+
+  * Notes and troubleshoting:
+    It should be possible to use the MS Visual studio Developer Command Prompt (https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) to build DALi from the command line.
+    However, the CMake version installed with MS Visual Studio 2017 is a bit out of date and some VCPKG modules require a higher version.
+    This instructions have been tested with CMake 3.12.2 on a Git Bash shell.
+
+  * Define an environment variable to set the path to the VCPKG folder
+
+    $ export VCPKG_FOLDER=C:/Users/username/Workspace/VCPKG_TOOL
+
+  * Define an environment variable to set the path where DALi is going to be installed.
+
+    $ export DALI_ENV_FOLDER=C:/Users/username/Workspace/dali-env
+
+  * Execute the following commands to create the makefiles, build and install DALi.
+  
+    $ cmake -g Ninja . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_FOLDER/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=$DALI_ENV_FOLDER
+    $ cmake --build . --target install
+
+
+  * Options:
+    - CMAKE_TOOLCHAIN_FILE  ---> Needed to find packages installed by VCPKG.
+    - CMAKE_INSTALL_PREFIX  ---> Were DALi is installed.
