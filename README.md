@@ -93,3 +93,27 @@ More info on vcpkg can be found here https://github.com/microsoft/vcpkg and here
 
 ### Step4:
 Open **windows-dependencies\Solution\vc2017\DALi-VCPKG.sln**, set dali-demo as start-up project, build and run.
+
+
+=========================================================================
+
+TODO
+
+  build on MS Windows from the command line:
+
+  * Requirements
+    - MSVC 2017
+    - CMake 3.12.2
+    
+  * Notes and troubleshoting:
+    It should be possible to use the MS Visual studio Developer Command Prompt (https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) to build DALi from the command line.
+    However, the CMake version installed with MS Visual Studio 2017 is a bit out of date and some VCPKG modules require a higher version.
+    This instructions have been tested with CMake 3.12.2 on a Git Bash shell.
+
+  * open a Git Bash Shell.
+  > cmake -g Ninja . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_FOLDER/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=$DALI_ENV_FOLDER
+  > cmake --build . --target install
+
+
+CMAKE_TOOLCHAIN_FILE  ---> Needed to find packages installed by VCPKG.
+CMAKE_INSTALL_PREFIX  ---> Were DALi is installed.
