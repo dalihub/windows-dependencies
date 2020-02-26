@@ -127,3 +127,20 @@ int rand_r( unsigned int* seed )
 
 	return rand();
 }
+
+int setenv( const char* __name, const char* __value, int __replace )
+{
+  int length = strlen(__name) + strlen(__value) + 1u;
+  char* envExpression = static_cast<char*>(malloc(length + 1u));
+  
+  strcpy(envExpression, __name);
+  strcat(envExpression, "=");
+  strcat(envExpression, __value);
+  envExpression[length] = '\0';
+
+  const bool result = _putenv( envExpression );
+
+  free(envExpression);
+
+  return result;
+}

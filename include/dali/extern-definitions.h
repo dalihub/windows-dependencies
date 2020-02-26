@@ -106,6 +106,8 @@ int clock_nanosleep( clockid_t clock_id, int flags, const struct timespec* reqtp
 
 int rand_r( unsigned int* seed );
 
+int setenv( const char* __name, const char* __value, int __replace );
+
 typedef size_t ssize_t;
 
 #endif // DALI_CORE_EXTERN_DEFINITIONS_H
