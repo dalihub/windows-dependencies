@@ -763,12 +763,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\scene-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-surface-frame-buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-texture-frame-buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\gesture-event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -844,6 +838,11 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\demangler-windows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-frame-buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\scene-graph-scene.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\singleton-service.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

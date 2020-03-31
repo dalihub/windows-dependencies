@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6517E691-3A75-3CF9-B432-27A54ACDDDD0}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
     <ProjectName>dali-core</ProjectName>
@@ -150,6 +150,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\animation-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\path-constrainer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\hash.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\singleton-service.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\hit-test-algorithm.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\key-event-devel.cpp" />
@@ -208,8 +209,8 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-processor.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-recognizer.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-surface-frame-buffer.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-texture-frame-buffer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-frame-buffer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\scene-graph-scene.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\manager\frame-callback-processor.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\manager\scene-graph-frame-callback.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\manager\update-proxy-impl.cpp" />
