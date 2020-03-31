@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B3CB580D-6490-396F-AE20-CF15975D70FE}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
     <ProjectName>dali-adaptor</ProjectName>
@@ -168,7 +168,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\performance-logger.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\physical-keyboard.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\pixel-buffer.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\singleton-service.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\sound-player.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\style-monitor.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\thread-settings.cpp" />
@@ -260,6 +259,7 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\abort-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\color-controller-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\command-line-options.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\configuration-manager.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\environment-options.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\fps-tracker.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\frame-time-stamp.cpp" />
@@ -271,7 +271,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\performance-logger-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\performance-marker.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\performance-server.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\singleton-service-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\sound-player-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\stat-context.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\stat-context-manager.cpp" />
@@ -361,6 +360,9 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\MemFile.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\OriginalFile.cpp" />
     <ClCompile Include="system-cache-path.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\dali-adaptor\dali\internal\system\common\configuration-manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
