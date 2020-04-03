@@ -604,14 +604,13 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\thread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\configuration-manager.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\configuration-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{EFDBE0C9-FF26-3C30-BA90-5916E19580C1}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\dali-adaptor\dali\internal\system\common\configuration-manager.h" />
   </ItemGroup>
 </Project>
