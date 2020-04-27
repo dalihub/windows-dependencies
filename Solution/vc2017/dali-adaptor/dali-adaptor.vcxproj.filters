@@ -592,9 +592,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\CustomFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\GetRealFileName.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\MemFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

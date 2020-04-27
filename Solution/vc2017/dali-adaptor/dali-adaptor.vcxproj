@@ -356,7 +356,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\network.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\thread.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\CustomFile.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\GetRealFileName.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\MemFile.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\Win32File\OriginalFile.cpp" />
     <ClCompile Include="system-cache-path.cpp" />
