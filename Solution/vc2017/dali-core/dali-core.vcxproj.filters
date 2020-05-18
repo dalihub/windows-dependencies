@@ -847,6 +847,12 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\scene-graph-scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\renderer-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\render-tasks\render-task-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

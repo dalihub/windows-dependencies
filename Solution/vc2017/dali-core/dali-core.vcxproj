@@ -163,6 +163,8 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\handle-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\csharp-type-registry.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\render-tasks\render-task-devel.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\renderer-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\scripting\scripting.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\signals\signal-delegate.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\threading\conditional-wait.cpp" />
