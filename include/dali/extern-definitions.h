@@ -110,5 +110,8 @@ int setenv( const char* __name, const char* __value, int __replace );
 
 typedef size_t ssize_t;
 
+int mkdir(const char *pathname, unsigned int mode);
+
+
 #endif // DALI_CORE_EXTERN_DEFINITIONS_H
 

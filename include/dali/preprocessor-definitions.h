@@ -57,5 +57,11 @@
 #define CLOCK_MONOTONIC 0
 #define TIMER_ABSTIME 0
 
+#define S_IRWXU 0
+#define S_IRGRP 0
+#define S_IXGRP 0
+#define S_IROTH 0
+#define S_IXOTH 0
+
 #endif // DALI_CORE_PREPROCESSOR_DEFINITIONS_H
 
