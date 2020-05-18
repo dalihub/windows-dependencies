@@ -144,3 +144,9 @@ int setenv( const char* __name, const char* __value, int __replace )
 
   return result;
 }
+
+int mkdir(const char *pathname, unsigned int mode)
+{
+	return CreateDirectory(pathname, nullptr);
+
+}
