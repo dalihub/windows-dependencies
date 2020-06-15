@@ -145,12 +145,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\distance-field.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\encoded-buffer-image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\encoded-buffer-image-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -326,12 +320,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\native-image-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\nine-patch-image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\nine-patch-image-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\nodes\node.cpp">
