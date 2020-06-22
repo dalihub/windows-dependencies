@@ -139,9 +139,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\gaussian-blur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\gif-loading.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\text-abstraction\glyph-info.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -602,6 +599,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\configuration-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\animated-image-loading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\webp-loading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\gif-loading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-adaptor.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\animated-image-loading.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\application-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\bitmap-saver.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\clipboard.cpp" />
@@ -159,7 +160,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\file-loader.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\file-stream.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\image-loading.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\gif-loading.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\input-method-context.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\input-method-options.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\key-devel.cpp" />
@@ -219,6 +219,7 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\graphics\windows-gl\egl-image-extensions.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\haptics\common\feedback-player-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\haptics\common\feedback-plugin-proxy.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\gif-loading.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\image-loader-plugin-proxy.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\native-bitmap-buffer-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\pixel-buffer-impl.cpp" />
@@ -236,6 +237,7 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\loader-png.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\loader-wbmp.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\pixel-manipulation.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\common\webp-loading.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\windows\curl-environment-win.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\windows\file-download-win.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\imaging\windows\native-image-source-factory-win.cpp" />

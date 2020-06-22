@@ -412,9 +412,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\builder\replacement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-gif-image-cache.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-image-cache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -767,6 +764,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\arc\arc-visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-animated-image-cache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
