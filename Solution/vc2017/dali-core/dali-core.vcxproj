@@ -158,7 +158,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\touch-data-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\distance-field.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\texture-set-image.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\handle-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\csharp-type-registry.cpp" />
@@ -247,13 +246,8 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-point.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-data.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\image.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\pixel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\pixel-data.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\buffer-image.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\frame-buffer-image.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\resource-image.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\native-image.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\math\compile-time-math.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\math\degree.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\math\matrix.cpp" />
@@ -353,11 +347,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\touch-event-processor.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\bitmap-packed-pixel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\bitmap-compressed.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\image-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\buffer-image-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\frame-buffer-image-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\resource-image-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\native-image-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\pixel-data-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\render-tasks\render-task-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\render-tasks\render-task-list-impl.cpp" />

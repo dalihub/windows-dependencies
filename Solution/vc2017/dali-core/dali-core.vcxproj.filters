@@ -58,12 +58,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\blending-options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\buffer-image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\buffer-image-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\signals\callback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -163,12 +157,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\frame-buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\frame-buffer-image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\frame-buffer-image-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\rendering\frame-buffer-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -229,13 +217,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\hover-event-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\image-attributes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\image-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\image-sampler.cpp">
@@ -314,12 +296,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\mutex-trace.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\native-image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\native-image-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\nodes\node.cpp">
@@ -535,12 +511,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\common\render-tracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\resource-image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\images\resource-image-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -632,9 +602,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\texture-set.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\texture-set-image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\rendering\texture-set-impl.cpp">
