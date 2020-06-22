@@ -17,6 +17,7 @@ pkg_list=( winsock2
 	   freetype
 	   harfbuzz
 	   fribidi
+	   libwebp
 	   dali-windows-dependencies
 	   dali-core
 	   dali-adaptor
