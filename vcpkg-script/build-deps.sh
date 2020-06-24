@@ -19,9 +19,9 @@ pkg_list=( winsock2
 	   fribidi
 	   libwebp
 	   dali-windows-dependencies
-	   dali-core
-	   dali-adaptor
-	   dali-toolkit )
+	   dali2-core
+	   dali2-adaptor
+	   dali2-toolkit )
 
 patch_files=( 	'../[VCPKG]_0001_Fix_proxy_access.patch'
       '../[VCPKG]_0002_Fix_Windows_toolchain_bigobj.patch'
