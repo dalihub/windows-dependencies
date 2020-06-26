@@ -148,11 +148,13 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\accessibility-manager\accessibility-manager.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\asset-manager\asset-manager.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\base64-encoding.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\builder.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\json-parser.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\builder\tree-node.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\alignment\alignment.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\control-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\control-wrapper.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\control-wrapper-impl.cpp" />
@@ -168,8 +170,10 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\confirmation-popup.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\popup.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scene3d-view\scene3d-view.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scroll-bar\scroll-bar.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\shadow-view\shadow-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\super-blur-view\super-blur-view.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\table-view\table-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-editor-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-field-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\text-controls\text-selection-popup.cpp" />
@@ -191,6 +195,7 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-effect.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-fold-effect.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\transition-effects\cube-transition-wave-effect.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\utility\npatch-utilities.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\visual-factory\transition-data.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\visual-factory\visual-factory.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\visual-factory\visual-base.cpp" />
@@ -362,7 +367,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\xhtml-entities.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\control-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\control.cpp" />
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\alignment\alignment.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\button.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\check-box-button.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\buttons\push-button.cpp" />
@@ -371,7 +375,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\image-view\image-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\model3d-view\model3d-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\progress-bar\progress-bar.cpp" />
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scroll-bar\scroll-bar.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\item-view\default-item-layout.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\item-view\item-layout.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\item-view\item-view.cpp" />
@@ -381,7 +384,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scroll-view\scroll-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\scrollable\scrollable.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\slider\slider.cpp" />
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\table-view\table-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\text-controls\text-editor.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\text-controls\text-label.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\controls\text-controls\text-field.cpp" />
@@ -389,7 +391,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\image-loader\async-image-loader.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\image-loader\sync-image-loader.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\styling\style-manager.cpp" />
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\accessibility-manager\accessibility-manager.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\focus-manager\keyboard-focus-manager.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\dali-toolkit-version.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\public-api\enums.cpp" />
