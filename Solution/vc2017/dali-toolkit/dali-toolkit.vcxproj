@@ -214,8 +214,8 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\animated-image-visual.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\image-cache.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\fixed-image-cache.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-animated-image-cache.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-image-cache.cpp" />
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\rolling-gif-image-cache.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\animated-vector-image-visual.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-task.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-thread.cpp" />

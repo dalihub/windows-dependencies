@@ -32,6 +32,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blocks", "dali-demo\demos\b
 		{827E353D-76EB-34E5-8261-756EEB05C6E0} = {827E353D-76EB-34E5-8261-756EEB05C6E0}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "animated-images", "dali-demo\demos\animated-images.vcxproj", "{485FFA48-CDD7-4051-9D51-63773C279EF7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{827E353D-76EB-34E5-8261-756EEB05C6E0} = {827E353D-76EB-34E5-8261-756EEB05C6E0}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -80,12 +85,21 @@ Global
 		{A27F6F2E-40DF-4F69-9EFA-894BC27DEAD6}.Release|Win32.Build.0 = Release|Win32
 		{A27F6F2E-40DF-4F69-9EFA-894BC27DEAD6}.Release|x64.ActiveCfg = Release|x64
 		{A27F6F2E-40DF-4F69-9EFA-894BC27DEAD6}.Release|x64.Build.0 = Release|x64
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Debug|Win32.Build.0 = Debug|Win32
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Debug|x64.ActiveCfg = Debug|x64
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Debug|x64.Build.0 = Debug|x64
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Release|Win32.ActiveCfg = Release|Win32
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Release|Win32.Build.0 = Release|Win32
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Release|x64.ActiveCfg = Release|x64
+		{485FFA48-CDD7-4051-9D51-63773C279EF7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A27F6F2E-40DF-4F69-9EFA-894BC27DEAD6} = {A4E80715-3D1E-495E-808D-D4CA8CF166AF}
+		{485FFA48-CDD7-4051-9D51-63773C279EF7} = {A4E80715-3D1E-495E-808D-D4CA8CF166AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02D0CCA5-F369-38A7-8475-A84AD1DAC693}
