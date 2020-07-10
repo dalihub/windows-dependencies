@@ -282,6 +282,7 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\update-status-logger.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\widget-application-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\windows\callback-manager-win.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\windows\file-descriptor-monitor-windows.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\windows\logging-win.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\windows\system-settings-win.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\windows\timer-impl-win.cpp" />
