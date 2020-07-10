@@ -580,9 +580,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\signals\signal-slot-observers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\stage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage-devel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -800,6 +797,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\scene-graph-scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\base-object-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

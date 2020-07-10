@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\hash.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\singleton-service.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage-devel.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\hit-test-algorithm.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\key-event-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture-detector.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\point.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-combiner.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-integ.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\base-object-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\demangler-windows.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\scene-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\gesture-event.cpp" />
@@ -229,7 +231,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\dali-common.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\dali-vector.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\extents.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\stage.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\gesture-detector.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\hover-event.cpp" />
