@@ -54,7 +54,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\dali-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
+      <AdditionalOptions>/vmg /wd4251</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CallingConvention>Cdecl</CallingConvention>
@@ -101,7 +101,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\dali-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /vmg /NODEFAULTLIB:libcmt.lib</AdditionalOptions>
+      <AdditionalOptions>/vmg /wd4251</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -149,6 +149,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\animation-data.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\animation-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\path-constrainer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\addon-binder.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\hash.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\singleton-service.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage-devel.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\handle-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\csharp-type-registry.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\renderer-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\scripting\scripting.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\signals\signal-delegate.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\threading\conditional-wait.cpp" />
@@ -170,6 +172,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\threading\thread.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\update\frame-callback-interface.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\update\update-proxy.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\addon-manager.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\bitmap.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\core.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\debug.cpp" />

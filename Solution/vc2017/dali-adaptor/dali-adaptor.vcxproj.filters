@@ -613,6 +613,12 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\windows\file-descriptor-monitor-windows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\addons\common\addon-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\addons\dummy\addon-manager-factory-dummy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

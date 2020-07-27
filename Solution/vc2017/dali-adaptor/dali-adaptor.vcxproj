@@ -54,7 +54,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\dali-core;..\..\..\..\dali-adaptor;..\..\..\..\dali-adaptor\third-party\windows-platform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
+      <AdditionalOptions>/vmg /wd4251</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CallingConvention>Cdecl</CallingConvention>
@@ -101,7 +101,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\dali-core;..\..\..\..\dali-adaptor;..\..\..\..\dali-adaptor\third-party\windows-platform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /NODEFAULTLIB:libcmt.lib /vmg</AdditionalOptions>
+      <AdditionalOptions>/vmg /wd4251</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -206,6 +206,8 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor\common\combined-update-render-controller.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor\generic\adaptor-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor\windows\framework-win.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\addons\common\addon-manager.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\addons\dummy\addon-manager-factory-dummy.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\clipboard\common\clipboard-event-notifier-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\clipboard\generic\clipboard-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\graphics\gles\egl-context-helper-implementation.cpp" />
