@@ -805,6 +805,15 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\addon-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\addon-binder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\renderer-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
