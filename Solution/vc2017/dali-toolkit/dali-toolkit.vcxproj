@@ -71,8 +71,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG_ENABLED;DALI_DATA_READ_ONLY_DIR=0;DALI_IMAGE_DIR=0;DALI_STYLE_DIR=0;DALI_SOUND_DIR=0;DALI_STYLE_IMAGE_DIR=0;CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;DALI_GLES_VERSION=30;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <LanguageStandard>
-      </LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;DALI_ENV=\"../../dali-env\";DALI_DATA_READ_ONLY_DIR=DALI_ENV\"/opt/share/dali\";DALI_IMAGE_DIR=DALI_ENV\"/opt/share/dali/toolkit/images/\";DALI_STYLE_DIR=DALI_ENV\"/opt/share/dali/toolkit/styles/\";DALI_SOUND_DIR=DALI_ENV\"/opt/share/dali/toolkit/sounds/\";DALI_STYLE_IMAGE_DIR=DALI_ENV\"/opt/share/dali/toolkit/styles/images/\";CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;CMAKE_INTDIR=\"Debug\";dali_toolkit_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -120,6 +119,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV=\"../../dali-env\";DALI_DATA_READ_ONLY_DIR=DALI_ENV\"/opt/share/dali\";DALI_IMAGE_DIR=DALI_ENV\"/opt/share/dali/toolkit/images/\";DALI_STYLE_DIR=DALI_ENV\"/opt/share/dali/toolkit/styles/\";DALI_SOUND_DIR=DALI_ENV\"/opt/share/dali/toolkit/sounds/\";DALI_STYLE_IMAGE_DIR=DALI_ENV\"/opt/share/dali/toolkit/styles/images/\";CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;CMAKE_INTDIR=\"Release\";dali_toolkit_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>

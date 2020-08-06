@@ -153,6 +153,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG_ENABLED;DALI_ENV="../../../../../dali-env";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
       <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -204,6 +205,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_ENV="../../../../../dali-env";APP_DATA_RES_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res";IMAGES_DIR=APP_DATA_RES_DIR"/images/";STYLE_DIR=APP_DATA_RES_DIR"/style/";DEMO_THEME_PATH=STYLE_DIR"demo-theme.json";DEMO_IMAGE_DIR=IMAGES_DIR;dataReadOnlyDir=DDALI_ENV"/opt/share/dali/";daliimagedir=dataReadOnlyDir"toolkit/images/";DALI_IMAGE_DIR=daliimagedir;DEMO_STYLE_DIR=APP_DATA_RES_DIR"/style/";APPLICATION_RESOURCE_PATH=DDALI_ENV"/opt/share/com.samsung.dali-demo/res";DEMO_VIDEO_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/videos/";DEMO_MODEL_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/models/";DEMO_SHADER_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/shaders/";DEMO_SCRIPT_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/scripts/";DEMO_GAME_DIR=DALI_ENV"/opt/share/com.samsung.dali-demo/res/game";ssize_t=size_t;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
       <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
