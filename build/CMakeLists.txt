@@ -2,6 +2,7 @@ cmake_minimum_required( VERSION 3.0 )
 
 SET( name "dali-windows-dependencies" )
  
+SET(CMAKE_C_STANDARD 99)
 PROJECT( ${name} LANGUAGES CXX )
 
 # Define options to CMake
@@ -20,6 +21,8 @@ ENDIF()
 IF( ENABLE_DEBUG )
   ADD_DEFINITIONS( "-DDEBUG_ENABLED" )
 ENDIF()
+
+ADD_COMPILE_OPTIONS( /std:c++17 ) # c++17 support
 
 SET( ROOT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 SET( SOURCE_DIR ${ROOT_SRC_DIR}/src )
