@@ -2,6 +2,8 @@ cmake_minimum_required( VERSION 3.0 )
 
 SET( name "dali-windows-dependencies" )
  
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_C_STANDARD 99)
 PROJECT( ${name} LANGUAGES CXX )
 
 # Define options to CMake
