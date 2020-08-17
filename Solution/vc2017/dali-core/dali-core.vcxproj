@@ -160,7 +160,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\key-event-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture-detector.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\touch-data-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\distance-field.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\handle-devel.cpp" />
@@ -178,6 +177,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\bitmap.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\core.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\debug.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-data-integ.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\profiling.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\input-options.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\render-task-list-integ.cpp" />
@@ -195,6 +195,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\demangler-windows.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\scene-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\gesture-event.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\hover-event-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-detector-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\long-press-gesture\long-press-gesture-processor.cpp" />
@@ -250,7 +251,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\tap-gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\tap-gesture-detector.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-point.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-data.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\pixel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\pixel-data.cpp" />
