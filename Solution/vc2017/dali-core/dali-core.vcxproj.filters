@@ -613,12 +613,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\animation\time-period.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-data.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\touch-data-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-combiner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -808,10 +802,22 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\renderer-devel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-data-integ.cpp">
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\hover-event-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\hover-event-impl.cpp">
+    <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-integ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\touch-event-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\wheel-event-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\wheel-event-devel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
