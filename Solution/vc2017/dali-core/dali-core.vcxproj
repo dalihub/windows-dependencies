@@ -269,6 +269,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\base-handle.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\handle.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\base-object.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\indirect-value.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\object-registry.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\property.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\property-array.cpp" />
