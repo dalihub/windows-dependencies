@@ -218,7 +218,9 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-recognizer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\touch-event-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\wheel-event-impl.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\rendering\vertex-buffer-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-frame-buffer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-vertex-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\scene-graph-scene.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\manager\frame-callback-processor.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\manager\scene-graph-frame-callback.cpp" />
@@ -285,12 +287,12 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\render-tasks\render-task-list.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\frame-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\geometry.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\property-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\texture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\texture-set.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\renderer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\sampler.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\shader.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\vertex-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\signals\callback.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\signals\connection-tracker.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\signals\connection-tracker-interface.cpp" />
@@ -330,7 +332,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\object-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\object-registry-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\projection.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\property-buffer-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\property-conditions-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\property-metadata.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\property-notification-impl.cpp" />
@@ -382,7 +383,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\gl-resources\gpu-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\queue\render-queue.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-geometry.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-property-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-renderer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-texture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\shaders\program.cpp" />

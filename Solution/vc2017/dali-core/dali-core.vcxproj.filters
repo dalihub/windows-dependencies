@@ -379,12 +379,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\property-base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\property-buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\property-buffer-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\common\property-condition-functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -479,9 +473,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\update\controllers\render-message-dispatcher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-property-buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\queue\render-queue.cpp">
@@ -821,6 +812,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\object\indirect-value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\rendering\vertex-buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\render\renderers\render-vertex-buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\rendering\vertex-buffer-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
