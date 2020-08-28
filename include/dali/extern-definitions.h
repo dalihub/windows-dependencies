@@ -100,10 +100,6 @@ static unsigned int __sync_fetch_and_xor( unsigned int *originalValue, int value
 int vasprintf(char** strp, const char* fmt, va_list ap);
 int asprintf(char** strp, const char* fmt, ...);
 
-typedef int clockid_t;
-int clock_gettime( int type, timespec *timeSpec );
-int clock_nanosleep( clockid_t clock_id, int flags, const struct timespec* reqtp, struct timespec* remtp );
-
 int rand_r( unsigned int* seed );
 
 int setenv( const char* __name, const char* __value, int __replace );

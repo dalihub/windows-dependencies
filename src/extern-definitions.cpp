@@ -28,48 +28,8 @@
 
 namespace
 {
-  
+
 static unsigned int _seed = -1;
-const uint64_t NANOSECONDS_PER_SECOND = 1e+9;
-static LARGE_INTEGER _cpuFrequency;
-static LARGE_INTEGER *_pCpuFrequency = NULL;
-
-void InternalGetNanoseconds( uint64_t& timeInNanoseconds )
-{
-  if( nullptr == _pCpuFrequency )
-  {
-    _pCpuFrequency = &_cpuFrequency;
-    QueryPerformanceFrequency( _pCpuFrequency );
-  }
-
-  LARGE_INTEGER curTime;
-  QueryPerformanceCounter( &curTime );
-
-  timeInNanoseconds = ( curTime.QuadPart * NANOSECONDS_PER_SECOND ) / _pCpuFrequency->QuadPart; // VCC have a look to this as it's different to other Windows versions!!!!!  
-}
-
-void Sleep( uint64_t timeInNanoseconds )
-{
-  //::Sleep( 5 ); VCC have a look to this!!!!!  
-  return;
-  uint64_t microSecond = timeInNanoseconds / 1000;
-
-  LARGE_INTEGER litmp;
-  LONGLONG QPart1, QPart2;
-  LONGLONG dfMinus, dfFreq;
-  int dfTim;
-  QueryPerformanceFrequency( &litmp );
-  dfFreq = litmp.QuadPart;  // Get clock frequency of counter
-  QueryPerformanceCounter( &litmp );
-  QPart1 = litmp.QuadPart;  // Get initial value
-  do {
-    QueryPerformanceCounter( &litmp );
-    QPart2 = litmp.QuadPart;  // Get current value
-    dfMinus = QPart2 - QPart1;
-    dfTim = dfMinus * 1000000 / dfFreq; // Get delta time in seconds
-  } while( dfTim < microSecond );
-}
-
 } // namespace
 
 int vasprintf( char **ptr, const char *format, va_list ap )
@@ -93,28 +53,6 @@ int asprintf(char **strp, const char *fmt, ...)
     int r = vasprintf(strp, fmt, ap);
     va_end(ap);
     return r;
-}
-
-int clock_gettime( int type, timespec *timeSpec )
-{
-  uint64_t timeInNanoseconds;
-  InternalGetNanoseconds( timeInNanoseconds );
-
-  timeSpec->tv_sec = timeInNanoseconds / NANOSECONDS_PER_SECOND;
-  timeSpec->tv_nsec = timeInNanoseconds % NANOSECONDS_PER_SECOND;
-
-  return 0;
-}
-
-int clock_nanosleep( clockid_t clock_id, int flags, const struct timespec *reqtp, struct timespec *remtp )
-{
-  uint64_t curTime;
-  InternalGetNanoseconds( curTime );
-
-  uint64_t timeInNanoseconds = reqtp->tv_sec * NANOSECONDS_PER_SECOND + reqtp->tv_sec;
-  Sleep( timeInNanoseconds - curTime );
-
-  return 0;
 }
 
 int rand_r( unsigned int* seed )
