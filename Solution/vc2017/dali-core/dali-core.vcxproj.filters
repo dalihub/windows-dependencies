@@ -79,9 +79,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\signals\connection-tracker-interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\constants.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\animation\constrainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -751,12 +748,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\tap-gesture\tap-gesture-recognizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-detector-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -821,6 +812,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\rendering\vertex-buffer-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\rotation-gesture-detector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\rotation-gesture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
