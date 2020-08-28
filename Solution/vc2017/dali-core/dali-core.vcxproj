@@ -158,8 +158,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\hit-test-algorithm.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\key-event-devel.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture-detector.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\rotation-gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\wheel-event-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\distance-field.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
@@ -238,7 +236,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\animation\linear-constrainer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\animation\path.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\animation\time-period.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\constants.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\dali-common.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\dali-vector.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\common\extents.cpp" />
@@ -248,6 +245,8 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\key-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\long-press-gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\long-press-gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\rotation-gesture-detector.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\rotation-gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\wheel-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\pan-gesture.cpp" />
