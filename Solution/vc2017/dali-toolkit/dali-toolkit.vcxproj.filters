@@ -773,6 +773,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-manager.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\progress-bar\progress-bar-devel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

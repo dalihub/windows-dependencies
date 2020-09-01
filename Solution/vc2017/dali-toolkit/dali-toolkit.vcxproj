@@ -169,6 +169,7 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\page-turn-view\page-turn-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\confirmation-popup.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\popup\popup.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\progress-bar\progress-bar-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scene3d-view\scene3d-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\scroll-bar\scroll-bar.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\shadow-view\shadow-view.cpp" />
