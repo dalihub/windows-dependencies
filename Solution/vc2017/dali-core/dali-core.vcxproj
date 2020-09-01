@@ -158,6 +158,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\hit-test-algorithm.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\key-event-devel.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\touch-point.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\wheel-event-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\distance-field.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\images\pixel-data-devel.cpp" />
@@ -255,7 +256,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\pinch-gesture-detector.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\tap-gesture.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\tap-gesture-detector.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-point.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\pixel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\images\pixel-data.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\math\compile-time-math.cpp" />

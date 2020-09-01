@@ -610,9 +610,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\touch-event-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\touch-point.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\trace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -818,6 +815,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\rotation-gesture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\touch-point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
