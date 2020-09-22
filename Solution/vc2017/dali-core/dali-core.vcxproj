@@ -166,6 +166,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\handle-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\object\csharp-type-registry.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\renderer-devel.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\texture-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\scripting\scripting.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\signals\signal-delegate.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\threading\conditional-wait.cpp" />
