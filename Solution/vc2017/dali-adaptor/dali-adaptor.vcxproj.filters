@@ -619,6 +619,15 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\addons\dummy\addon-manager-factory-dummy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\vector-image-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-plugin-proxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

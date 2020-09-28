@@ -176,6 +176,7 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\tilt-sensor.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\lifecycle-controller.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\vector-animation-renderer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\vector-image-renderer.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\video-player.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\virtual-keyboard.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\web-engine.cpp" />
@@ -307,6 +308,8 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\trace\common\trace-manager-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-animation\common\vector-animation-renderer-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-animation\common\vector-animation-renderer-plugin-proxy.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-impl.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-plugin-proxy.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\video\common\video-player-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\web-engine\common\web-engine-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\window-system\common\display-connection.cpp" />
