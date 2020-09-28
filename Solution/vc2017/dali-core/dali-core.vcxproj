@@ -193,6 +193,8 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\point.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-combiner.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-integ.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-property-handler.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-relayouter.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\base-object-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\demangler-windows.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\scene-impl.cpp" />
@@ -210,6 +212,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-event.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-processor.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\pinch-gesture\pinch-gesture-recognizer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\ray-test.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-detector-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-processor.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\rotation-gesture\rotation-gesture-recognizer.cpp" />
@@ -308,7 +311,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\trace.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\blending-options.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\core-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\internal-constants.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\math.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\message-buffer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\mutex-trace.cpp" />
