@@ -325,12 +325,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\multi-language-support-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvg.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvgrast.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\navigation-view\navigation-view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -628,6 +628,12 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvg.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvgrast.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

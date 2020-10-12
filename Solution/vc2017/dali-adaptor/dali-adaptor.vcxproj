@@ -360,6 +360,8 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvg.cc" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvgrast.cc" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\resampler\resampler.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\dlfcn.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\environment.cpp" />
