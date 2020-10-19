@@ -217,6 +217,9 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\controls\web-view\web-view-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\drag-drop-detector\drag-and-drop-detector-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-embedded-item.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-event-handler.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-input-font-handler.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-placeholder-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\animated-image-visual.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\image-cache.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\fixed-image-cache.cpp" />
