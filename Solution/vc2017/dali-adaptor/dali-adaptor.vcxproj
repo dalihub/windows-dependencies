@@ -148,7 +148,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-adaptor.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\animated-image-loading.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\application-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\bitmap-saver.cpp" />
@@ -194,11 +194,9 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\text-abstraction\text-renderer.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\integration-api\adaptor-framework\scene-holder-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\integration-api\adaptor-framework\scene-holder.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\bridge\dummy-atspi.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-factory.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-adaptor-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-gesture-detector.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\generic\accessibility-adaptor-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor-framework\generic\file-loader-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor-framework\generic\file-stream-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-builder-impl.cpp" />

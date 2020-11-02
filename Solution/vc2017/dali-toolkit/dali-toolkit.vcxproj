@@ -69,7 +69,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG_ENABLED;DALI_DATA_READ_ONLY_DIR=0;DALI_IMAGE_DIR=0;DALI_STYLE_DIR=0;DALI_SOUND_DIR=0;DALI_STYLE_IMAGE_DIR=0;CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;DALI_GLES_VERSION=30;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DALI_DATA_READ_ONLY_DIR="";DALI_IMAGE_DIR="";DALI_STYLE_DIR="";DALI_SOUND_DIR="";DALI_STYLE_IMAGE_DIR="";CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;DALI_GLES_VERSION=30;DEBUG_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -115,7 +115,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DALI_DATA_READ_ONLY_DIR=0;DALI_IMAGE_DIR=0;DALI_STYLE_DIR=0;DALI_SOUND_DIR=0;DALI_STYLE_IMAGE_DIR=0;CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;DALI_GLES_VERSION=30;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DALI_DATA_READ_ONLY_DIR="";DALI_IMAGE_DIR="";DALI_STYLE_DIR="";DALI_SOUND_DIR="";DALI_STYLE_IMAGE_DIR="";CURL_STATICLIB=0;BUILDING_DALI_TOOLKIT;DALI_GLES_VERSION=30;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -218,6 +218,7 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\drag-drop-detector\drag-and-drop-detector-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\markup-processor-embedded-item.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-event-handler.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-impl-event-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-input-font-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-placeholder-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\animated-image-visual.cpp" />

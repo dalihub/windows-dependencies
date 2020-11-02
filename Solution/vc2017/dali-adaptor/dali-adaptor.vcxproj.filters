@@ -4,15 +4,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\system\common\abort-handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-adaptor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-adaptor-impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-gesture-detector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -520,9 +511,6 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\input\common\keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\generic\accessibility-adaptor-impl-generic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\clipboard\generic\clipboard-impl-generic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -632,6 +620,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvgrast.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\bridge\dummy-atspi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

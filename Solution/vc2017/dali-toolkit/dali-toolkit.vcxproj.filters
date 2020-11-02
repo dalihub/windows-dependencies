@@ -781,6 +781,9 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-placeholder-handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-impl-event-handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
