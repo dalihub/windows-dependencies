@@ -325,12 +325,6 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\multi-language-support-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvg.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\third-party\nanosvg\nanosvgrast.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\navigation-view\navigation-view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -772,7 +766,24 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\utility\npatch-utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-manager.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\controls\progress-bar\progress-bar-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-vector-image\vector-animation-manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-event-handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-input-font-handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-placeholder-handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-impl-event-handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

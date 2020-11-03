@@ -223,9 +223,6 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\input-options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\internal-constants.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\public-api\events\key-event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -818,6 +815,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\touch-point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\events\pan-gesture-devel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\events\ray-test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-relayouter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-property-handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\texture-devel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

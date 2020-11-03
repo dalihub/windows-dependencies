@@ -148,7 +148,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-adaptor.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\accessibility-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\animated-image-loading.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\application-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\bitmap-saver.cpp" />
@@ -176,6 +176,7 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\tilt-sensor.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\lifecycle-controller.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\vector-animation-renderer.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\vector-image-renderer.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\video-player.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\virtual-keyboard.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\adaptor-framework\web-engine.cpp" />
@@ -193,11 +194,9 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\devel-api\text-abstraction\text-renderer.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\integration-api\adaptor-framework\scene-holder-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\integration-api\adaptor-framework\scene-holder.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\bridge\dummy-atspi.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-factory.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\tts-player-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-adaptor-impl.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\common\accessibility-gesture-detector.cpp" />
-    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\accessibility\generic\accessibility-adaptor-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor-framework\generic\file-loader-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor-framework\generic\file-stream-impl-generic.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\adaptor\common\adaptor-builder-impl.cpp" />
@@ -307,6 +306,8 @@
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\trace\common\trace-manager-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-animation\common\vector-animation-renderer-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-animation\common\vector-animation-renderer-plugin-proxy.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-impl.cpp" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\vector-image\common\vector-image-renderer-plugin-proxy.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\video\common\video-player-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\web-engine\common\web-engine-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\dali\internal\window-system\common\display-connection.cpp" />
@@ -357,6 +358,8 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvg.cc" />
+    <ClCompile Include="..\..\..\..\dali-adaptor\third-party\nanosvg\nanosvgrast.cc" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\resampler\resampler.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\dlfcn.cpp" />
     <ClCompile Include="..\..\..\..\dali-adaptor\third-party\windows-platform\environment.cpp" />
