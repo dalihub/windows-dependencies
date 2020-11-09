@@ -15,5 +15,8 @@
     <ClCompile Include="..\..\..\..\dali-demo\shared\execute-process-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-demo\shared\bubble-animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

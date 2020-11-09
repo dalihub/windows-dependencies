@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\dali-demo\demo\dali-demo.cpp" />
+    <ClCompile Include="..\..\..\..\dali-demo\shared\bubble-animator.cpp" />
     <ClCompile Include="..\..\..\..\dali-demo\shared\dali-table-view.cpp" />
     <ClCompile Include="..\..\..\..\dali-demo\shared\execute-process-win.cpp" />
   </ItemGroup>
