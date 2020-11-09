@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="public-api">
+      <UniqueIdentifier>{830e1b96-1cf0-4716-a5e3-a92ab2d06a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="internal">
+      <UniqueIdentifier>{72dbf610-51ab-413a-9238-196950ff914f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third-party">
+      <UniqueIdentifier>{20011d72-121d-478b-ad45-d92f673c94d1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\gltf2-asset.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\hash.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-reader.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-util.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\alpha-function-helper.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animated-property.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animation-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\blend-shape-details.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\camera-parameters.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\dli-loader.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\environment-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\gltf2-loader.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\ktx-loader.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\material-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\matrix-stack.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\mesh-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\node-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\parse-renderer-state.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\renderer-state.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\resource-bundle.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\scene-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\skinning-details.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\string-callback.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\utils.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\view-projection.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition-factory.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\customization.cpp">
+      <Filter>public-api</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\gltf2-asset.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\hash.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-reader.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-util.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\alpha-function-helper.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animated-property.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animation-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\api.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\blend-shape-details.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\camera-parameters.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\customization.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\dli-loader.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\environment-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\gltf2-loader.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\index.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\ktx-loader.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\light-parameters.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\load-result.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\material-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\matrix-stack.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\mesh-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\mesh-geometry.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\node-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\parse-renderer-state.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\renderer-state.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\resource-bundle.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\scene-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\skeleton-definition.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\skinning-details.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\string-callback.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\utils.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\view-projection.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\third-party\json.h">
+      <Filter>third-party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition-factory.h">
+      <Filter>public-api</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
