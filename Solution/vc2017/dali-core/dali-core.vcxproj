@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\animation-devel.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\animation\path-constrainer.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\addon-binder.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\capabilities.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\hash.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\singleton-service.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\stage-devel.cpp" />

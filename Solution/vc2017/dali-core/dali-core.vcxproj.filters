@@ -832,6 +832,9 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\rendering\texture-devel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\capabilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

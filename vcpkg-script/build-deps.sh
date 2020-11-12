@@ -6,10 +6,7 @@ https_proxy_ip=$http_proxy_ip
 pkg_list=( dali2-toolkit )
 
 patch_files=( 	'../[VCPKG]_0001_Fix_proxy_access.patch'
-      '../[VCPKG-angle]_0001_Apply_Fix_windows_build_error_cannot_find_definition_far.patch'
-      '../[VCPKG-angle]_0002_Fix_angle_header_files.patch'
-      '../[VCPKG-angle]_0003_Apply_Fix_glInvalidateFramebuffer_crash.patch'
-      '../[VCPKG-angle]_0004_Fix_static_assert.patch'
+      '../[VCPKG-angle]_0001_Apply_Fix_glInvalidateFramebuffer_crash.patch'
       '../[VCPKG-getopt]_0001_Apply_Fix_extern_c.patch'
       '../[VCPKG-libjpeg-turbo]_0001_Apply_Fix_fill_jpeg_buffer_cb.patch'
       '../[VCPKG-pthreads]_0001_Apply_Fix_define_timespec.patch'
