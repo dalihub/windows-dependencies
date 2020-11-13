@@ -98,6 +98,12 @@
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat $(ProjectName) dali public-api
+call $(SolutionDir)install-headers.bat $(ProjectName) dali devel-api</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -144,6 +150,12 @@
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat $(ProjectName) dali public-api
+call $(SolutionDir)install-headers.bat $(ProjectName) dali devel-api</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\actors\actor-devel.cpp" />

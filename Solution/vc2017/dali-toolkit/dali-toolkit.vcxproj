@@ -98,6 +98,12 @@
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat $(ProjectName) $(ProjectName) public-api
+call $(SolutionDir)install-headers.bat $(ProjectName) $(ProjectName) devel-api</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -146,6 +152,12 @@
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat $(ProjectName) $(ProjectName) public-api
+call $(SolutionDir)install-headers.bat $(ProjectName) $(ProjectName) devel-api</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\devel-api\accessibility-manager\accessibility-manager.cpp" />
