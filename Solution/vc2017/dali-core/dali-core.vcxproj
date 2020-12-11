@@ -206,6 +206,8 @@ call $(SolutionDir)install-headers.bat $(ProjectName) dali devel-api</Command>
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\point.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-combiner.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\integration-api\events\touch-event-integ.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\const-string.cpp" />
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-parent-impl.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-property-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-relayouter.cpp" />
     <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\common\base-object-impl.cpp" />

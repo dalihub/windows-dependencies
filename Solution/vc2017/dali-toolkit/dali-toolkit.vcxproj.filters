@@ -784,6 +784,18 @@
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-impl-event-handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-relayouter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-text-updater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-selection-handle-controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\npatch-data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

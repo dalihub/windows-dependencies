@@ -233,6 +233,9 @@ call $(SolutionDir)install-headers.bat $(ProjectName) $(ProjectName) devel-api</
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-impl-event-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-input-font-handler.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-placeholder-handler.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-relayouter.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-controller-text-updater.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\text\text-selection-handle-controller.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\animated-image-visual.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\image-cache.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\animated-image\fixed-image-cache.cpp" />
@@ -255,6 +258,7 @@ call $(SolutionDir)install-headers.bat $(ProjectName) $(ProjectName) devel-api</
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\image-visual-shader-factory.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\image\image-visual.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\mesh\mesh-visual.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\npatch-data.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\npatch-loader.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\npatch\npatch-visual.cpp" />
     <ClCompile Include="..\..\..\..\dali-toolkit\dali-toolkit\internal\visuals\primitive\primitive-visual.cpp" />

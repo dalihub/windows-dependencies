@@ -835,6 +835,12 @@
     <ClCompile Include="..\..\..\..\dali-core\dali\devel-api\common\capabilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\common\const-string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dali-core\dali\internal\event\actors\actor-parent-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
