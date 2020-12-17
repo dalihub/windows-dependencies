@@ -23,6 +23,10 @@
 #include <cstdio>
 #include <ctime>
 
+#ifndef strerror_r
+#define strerror_r(errno, buf, len) strerror_s(buf, len, errno)
+#endif
+
 #ifdef __cplusplus
 
 template <typename T>
