@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug-VCPKG|Win32">
+      <Configuration>Debug-VCPKG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug-VCPKG|x64">
+      <Configuration>Debug-VCPKG</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-VCPKG|Win32">
+      <Configuration>Release-VCPKG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-VCPKG|x64">
+      <Configuration>Release-VCPKG</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\gltf2-asset.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\hash.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-reader.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-util.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\alpha-function-helper.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animated-property.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animation-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\blend-shape-details.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\camera-parameters.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\customization.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\dli-loader.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\environment-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\gltf2-loader.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\ktx-loader.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\material-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\matrix-stack.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\mesh-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\node-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\parse-renderer-state.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\renderer-state.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\resource-bundle.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\scene-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition-factory.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\skinning-details.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\string-callback.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\utils.cpp" />
+    <ClCompile Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\view-projection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\gltf2-asset.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\hash.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-reader.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\internal\json-util.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\alpha-function-helper.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animated-property.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\animation-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\api.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\blend-shape-details.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\camera-parameters.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\customization.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\dli-loader.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\environment-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\gltf2-loader.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\index.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\ktx-loader.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\light-parameters.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\load-result.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\material-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\matrix-stack.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\mesh-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\mesh-geometry.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\node-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\parse-renderer-state.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\renderer-state.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\resource-bundle.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\scene-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition-factory.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\shader-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\skeleton-definition.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\skinning-details.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\string-callback.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\utils.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\public-api\view-projection.h" />
+    <ClInclude Include="..\..\..\..\dali-toolkit\dali-scene-loader\third-party\json.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dali-adaptor\dali-adaptor.vcxproj">
+      <Project>{b3cb580d-6490-396f-ae20-cf15975d70fe}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\dali-core\dali-core.vcxproj">
+      <Project>{6517e691-3a75-3cf9-b432-27a54acdddd0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\dali-toolkit\dali-toolkit.vcxproj">
+      <Project>{827e353d-76eb-34e5-8261-756eeb05c6e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\windows-dependencies\windows-dependencies.vcxproj">
+      <Project>{479380e3-2b1f-4ed3-b74b-112994a77679}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{F075F638-8552-44B2-9B51-74B6BC6CC06A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectName>dali-scene-loader</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)-msvc</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)-msvc</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)-msvc</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)-msvc</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BUILDING_DALI_SCENE_LOADER;DEBUG_ENABLED;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../include;$(SolutionDir)../../../dali-core;$(SolutionDir)../../../dali-adaptor;$(SolutionDir)../../../dali-toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat dali-toolkit $(ProjectName) public-api
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).pdb
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).ilk</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BUILDING_DALI_SCENE_LOADER;DEBUG_ENABLED;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../dali-toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat dali-toolkit $(ProjectName) public-api
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).pdb
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).ilk</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-VCPKG|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BUILDING_DALI_SCENE_LOADER;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../include;$(SolutionDir)../../../dali-core;$(SolutionDir)../../../dali-adaptor;$(SolutionDir)../../../dali-toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat dali-toolkit $(ProjectName) public-api </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BUILDING_DALI_SCENE_LOADER;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../dali-toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/vmg  /wd4251 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ForcedIncludeFiles>dali-windows-dependencies.h</ForcedIncludeFiles>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)install.bat $(TargetPath)
+call $(SolutionDir)install.bat $(OutputPath)$(TargetName).lib
+call $(SolutionDir)install-headers.bat dali-toolkit $(ProjectName) public-api </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-VCPKG|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
