@@ -1,5 +1,40 @@
 # Instructions to build the third-party dependencies
 
+## VS 2022 / MSVC v143 (recommended)
+
+For the current DALi Windows backend, use `setup-dali-dependencies.ps1` from an
+x64 MSVC Developer PowerShell. It installs the pinned vcpkg dependencies and
+the verified TizenVG revision used by DALi's canvas and vector-animation
+backends.
+
+Outside a corporate network:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup-dali-dependencies.ps1 `
+  -DaliRoot C:\work\DALi `
+  -VcpkgRoot C:\Tools\DALI_VCPKG\vcpkg
+```
+
+Inside a corporate network that requires an HTTP proxy:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup-dali-dependencies.ps1 `
+  -DaliRoot C:\work\DALi `
+  -VcpkgRoot C:\Tools\DALI_VCPKG\vcpkg `
+  -Proxy proxy.company.example:8080
+```
+
+Use `-SkipVcpkg` or `-SkipTizenVg` to reuse a dependency that has already been
+installed. Repository mirror and revision parameters are available for both
+vcpkg and TizenVG.
+
+Do not disable TLS verification. Install the company root certificate through
+the approved IT process if HTTPS inspection is used.
+
+The older `build-deps.sh` workflow below is retained for historical VC2017
+builds. It installs legacy DALi packages and x86 dependencies, so it should not
+be used for the current x64 smoke test.
+
 ## 0. Notes and troubleshootings
 - Due to different architectures, platforms, configurations, etc the script might need to be modified in order to be able to install the third-party dependencies.
 - It might happen that the script gets stuck downloading or building a package, usually it can be detected if in the Performance tab of the Windows Task Manager

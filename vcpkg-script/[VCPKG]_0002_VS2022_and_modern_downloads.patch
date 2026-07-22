@@ -1,0 +1,100 @@
+diff --git a/ports/giflib/portfile.cmake b/ports/giflib/portfile.cmake
+index 7ca1478f7..2a4e44e43 100644
+--- a/ports/giflib/portfile.cmake
++++ b/ports/giflib/portfile.cmake
+@@ -4,9 +4,9 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
+ 
+ set(GIFLIB_VERSION 5.1.4)
+ vcpkg_download_distfile(ARCHIVE
+-    URLS "https://nchc.dl.sourceforge.net/project/giflib/giflib-${GIFLIB_VERSION}.tar.bz2"
+-    FILENAME "giflib-${GIFLIB_VERSION}.tar.bz2"
+-    SHA512 32b5e342056c210e6478e9cb3b6ceec9594dcfaf34feea1eb4dad633a081ed4465bceee578c19165907cb47cb83912ac359ceea666a8e07dbbb5420f9928f96d
++    URLS "https://downloads.sourceforge.net/project/giflib/giflib-5.x/giflib-${GIFLIB_VERSION}.tar.gz"
++    FILENAME "giflib-${GIFLIB_VERSION}.tar.gz"
++    SHA512 d9a98a593bcfbbfb2fcbeef1382ca9669a6b85276512e6828c92869d16c7cfe980bbb318766fc176be3c9f7deff7878d2be8aeda1d40af2cc4ac723fe6121b83
+ )
+ 
+ if (VCPKG_CMAKE_SYSTEM_NAME STREQUAL "WindowsStore" OR NOT VCPKG_CMAKE_SYSTEM_NAME)
+diff --git a/scripts/bootstrap.ps1 b/scripts/bootstrap.ps1
+index 3817fd691..930b057e3 100644
+--- a/scripts/bootstrap.ps1
++++ b/scripts/bootstrap.ps1
+@@ -160,6 +160,16 @@ function findAnyMSBuildWithCppPlatformToolset([string]$withVSPath)
+         }
+ 
+         $majorVersion = $version.Substring(0,2);
++        if ($majorVersion -eq "17")
++        {
++            $VCFolder= "$path\VC\Tools\MSVC\"
++            if (Test-Path $VCFolder)
++            {
++                Write-Verbose "Picking: $instanceCandidate"
++                return "$path\MSBuild\Current\Bin\MSBuild.exe", "v143"
++            }
++        }
++
+         if ($majorVersion -eq "16")
+         {
+             $VCFolder= "$path\VC\Tools\MSVC\"
+diff --git a/scripts/cmake/vcpkg_configure_meson.cmake b/scripts/cmake/vcpkg_configure_meson.cmake
+index 6dfb266cf..844bd1eb5 100644
+--- a/scripts/cmake/vcpkg_configure_meson.cmake
++++ b/scripts/cmake/vcpkg_configure_meson.cmake
+@@ -28,6 +28,18 @@ function(vcpkg_configure_meson)
+     # select meson cmd-line options
+     list(APPEND _vcm_OPTIONS -Dcmake_prefix_path=${CURRENT_INSTALLED_DIR})
+     list(APPEND _vcm_OPTIONS --buildtype plain --backend ninja --wrap-mode nodownload)
++    if(CMAKE_HOST_WIN32 AND VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
++        set(ENV{PROCESSOR_ARCHITEW6432} "AMD64")
++        set(ENV{PROCESSOR_ARCHITECTURE} "AMD64")
++        set(_VCPKG_MESON_NATIVE_FILE "${CURRENT_BUILDTREES_DIR}/vcpkg-x64-native.ini")
++        file(WRITE "${_VCPKG_MESON_NATIVE_FILE}"
++            "[host_machine]\n"
++            "system = 'windows'\n"
++            "cpu_family = 'x86_64'\n"
++            "cpu = 'x86_64'\n"
++            "endian = 'little'\n")
++        list(APPEND _vcm_OPTIONS --native-file ${_VCPKG_MESON_NATIVE_FILE})
++    endif()
+     if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
+         list(APPEND _vcm_OPTIONS --default-library shared)
+     else()
+diff --git a/toolsrc/src/vcpkg/visualstudio.cpp b/toolsrc/src/vcpkg/visualstudio.cpp
+index df3c70de2..9ea5367ee 100644
+--- a/toolsrc/src/vcpkg/visualstudio.cpp
++++ b/toolsrc/src/vcpkg/visualstudio.cpp
+@@ -15,6 +15,7 @@ namespace vcpkg::VisualStudio
+     static constexpr CStringView V_140 = "v140";
+     static constexpr CStringView V_141 = "v141";
+     static constexpr CStringView V_142 = "v142";
++    static constexpr CStringView V_143 = "v143";
+ 
+     struct VisualStudioInstance
+     {
+@@ -235,6 +236,11 @@ namespace vcpkg::VisualStudio
+                         toolset_version = V_142;
+                         vcvars_option = "-vcvars_ver=14.2";
+                     }
++                    else if (toolset_version_prefix[3] == '3' || toolset_version_prefix[3] == '4')
++                    {
++                        toolset_version = V_143;
++                        vcvars_option = "-vcvars_ver=" + toolset_version_prefix;
++                    }
+                     else
+                     {
+                         // unknown toolset minor version
+@@ -251,14 +257,6 @@ namespace vcpkg::VisualStudio
+                                         toolset_version,
+                                         supported_architectures};
+ 
+-                        const auto english_language_pack = dumpbin_path.parent_path() / "1033";
+-
+-                        if (!fs.exists(english_language_pack))
+-                        {
+-                            excluded_toolsets.push_back(std::move(toolset));
+-                            continue;
+-                        }
+-
+                         found_toolsets.push_back(std::move(toolset));
+ 
+                         if (v140_is_available)

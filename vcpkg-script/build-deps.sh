@@ -1,6 +1,6 @@
 #!/bin/bash
 
-http_proxy_ip="106.1.18.35:8080"
+http_proxy_ip=""
 https_proxy_ip=$http_proxy_ip
 
 pkg_list=( dali2-toolkit )
@@ -10,6 +10,7 @@ patch_files=( 	'../[VCPKG]_0001_Fix_proxy_access.patch'
       '../[VCPKG-getopt]_0001_Apply_Fix_extern_c.patch'
       '../[VCPKG-libjpeg-turbo]_0001_Apply_Fix_fill_jpeg_buffer_cb.patch'
       '../[VCPKG-pthreads]_0001_Apply_Fix_define_timespec.patch'
+      '../[VCPKG]_0002_VS2022_and_modern_downloads.patch'
   )
 
 # install packages
@@ -42,16 +43,16 @@ function fn_patch_files()
 }
 
 echo "This script install vcpkg and the third-party dependencies used by watch3d."
-echo "The default http proxy ip is set to " $http_proxy_ip
-echo "Use the following options to set a different proxy ip"
+echo "No proxy is configured by default."
+echo "Use the following options when a proxy is required."
 echo " -p | -httpProxy | --httpProxy       To set the http proxy ip. It sets as well the https one"
 echo "[-s | -httpsProxy | --httpsProxy]    Optional. To set the https proxy ip if it's different than the http one."
 echo "[-n]                                 Optional. Doesn't set any proxy."
 
-use_proxy=true;
+use_proxy=false;
 while true; do
   case "$1" in
-    -p | -httpProxy | --httpProxy) http_proxy_ip="$2"; https_proxy_ip=$http_proxy_ip; shift 2 ;;
+    -p | -httpProxy | --httpProxy) http_proxy_ip="$2"; https_proxy_ip=$http_proxy_ip; use_proxy=true; shift 2 ;;
     -s | -httpsProxy | --httpsProxy) https_proxy_ip="$2"; shift 2 ;;
     -n) use_proxy=false; shift; break ;;
     -- ) shift; break ;;
@@ -60,7 +61,7 @@ while true; do
 done
 
 #set up proxy
-if "$use_proxy" = "true" ; then
+if [ "$use_proxy" = "true" ] ; then
   export VCPKG_PROXY="${http_proxy_ip}"
   export HTTP_PROXY="http://${http_proxy_ip}/"
   export HTTPS_PROXY="http://${https_proxy_ip}/"
@@ -69,6 +70,7 @@ env
 
 git clone https://github.com/dalihub/vcpkg.git
 cd vcpkg
+git checkout a58936506
 
 fn_patch_files
 
