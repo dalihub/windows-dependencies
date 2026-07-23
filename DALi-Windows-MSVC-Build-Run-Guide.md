@@ -80,7 +80,7 @@ git -C C:/work/DALi/windows-dependencies switch --detach FETCH_HEAD
 | `windows-dependencies` | MSVC에서 GCC `__sync_*` builtin을 Interlocked API로 제공 |
 | `windows-dependencies` | proxy IP 하드코딩 제거, `VCPKG_PROXY` 기반 처리 및 proxy 미사용 경로의 handle shadowing 수정 |
 | `windows-dependencies` | 구형 vcpkg의 VS 2022/v143, 한국어 VS 설치, x64 Meson, 현재 giflib URL 지원 patch 추가 |
-| `windows-dependencies` | Windows 시스템 글꼴용 최소 `fonts.conf`를 `share/dali`에 설치 |
+| `windows-dependencies` | Windows 시스템 글꼴과 DALi prefix-local 글꼴/config를 읽는 `fonts.conf`를 `share/dali`에 설치 |
 | `dali-core` | C++20 designated initializer를 C++17 aggregate 초기화로 변경 |
 | `dali-core` | public `SharedPtr` 사용자가 MSVC `__sync_*` 호환 구현을 볼 수 있도록 보완 |
 | `dali-core` | Windows에서 uniform hash가 32비트로 잘리지 않도록 `UniformPropertyMapping::Hash`를 `std::size_t`로 변경 |
@@ -865,6 +865,66 @@ $DaliEnv = "D:/apps/dali-env"
 ```text
 %LOCALAPPDATA%\.cache\dali_common_caches\gpu-environment-gles.conf
 ```
+
+### 15.1 DALi prefix-local fontconfig 구성
+
+`windows-dependencies`가 설치하는 `fonts.conf`는 `C:/Windows/Fonts`와 함께 다음 두 경로를
+설정 파일 자신의 위치를 기준으로 참조한다.
+
+```text
+<DALI_PREFIX>/share/dali/fonts.conf
+<DALI_PREFIX>/share/dali/fonts/                  # .ttf, .otf font files
+<DALI_PREFIX>/share/dali/fontconfig/conf.d/      # 99-tizen.conf 같은 snippets
+```
+
+따라서 로컬 폰트와 Tizen alias를 시험할 때는 다음처럼 배치한다.
+
+```powershell
+$DALI_PREFIX = "C:/work/DALi/dali-env"
+
+Copy-Item C:/work/fonts/*.ttf "$DALI_PREFIX/share/dali/fonts/"
+Copy-Item C:/work/fontconfig/99-tizen.conf "$DALI_PREFIX/share/dali/fontconfig/conf.d/"
+$env:FONTCONFIG_FILE = "$DALI_PREFIX/share/dali/fonts.conf"
+```
+
+`conf.d`에서 읽힐 파일 이름은 ASCII 숫자로 시작하고 `.conf`로 끝나야 한다. 파일명 순서대로
+적용되므로 alias override는 `99-tizen.conf`처럼 뒤쪽 번호를 사용한다. 각 snippet은
+`<fontconfig>` root를 가진 유효한 fontconfig XML이어야 한다. 기본 `fonts.conf`가 이미
+prefix-local `fonts` 디렉터리를 scan하므로 alias-only snippet에는 `<dir>`이 필요 없다.
+snippet에서 상대 폰트 경로를 추가한다면 `fontconfig/conf.d` 기준의 `../../fonts`를 사용한다.
+폰트 파일명과 내부 family name은 별개이므로 alias의 대상 family가 복사한 폰트 내부 이름과
+일치해야 한다. 폰트 또는 config를 바꾼 뒤에는 DALi/fontconfig 상태가 새로 만들어지도록 앱을
+재시작한다.
+
+### 15.2 gettext catalog 생성과 Windows locale
+
+`dali-ui`의 localization sample CMake는 Windows에서 다음 도구를 자동 탐색하며, 없으면
+configure 단계에서 실패한다.
+
+```text
+<VcpkgRoot>/installed/x64-windows/tools/gettext/msgfmt.exe
+```
+
+런타임에는 `libintl.dll`을 찾을 수 있도록
+`<VcpkgRoot>/installed/x64-windows/bin`을 `PATH`에 유지한다. MO 파일은 gettext 표준 구조인
+`<locale-root>/<locale>/LC_MESSAGES/<domain>.mo`로 배치한다.
+
+MSVC CRT에는 `LC_MESSAGES`가 없다. 또한 현재 고정 vcpkg의 GNU gettext 0.19 Windows 구현은
+CRT의 `setlocale(LC_ALL, ...)` 결과를 message catalog 선택에 직접 사용하지 않고
+`LANGUAGE`, `LC_ALL`, `LC_MESSAGES`, `LANG` 환경값과 Windows locale을 순서대로 참조한다.
+따라서 실행 중 시스템 언어 변경을 처리하는 Windows appfw/backend는 다음 순서를 지켜야 한다.
+
+1. gettext가 이해하는 POSIX locale 이름(예: `ko_KR`)을 `LANGUAGE` 또는 `LC_ALL` process
+   environment에 반영한다.
+2. CRT 전체 locale도 바꿔야 한다면 별도로 `setlocale(LC_ALL, "ko-KR")`처럼 Windows locale
+   이름을 전달한다.
+3. DLL과 실행 파일 양쪽에서 환경 변경을 볼 수 있도록 Win32 process environment와 CRT
+   environment를 함께 갱신한다.
+4. 이 상태를 만든 뒤 DALi `LocaleChangedSignal`을 emit한다.
+
+`setlocale(LC_ALL, ...)`은 숫자, 통화, 날짜 등의 CRT category도 함께 바꾸므로 message
+catalog만 바꾸기 위한 단독 대체 수단으로 간주하면 안 된다. `dali-ui`의
+`text-windows.example`은 이 계약과 PO→MO lookup을 수동 전환 키로 검증한다.
 
 ## 16. 문제 해결
 
