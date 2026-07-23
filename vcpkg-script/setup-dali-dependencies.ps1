@@ -14,6 +14,14 @@ $ErrorActionPreference = "Stop"
 $ScriptRoot = $PSScriptRoot
 $InstallPrefix = Join-Path $DaliRoot "dali-env"
 
+if($Proxy)
+{
+  $ProxyAddress = $Proxy -replace '^https?://', ''
+  $env:VCPKG_PROXY = $ProxyAddress
+  $env:HTTP_PROXY = "http://$ProxyAddress"
+  $env:HTTPS_PROXY = "http://$ProxyAddress"
+}
+
 if(-not $SkipVcpkg)
 {
   $VcpkgArguments = @{
