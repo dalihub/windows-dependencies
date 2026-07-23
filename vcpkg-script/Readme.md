@@ -7,6 +7,18 @@ x64 MSVC Developer PowerShell. It installs the pinned vcpkg dependencies and
 the verified TizenVG revision used by DALi's canvas and vector-animation
 backends.
 
+The vcpkg setup also installs native `libintl` through the pinned `gettext`
+port and installs `msgfmt.exe` with its private runtime DLLs under:
+
+```text
+<VcpkgRoot>\installed\x64-windows\tools\gettext
+```
+
+The pinned vcpkg revision normally builds only `libintl`; the DALi gettext
+patch adds the missing catalog compiler without changing the other dependency
+ports. CMake 3.15 or newer is required because the catalog compiler package
+uses Zstandard compression.
+
 Outside a corporate network:
 
 ```powershell

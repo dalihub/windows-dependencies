@@ -1,0 +1,66 @@
+diff --git a/ports/gettext/portfile.cmake b/ports/gettext/portfile.cmake
+index 7d1bc3a..ce9254d 100644
+--- a/ports/gettext/portfile.cmake
++++ b/ports/gettext/portfile.cmake
+@@ -49,3 +49,61 @@ file(COPY ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/gettex
+ file(RENAME ${CURRENT_PACKAGES_DIR}/share/gettext/COPYING ${CURRENT_PACKAGES_DIR}/share/gettext/copyright)
+ 
++# This pinned vcpkg port builds libintl only. Install msgfmt and the exact
++# runtime DLLs it imports as a build tool so DALi can compile PO catalogs.
++vcpkg_download_distfile(MSGFMT_ARCHIVE
++    URLS "https://repo.msys2.org/msys/x86_64/gettext-0.22.5-1-x86_64.pkg.tar.zst"
++    FILENAME "msys2-gettext-0.22.5-1-x86_64.pkg.tar.zst"
++    SHA512 50e1969179c6b33376396f200f6c25f709a6104d253121a8148bc5591b140c6f1729dc703374315a96137fa7cfec2abe427ea63bce243d5c0729cee8964ffbd3
++)
++vcpkg_download_distfile(MSGFMT_LIBINTL_ARCHIVE
++    URLS "https://repo.msys2.org/msys/x86_64/libintl-0.22.5-1-x86_64.pkg.tar.zst"
++    FILENAME "msys2-libintl-0.22.5-1-x86_64.pkg.tar.zst"
++    SHA512 1f1826763bcc252f15a0a5a27fbf596a2b5fad5e092bdff17af8231c373c0de17be7411938068aac0f0a617edbb32533de6619f6c58ebcdec7480c210673af45
++)
++vcpkg_download_distfile(MSGFMT_LIBICONV_ARCHIVE
++    URLS "https://repo.msys2.org/msys/x86_64/libiconv-1.19-1-x86_64.pkg.tar.zst"
++    FILENAME "msys2-libiconv-1.19-1-x86_64.pkg.tar.zst"
++    SHA512 326c3edaff3c1b8982cd5bec7c07fffd0da776271ed16b0ff0ea66c004d937194376f6804ecf35901df4e766879c774a624294d2b383dcea5f53f20257452170
++)
++vcpkg_download_distfile(MSGFMT_MSYS_RUNTIME_ARCHIVE
++    URLS "https://repo.msys2.org/msys/x86_64/msys2-runtime-3.6.10-1-x86_64.pkg.tar.zst"
++    FILENAME "msys2-runtime-3.6.10-1-x86_64.pkg.tar.zst"
++    SHA512 c0a84b541e958a80968ccd9683f583995a8b0bdfbbf26f712518f3dc678d3ea578222a9947f030f5007af83d954086ae13635ec576b2d9bd46f0a95877bfe640
++)
++
++set(MSGFMT_SOURCE_DIR "${CURRENT_BUILDTREES_DIR}/msgfmt-source")
++set(MSGFMT_LIBINTL_SOURCE_DIR "${CURRENT_BUILDTREES_DIR}/msgfmt-libintl-source")
++set(MSGFMT_LIBICONV_SOURCE_DIR "${CURRENT_BUILDTREES_DIR}/msgfmt-libiconv-source")
++set(MSGFMT_MSYS_RUNTIME_SOURCE_DIR "${CURRENT_BUILDTREES_DIR}/msgfmt-msys-runtime-source")
++
++vcpkg_extract_source_archive("${MSGFMT_ARCHIVE}" "${MSGFMT_SOURCE_DIR}")
++vcpkg_extract_source_archive("${MSGFMT_LIBINTL_ARCHIVE}" "${MSGFMT_LIBINTL_SOURCE_DIR}")
++vcpkg_extract_source_archive("${MSGFMT_LIBICONV_ARCHIVE}" "${MSGFMT_LIBICONV_SOURCE_DIR}")
++vcpkg_extract_source_archive("${MSGFMT_MSYS_RUNTIME_ARCHIVE}" "${MSGFMT_MSYS_RUNTIME_SOURCE_DIR}")
++
++set(MSGFMT_TOOL_DIR "${CURRENT_PACKAGES_DIR}/tools/gettext")
++file(MAKE_DIRECTORY "${MSGFMT_TOOL_DIR}")
++file(COPY
++    "${MSGFMT_SOURCE_DIR}/usr/bin/msgfmt.exe"
++    "${MSGFMT_SOURCE_DIR}/usr/bin/msys-gettextlib-0-22-5.dll"
++    "${MSGFMT_SOURCE_DIR}/usr/bin/msys-gettextsrc-0-22-5.dll"
++    "${MSGFMT_LIBINTL_SOURCE_DIR}/usr/bin/msys-intl-8.dll"
++    "${MSGFMT_LIBICONV_SOURCE_DIR}/usr/bin/msys-iconv-2.dll"
++    "${MSGFMT_MSYS_RUNTIME_SOURCE_DIR}/usr/bin/msys-2.0.dll"
++    DESTINATION "${MSGFMT_TOOL_DIR}"
++)
++
++foreach(MSGFMT_REQUIRED_FILE
++    msgfmt.exe
++    msys-gettextlib-0-22-5.dll
++    msys-gettextsrc-0-22-5.dll
++    msys-intl-8.dll
++    msys-iconv-2.dll
++    msys-2.0.dll
++)
++    if(NOT EXISTS "${MSGFMT_TOOL_DIR}/${MSGFMT_REQUIRED_FILE}")
++        message(FATAL_ERROR "Required msgfmt runtime file was not installed: ${MSGFMT_REQUIRED_FILE}")
++    endif()
++endforeach()
++
+ vcpkg_copy_pdbs()

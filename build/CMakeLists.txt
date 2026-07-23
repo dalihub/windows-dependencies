@@ -68,6 +68,7 @@ ENDIF()
 INSTALL(FILES ${INCLUDE_HEADERS} DESTINATION include )
 INSTALL(FILES ${INCLUDE_DALI_HEADERS} DESTINATION include/dali )
 INSTALL(FILES ${ROOT_SRC_DIR}/resources/fonts.conf DESTINATION share/dali )
+INSTALL(FILES ${ROOT_SRC_DIR}/resources/set-dali-runtime-env.ps1 DESTINATION . )
 
 INSTALL( TARGETS ${name}
   EXPORT ${name}-targets
