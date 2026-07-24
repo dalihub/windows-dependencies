@@ -6,7 +6,7 @@ param(
   [string]$SourceRoot,
   [Parameter(Mandatory = $true)]
   [string]$BuildRoot,
-  [string]$Repository = "git://git.tizen.org/platform/core/graphics/tizenvg.git",
+  [string]$Repository = "https://github.sec.samsung.net/tizen/tizenvg.git",
   [string]$Revision = "ae039a6154a258a8fa19f23b25285acd73d2f6c1",
   [string]$PythonCommand = "",
   [string]$VsDevCmd = ""

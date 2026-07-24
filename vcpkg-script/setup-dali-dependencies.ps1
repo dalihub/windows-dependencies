@@ -3,7 +3,7 @@ param(
   [string]$DaliRoot = "C:\work\DALi",
   [string]$VcpkgRoot = "C:\Tools\DALI_VCPKG\vcpkg",
   [string]$VcpkgRepository = "https://github.com/dalihub/vcpkg.git",
-  [string]$TizenVgRepository = "git://git.tizen.org/platform/core/graphics/tizenvg.git",
+  [string]$TizenVgRepository = "https://github.sec.samsung.net/tizen/tizenvg.git",
   [string]$TizenVgRevision = "ae039a6154a258a8fa19f23b25285acd73d2f6c1",
   [string]$Proxy = "",
   [switch]$SkipVcpkg,
