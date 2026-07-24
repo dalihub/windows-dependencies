@@ -16,7 +16,7 @@ index df6b1be09..8dc8d1a7e 100644
  #endif
  
  namespace vcpkg::Downloads
-@@ -35,37 +35,53 @@ namespace vcpkg::Downloads
+@@ -35,37 +35,62 @@ namespace vcpkg::Downloads
                             target_file_path,
                             std::to_string(err));
  
@@ -99,5 +99,14 @@ index df6b1be09..8dc8d1a7e 100644
 +			}
 +		}
  
++        // Do not let a stalled corporate proxy block the whole dependency
++        // installation forever. Each WinHTTP phase gets its own 10-second
++        // timeout; the setup script retries the resumable vcpkg install.
++        Checks::check_exit(VCPKG_LINE_INFO,
++                           WinHttpSetTimeouts(hSession, 10000, 10000, 10000, 10000),
++                           "WinHttpSetTimeouts() failed: %d",
++                           GetLastError());
++
++
          // Use Windows 10 defaults on Windows 7
          DWORD secure_protocols(WINHTTP_FLAG_SECURE_PROTOCOL_SSL3 | WINHTTP_FLAG_SECURE_PROTOCOL_TLS1 |

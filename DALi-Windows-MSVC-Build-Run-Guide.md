@@ -1,984 +1,237 @@
-# DALi Windows MSVC 빌드 및 sample 실행 가이드
+# DALi Windows MSVC 빌드 및 실행 가이드
 
-이 문서는 Windows에서 `windows-dependencies`, `dali-core`, `dali-adaptor`, `dali-ui`를
-MSVC로 순서대로 빌드하고 선택한 `dali-ui/samples` 앱을 실행하는 검증된 절차다.
-사외 직접 인터넷 환경과 사내 proxy/mirror 환경을 구분하며, 다른 개발자나 자동화 도구도
-위에서 아래로 그대로 실행할 수 있도록 필요한 revision, 명령, 성공 기준을 함께 기록한다.
-
-## 1. 검증된 구성
-
-2026-07-22에 다음 구성으로 end-to-end smoke test를 완료했다.
-
-| 항목 | 검증값 |
-|---|---|
-| OS/architecture | Windows x64 |
-| Visual Studio | Build Tools 2022 17.14.36 |
-| compiler/toolset | MSVC 19.44, v143 14.44.35207 |
-| Windows SDK | 10.0.26100 |
-| generator | Ninja 1.12.1 |
-| CMake | 3.31.6 |
-| Python | 3.14.3 |
-| build type | Release |
-| graphics backend | GLES/ANGLE, OpenGL ES 3.0 |
-| vcpkg triplet | `x64-windows` |
-
-검증에 사용한 주요 revision은 다음과 같다.
+이 문서는 다음 네 저장소를 같은 폴더에 clone한 사용자를 위한 절차다.
 
 ```text
-dali-core           aa7e686ee  Improve Windows compiler compatibility
-dali-adaptor        25b498266  Improve Windows backend support
-dali-ui             de82cd00   Windows Backend
-windows-dependencies 4377dc1   Update for 2022 MSVC
-dalihub/vcpkg       a58936506  (반드시 이 revision으로 고정)
-```
-
-Debug, x86, MinGW, Vulkan 또는 최신 upstream vcpkg를 섞지 않는다. 첫 검증은 위 조합을
-그대로 사용한다.
-
-### 1.1 패치가 아직 merge되지 않았을 때
-
-2026-07-22 기준 patch 위치는 다음과 같다. 각 변경이 대상 branch에 merge된 뒤에는 이
-절차를 생략하고 최신 대상 branch를 사용한다.
-
-| 저장소 | patch 위치 |
-|---|---|
-| `dali-core` | Gerrit change [348534](https://review.tizen.org/gerrit/c/platform/core/uifw/dali-core/+/348534), patchset 2 |
-| `dali-adaptor` | Gerrit change [348535](https://review.tizen.org/gerrit/c/platform/core/uifw/dali-adaptor/+/348535), patchset 2 |
-| `dali-ui` | `bshsqa/dali-ui`의 `WindowsBackend` branch |
-| `windows-dependencies` | draft PR [#51](https://github.com/dalihub/windows-dependencies/pull/51) |
-
-이미 각 patch가 적용된 checkout을 전달받았다면 다시 cherry-pick하지 않는다. Gerrit origin을
-사용하는 checkout에서는 다음처럼 정확한 patchset을 받을 수 있다.
-
-```powershell
-git -C C:/work/DALi/dali-core fetch origin refs/changes/34/348534/2
-git -C C:/work/DALi/dali-core cherry-pick FETCH_HEAD
-
-git -C C:/work/DALi/dali-adaptor fetch origin refs/changes/35/348535/2
-git -C C:/work/DALi/dali-adaptor cherry-pick FETCH_HEAD
-```
-
-GitHub branch와 PR head를 직접 받는 경우는 다음과 같다.
-
-```powershell
-git -C C:/work/DALi/dali-ui fetch `
-  https://github.com/bshsqa/dali-ui.git WindowsBackend
-git -C C:/work/DALi/dali-ui switch --detach FETCH_HEAD
-
-git -C C:/work/DALi/windows-dependencies fetch `
-  https://github.com/bshsqa/windows-dependencies.git agent/windows-msvc-build-support
-git -C C:/work/DALi/windows-dependencies switch --detach FETCH_HEAD
-```
-
-## 2. 기존 가이드에서 추가된 필수 수정
-
-현재 작업 트리에는 아래 수정이 반영돼 있다. 다른 branch나 새 checkout에서 빌드한다면
-이 변경도 함께 commit/cherry-pick해야 한다.
-
-| 저장소 | 보완 내용 |
-|---|---|
-| `windows-dependencies` | MSVC에서 GCC `__sync_*` builtin을 Interlocked API로 제공 |
-| `windows-dependencies` | proxy IP 하드코딩 제거, `VCPKG_PROXY` 기반 처리 및 proxy 미사용 경로의 handle shadowing 수정 |
-| `windows-dependencies` | 구형 vcpkg의 VS 2022/v143, 한국어 VS 설치, x64 Meson, 현재 giflib URL 지원 patch 추가 |
-| `windows-dependencies` | Windows 시스템 글꼴용 최소 `fonts.conf`를 `share/dali`에 설치 |
-| `dali-core` | C++20 designated initializer를 C++17 aggregate 초기화로 변경 |
-| `dali-core` | public `SharedPtr` 사용자가 MSVC `__sync_*` 호환 구현을 볼 수 있도록 보완 |
-| `dali-core` | Windows에서 uniform hash가 32비트로 잘리지 않도록 `UniformPropertyMapping::Hash`를 `std::size_t`로 변경 |
-| `dali-adaptor` | Windows에서 `AddOnManagerFactory` factory symbol을 실제 static member로 정의 |
-| `dali-ui` | MSVC에 `/vmg`와 `__restrict__=__restrict` 적용 |
-| `dali-ui` | Python autogen 파일 입출력을 UTF-8로 고정하여 CP949 decode 오류 방지 |
-| `dali-ui` | 생성 shader 문자열을 8,000 byte 단위 literal로 분할하여 MSVC C2026 방지 |
-| `dali-ui` | `SelectableLottieImage::FrameRange` 생성자를 foundation DLL에서 명시적으로 export |
-| `dali-ui/samples` | library와 callback member-pointer ABI를 맞추기 위해 `/vmg` 적용 |
-
-관련 working tree는 다음 명령으로 확인한다.
-
-```powershell
-git -C C:/work/DALi/windows-dependencies status --short
-git -C C:/work/DALi/dali-core status --short
-git -C C:/work/DALi/dali-adaptor status --short
-git -C C:/work/DALi/dali-ui status --short
-```
-
-특히 sample의 `/vmg`를 빼면 빌드는 성공해도 실행 또는 종료 시 `0xc0000005`,
-`0xc0000374`가 발생할 수 있다.
-
-## 3. 필수 설치 항목
-
-Visual Studio Installer에서 `Visual Studio Build Tools 2022`의 다음 workload/component를
-설치한다.
-
-- `C++를 사용한 데스크톱 개발`
-- `MSVC v143 C++ x64/x86 Build Tools`
-- Windows 10 또는 Windows 11 SDK
-- CMake tools for Windows
-
-Linux용 C++ workload, MFC/ATL, UWP, .NET workload는 이 빌드에 필요하지 않다. 별도로
-Git for Windows와 Python 3도 필요하다. Ninja와 CMake는 Visual Studio 설치본을 사용할
-수 있다. TizenVG 빌드에는 Meson 0.63.0 이상이 필요하다.
-
-통합 setup script는 현재 `PATH`의 Meson이 0.63.0 이상이면 그대로 사용한다. Meson이 없거나
-`vcpkg`가 내려받은 오래된 Meson 0.52.x가 먼저 잡히면 `$DALI_OUT/tizenvg/meson-tools`에
-local Python venv를 만들고 `meson==0.63.3`, `ninja==1.11.1.1`을 설치해서 사용한다. 사내망에서
-pip SSL/connect error가 나면 6.1절처럼 `-Proxy host:port`를 전달해서 다시 실행한다.
-
-수동으로 미리 설치하려면 다음처럼 설치하고, 새 Meson 경로가 `PATH` 앞쪽에 오도록 한다.
-
-```powershell
-python -m pip install --user "meson==0.63.3" "ninja==1.11.1.1"
-meson --version
-```
-
-재부팅은 Installer가 요구할 때만 한다.
-
-## 4. 디렉터리 구성
-
-공백과 한글이 없는 짧은 build 경로를 사용한다.
-
-```text
-C:\work\DALi\
+<workspace>\
+  windows-dependencies\
   dali-core\
   dali-adaptor\
   dali-ui\
-  windows-dependencies\
-  tizenvg\
-  dali-env\
-  out\
-
-C:\Tools\DALI_VCPKG\
-  vcpkg\
 ```
 
-원본 checkout이 OneDrive 등의 다른 위치에 있다면 복사할 필요 없이 junction을 만들 수
-있다. 대상 경로는 실제 환경에 맞게 바꾼다.
+사용자는 CMake 옵션, Visual Studio 경로, 설치 경로를 직접 설정하지 않는다.
+`windows-dependencies`에 포함된 스크립트가 형제 저장소와 빌드 도구를 자동으로 찾고,
+필요한 순서와 산출물을 검사한다.
+
+검증된 구성:
+
+- Windows x64
+- Visual Studio 2022, MSVC v143
+- CMake + Ninja
+- Release
+- GLES/ANGLE
+- vcpkg `x64-windows`
+
+Debug, x86, MinGW, Vulkan은 현재 스크립트의 지원 범위가 아니다.
+
+## 1. 사전 준비
+
+Visual Studio Installer에서 다음 항목을 설치한다.
+
+- Visual Studio 2022 또는 Build Tools 2022
+- `Desktop development with C++`
+- MSVC v143 x64/x86 build tools
+- Windows 10 또는 Windows 11 SDK
+- CMake tools for Windows
+
+Git for Windows도 필요하다. Python, Meson, Ninja는 별도로 설치할 필요가 없다.
+
+PowerShell에서 `windows-dependencies`로 이동하고, 현재 PowerShell에서 로컬 스크립트
+실행을 허용한다.
 
 ```powershell
-New-Item -ItemType Directory -Force C:/work/DALi | Out-Null
-New-Item -ItemType Junction -Path C:/work/DALi/dali-core    -Target "D:/src/dali-core"
-New-Item -ItemType Junction -Path C:/work/DALi/dali-adaptor -Target "D:/src/dali-adaptor"
-New-Item -ItemType Junction -Path C:/work/DALi/dali-ui      -Target "D:/src/dali-ui"
-```
-
-이미 같은 이름의 경로가 있으면 junction 명령을 실행하지 않는다.
-
-## 5. 사외 환경 준비
-
-사외에서는 공개 GitHub에 직접 접근한다고 가정한다.
-
-```powershell
-Set-Location C:/work/DALi
-git clone https://github.com/dalihub/windows-dependencies.git
-```
-
-현재 shell에 과거 proxy 설정이 남아 있다면 제거한다.
-
-```powershell
-Remove-Item Env:VCPKG_PROXY -ErrorAction SilentlyContinue
-Remove-Item Env:HTTP_PROXY  -ErrorAction SilentlyContinue
-Remove-Item Env:HTTPS_PROXY -ErrorAction SilentlyContinue
-```
-
-보완된 `windows-dependencies`의 통합 setup script로 vcpkg와 TizenVG를 구성한다.
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File C:/work/DALi/windows-dependencies/vcpkg-script/setup-dali-dependencies.ps1 `
-  -DaliRoot C:/work/DALi `
-  -VcpkgRoot C:/Tools/DALI_VCPKG/vcpkg
-```
-
-이 script는 다음 작업을 수행한다.
-
-1. `dalihub/vcpkg` clone 또는 검증된 기존 checkout 재사용
-2. 검증 revision `a58936506` checkout 확인
-3. DALi port patch, proxy patch, VS 2022 호환 patch, gettext `msgfmt` 설치 patch를 누락분만 적용
-4. vcpkg bootstrap
-5. 필요한 `x64-windows` third-party package 설치
-6. `libintl.h`, `libintl.lib`, `libintl.dll`, `msgfmt.exe` 설치 결과 검증
-7. 기존 gettext package가 patch 적용 전 상태라 `msgfmt.exe`가 없으면 gettext 의존 package를 자동 재설치
-8. TizenVG `tizen` 브랜치 clone 및 검증 revision checkout
-9. x64 MSVC 환경을 감지하여 TizenVG를 `svg,lottie` loader로 `dali-env`에 빌드·설치
-
-사외망에서는 `-Proxy`를 전달하지 않는다. 이 경우 script는 `VCPKG_PROXY`, `HTTP_PROXY`,
-`HTTPS_PROXY`를 설정하지 않으므로 기존 proxy 설정이 빌드에 섞이지 않는다. 사내망에서는
-`-Proxy host:port`를 전달하면 vcpkg download, Git, TizenVG build process에 필요한 proxy
-환경 변수를 현재 process에만 설정한다.
-
-Git 명령은 10초 안에 완료되지 않으면 timeout으로 중단한다. 대상 vcpkg 경로가 이미 존재하면 revision과 Git checkout 여부를 확인하고, `a58936506`이면
-재사용한다. patch 적용 여부와 필수 산출물도 다시 확인하므로, 중간에 실패한 설치를 그대로
-다시 실행해도 된다. 다른 revision이거나 Git checkout이 아니면 중단되며, 이때는 새 경로를
-지정하거나 기존 경로를 사람이 확인한 뒤 정리한다. TizenVG를 재사용하려면 `-SkipTizenVg`를
-사용한다.
-
-## 6. 사내 환경 준비
-
-사내에서는 승인된 Git mirror와 proxy 정보를 사용한다. 실제 host, port 및 mirror URL은
-사내 안내에 따라 넣고 문서나 commit에 credential을 기록하지 않는다.
-
-### 6.1 사내 proxy로 공개 저장소에 접근하는 경우
-
-```powershell
-$Proxy = "proxy.company.example:8080"
-
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File C:/work/DALi/windows-dependencies/vcpkg-script/setup-dali-dependencies.ps1 `
-  -DaliRoot C:/work/DALi `
-  -VcpkgRoot C:/Tools/DALI_VCPKG/vcpkg `
-  -Proxy $Proxy
-```
-
-script는 현재 process에 다음 값을 설정한다.
-
-```text
-VCPKG_PROXY=proxy.company.example:8080
-HTTP_PROXY=http://proxy.company.example:8080
-HTTPS_PROXY=http://proxy.company.example:8080
-```
-
-TLS 검증을 끄지 않는다. HTTPS inspection을 사용하는 환경에서는 사내 절차에 따라 회사
-root certificate를 Windows trust store에 설치한다.
-
-### 6.2 사내 Git mirror를 사용하는 경우
-
-`windows-dependencies`, DALi 소스와 TizenVG는 사내 mirror에서 받고 setup script에
-각 mirror URL을 전달한다.
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File C:/work/DALi/windows-dependencies/vcpkg-script/setup-dali-dependencies.ps1 `
-  -DaliRoot C:/work/DALi `
-  -VcpkgRoot C:/Tools/DALI_VCPKG/vcpkg `
-  -VcpkgRepository "https://git.company.example/mirror/dalihub/vcpkg.git" `
-  -TizenVgRepository "https://git.company.example/mirror/tizen/tizenvg.git" `
-  -Proxy "proxy.company.example:8080"
-```
-
-mirror에 vcpkg `a58936506`과 문서에 지정된 TizenVG revision이 있어야 한다. package source
-archive까지 사내 mirror로 치환되는 환경이라면 해당 mirror 정책을 따르되 SHA512 검증은
-유지한다.
-
-
-## 6.3 전체 빌드 빠른 실행 순서
-
-처음 세팅하는 개발자는 아래 순서대로 실행한다. 사외망이면 `-Proxy` 줄을 빼고, 사내망이면
-실제 proxy 주소를 넣는다. `git clone`, `git fetch`, `git checkout`, `git apply` 같은 Git 명령은
-setup script 안에서 10초 안에 끝나지 않으면 중단된다. 사내망에서 GitHub가 막힌 상태로 오래
-멈추지 않게 하기 위한 정책이며, 빌드/컴파일 단계에는 이 timeout을 적용하지 않는다.
-
-### 6.3.1 third-party dependency 설치
-
-```powershell
-$DALI_ROOT  = "C:/work/DALi"
-$VCPKG_ROOT = "C:/Tools/DALI_VCPKG/vcpkg"
-# 사내망에서만 사용한다. 사외망이면 이 줄과 -Proxy 인자를 제거한다.
-$Proxy = "proxy.company.example:8080"
-
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$DALI_ROOT/windows-dependencies/vcpkg-script/setup-dali-dependencies.ps1" `
-  -DaliRoot $DALI_ROOT `
-  -VcpkgRoot $VCPKG_ROOT `
-  -Proxy $Proxy
-```
-
-사외망에서는 다음처럼 proxy 없이 실행한다.
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$DALI_ROOT/windows-dependencies/vcpkg-script/setup-dali-dependencies.ps1" `
-  -DaliRoot $DALI_ROOT `
-  -VcpkgRoot $VCPKG_ROOT
-```
-
-이미 dependency 설치가 끝난 뒤 DALi 코드만 다시 빌드할 때는 이 절을 건너뛴다. TizenVG만
-재사용하려면 `-SkipTizenVg`, vcpkg만 재사용하려면 `-SkipVcpkg`를 추가한다.
-
-### 6.3.2 공통 빌드 환경 설정
-
-```powershell
-$DALI_ROOT   = "C:/work/DALi"
-$DALI_PREFIX = "$DALI_ROOT/dali-env"
-$DALI_OUT    = "$DALI_ROOT/out"
-$VCPKG_ROOT  = "C:/Tools/DALI_VCPKG/vcpkg"
-$VsDevCmd    = "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/Tools/VsDevCmd.bat"
-
-if(-not (Test-Path $VsDevCmd))
-{
-  $VsDevCmd = "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/VsDevCmd.bat"
-}
-
-cmd.exe /d /c "call `"$VsDevCmd`" -arch=x64 -host_arch=x64 >nul && set" |
-  ForEach-Object {
-    if($_ -match '^([^=]+)=(.*)$')
-    {
-      [Environment]::SetEnvironmentVariable($matches[1], $matches[2], 'Process')
-    }
-  }
-
-$env:VSLANG = "1033"
-New-Item -ItemType Directory -Force $DALI_PREFIX, $DALI_OUT | Out-Null
-
-$env:DESKTOP_PREFIX = $DALI_PREFIX
-$env:DALI_DATA_RO_DIR = "$DALI_PREFIX/share/dali"
-$env:DALI_DATA_RW_DIR = "$DALI_PREFIX/share/dali"
-$env:DALI_DATA_RO_INSTALL_DIR = "$DALI_PREFIX/share/dali"
-$env:FONTCONFIG_FILE = "$DALI_PREFIX/share/dali/fonts.conf"
-$env:PATH = "$DALI_PREFIX/bin;$DALI_PREFIX/lib;$VCPKG_ROOT/installed/x64-windows/bin;$env:PATH"
-
-$Common = @(
-  "-G", "Ninja"
-  "-DCMAKE_BUILD_TYPE=Release"
-  "-DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
-  "-DVCPKG_TARGET_TRIPLET=x64-windows"
-  "-DCMAKE_INSTALL_PREFIX=$DALI_PREFIX"
-  "-DCMAKE_PREFIX_PATH=$DALI_PREFIX"
-)
-```
-
-### 6.3.3 core, adaptor, ui 빌드/install
-
-```powershell
-cmake -S "$DALI_ROOT/windows-dependencies/build" `
-      -B "$DALI_OUT/windows-dependencies" @Common
-cmake --build "$DALI_OUT/windows-dependencies" --target install --parallel 8
-
-$CoreArgs = $Common + @(
-  "-DENABLE_PKG_CONFIGURE=OFF"
-  "-DENABLE_LINK_TEST=OFF"
-  "-DINSTALL_CMAKE_MODULES=ON"
-  "-Ddali-windows-dependencies_DIR=$DALI_PREFIX/share/dali-windows-dependencies"
-)
-cmake -S "$DALI_ROOT/dali-core/build/tizen" -B "$DALI_OUT/dali-core" @CoreArgs
-cmake --build "$DALI_OUT/dali-core" --target install --parallel 8
-
-$AdaptorArgs = $Common + @(
-  "-DENABLE_PKG_CONFIGURE=OFF"
-  "-DENABLE_LINK_TEST=OFF"
-  "-DINSTALL_CMAKE_MODULES=ON"
-  "-DPROFILE_LCASE=windows"
-  "-DENABLE_PROFILE=WINDOWS"
-  "-DENABLE_GRAPHICS_BACKEND=GLES"
-  "-DENABLE_VECTOR_BASED_TEXT_RENDERING=OFF"
-  "-Dthorvg_support=ON"
-  "-Ddali-windows-dependencies_DIR=$DALI_PREFIX/share/dali-windows-dependencies"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-)
-cmake -S "$DALI_ROOT/dali-adaptor/build/tizen" -B "$DALI_OUT/dali-adaptor" @AdaptorArgs
-cmake --build "$DALI_OUT/dali-adaptor" --target install --parallel 8
-
-$UiArgs = $Common + @(
-  "-DENABLE_PKG_CONFIGURE=OFF"
-  "-DINSTALL_CMAKE_MODULES=ON"
-  "-DENABLE_VECTOR_BASED_TEXT_RENDERING=OFF"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-  "-Ddali2-adaptor_DIR=$DALI_PREFIX/share/dali2-adaptor"
-)
-cmake -S "$DALI_ROOT/dali-ui/build/tizen" -B "$DALI_OUT/dali-ui" @UiArgs
-cmake --build "$DALI_OUT/dali-ui" --target install --parallel 8
-```
-
-### 6.3.4 검증 sample 빌드/install
-
-```powershell
-$SampleArgs = $Common + @(
-  "-DDALI_UI_SAMPLE_LIST=image-view;chart-view;background-blur-dither"
-  "-DIMAGE_VIEW_SAMPLE_LIST=lottie-animation-view.example"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-  "-Ddali2-adaptor_DIR=$DALI_PREFIX/share/dali2-adaptor"
-  "-Ddali2-ui-foundation_DIR=$DALI_PREFIX/share/dali2-ui-foundation"
-  "-Ddali2-ui-components_DIR=$DALI_PREFIX/share/dali2-ui-components"
-)
-
-cmake -S "$DALI_ROOT/dali-ui/samples" `
-      -B "$DALI_OUT/dali-ui-samples" @SampleArgs
-cmake --build "$DALI_OUT/dali-ui-samples" --target install --parallel 8
-```
-
-### 6.3.5 실행
-
-```powershell
-$env:DALI_WINDOW_WIDTH = "1920"
-$env:DALI_WINDOW_HEIGHT = "1080"
-
-& "$DALI_PREFIX/bin/lottie-animation-view.example.exe"
-& "$DALI_PREFIX/bin/chart-view.example.exe"
-& "$DALI_PREFIX/bin/background-blur-dither.example.exe"
-```
-
-새 PowerShell에서 실행만 할 때는 15절의 runtime 환경 설정을 먼저 실행한다.
-
-## 7. vcpkg 수동 구성 방법
-
-setup script를 사용할 수 없을 때만 다음 절차를 사용한다. 모든 patch는 보완된
-`windows-dependencies`에서 가져오며 `patch.exe` 대신 `git apply`를 사용한다.
-
-```powershell
-$VcpkgRoot = "C:/Tools/DALI_VCPKG/vcpkg"
-$PatchRoot = "C:/work/DALi/windows-dependencies/vcpkg-script"
-
-git clone https://github.com/dalihub/vcpkg.git $VcpkgRoot
-git -C $VcpkgRoot checkout a58936506
-
-$Patches = @(
-  "[VCPKG]_0001_Fix_proxy_access.patch"
-  "[VCPKG-angle]_0001_Apply_Fix_glInvalidateFramebuffer_crash.patch"
-  "[VCPKG-getopt]_0001_Apply_Fix_extern_c.patch"
-  "[VCPKG-libjpeg-turbo]_0001_Apply_Fix_fill_jpeg_buffer_cb.patch"
-  "[VCPKG-pthreads]_0001_Apply_Fix_define_timespec.patch"
-  "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch"
-  "[VCPKG]_0002_VS2022_and_modern_downloads.patch"
-)
-
-foreach($Patch in $Patches)
-{
-  git -C $VcpkgRoot apply --check --ignore-whitespace "$PatchRoot/$Patch"
-  if($LASTEXITCODE -ne 0) { throw "Patch check failed: $Patch" }
-  git -C $VcpkgRoot apply --ignore-whitespace --whitespace=nowarn "$PatchRoot/$Patch"
-  if($LASTEXITCODE -ne 0) { throw "Patch apply failed: $Patch" }
-}
-
-cmd.exe /d /c "`"$VcpkgRoot/bootstrap-vcpkg.bat`" -disableMetrics"
-```
-
-설치 package 목록:
-
-```powershell
-$Packages = @(
-  "winsock2:x64-windows", "pthreads:x64-windows", "curl:x64-windows",
-  "getopt-win32:x64-windows", "libexif:x64-windows",
-  "libjpeg-turbo:x64-windows", "libpng:x64-windows", "giflib:x64-windows",
-  "angle:x64-windows", "cairo:x64-windows", "fontconfig:x64-windows",
-  "freetype:x64-windows", "harfbuzz:x64-windows", "fribidi:x64-windows",
-  "libwebp:x64-windows", "gettext:x64-windows"
-)
-
-& "$VcpkgRoot/vcpkg.exe" install @Packages
-```
-
-이 고정 vcpkg revision의 기본 `gettext` port는 native `libintl`만 설치한다. 함께 적용하는
-gettext patch는 PO catalog compiler와 전용 runtime을 다음 위치에 추가한다. 압축 해제를 위해
-CMake 3.15 이상이 필요하며, 이 문서의 검증 조합인 CMake 3.31.6은 해당 조건을 만족한다.
-
-```powershell
-$Msgfmt = "$VcpkgRoot/installed/x64-windows/tools/gettext/msgfmt.exe"
-& $Msgfmt --version
-Test-Path "$VcpkgRoot/installed/x64-windows/include/libintl.h"
-```
-
-legacy `build-deps.sh`는 `dali2-toolkit`과 x86 package까지 설치하는 광범위한 workflow이므로
-이번 smoke test에는 사용하지 않는다. 보완본에서는 안전을 위해 proxy 기본값도 제거했다.
-
-고정한 vcpkg revision에는 TizenVG port가 없으므로 통합 setup script가 Meson build로
-설치한다.
-
-## 8. MSVC 환경과 공통 변수 설정
-
-Developer PowerShell을 직접 열 필요는 없다. 일반 PowerShell에서도 아래 코드로 x64 MSVC
-환경을 현재 shell에 가져올 수 있다.
-
-이 절의 값은 Ubuntu build 환경에서 사용하는 `setenv`에 대응하며 현재 PowerShell process에만
-적용된다. 새 PowerShell을 열면 다시 실행해야 한다. `VsDevCmd.bat` import는 compile/link에
-필요하고, DALi 경로와 data 변수는 configure/build/install 및 sample 실행에 사용된다.
-
-```powershell
-$VsDevCmd = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat"
-
-cmd.exe /d /c "call `"$VsDevCmd`" -arch=x64 -host_arch=x64 >nul && set" |
-  ForEach-Object {
-    if($_ -match '^([^=]+)=(.*)$')
-    {
-      [Environment]::SetEnvironmentVariable($matches[1], $matches[2], 'Process')
-    }
-  }
-
-where.exe cl
-cmake --version
-ninja --version
-python --version
-git --version
-```
-
-그다음 공통 변수를 설정한다.
-
-```powershell
-$DALI_ROOT   = "C:/work/DALi"
-$DALI_PREFIX = "$DALI_ROOT/dali-env"
-$DALI_OUT    = "$DALI_ROOT/out"
-$VCPKG_ROOT  = "C:/Tools/DALI_VCPKG/vcpkg"
-
-# Ninja가 MSVC의 /showIncludes 출력을 확실히 해석하도록 영문 출력 사용
-$env:VSLANG = "1033"
-
-New-Item -ItemType Directory -Force $DALI_PREFIX, $DALI_OUT | Out-Null
-
-$env:DESKTOP_PREFIX = $DALI_PREFIX
-$env:DALI_DATA_RO_DIR = "$DALI_PREFIX/share/dali"
-$env:DALI_DATA_RW_DIR = "$DALI_PREFIX/share/dali"
-$env:DALI_DATA_RO_INSTALL_DIR = "$DALI_PREFIX/share/dali"
-$env:FONTCONFIG_FILE = "$DALI_PREFIX/share/dali/fonts.conf"
-$env:PATH = "$DALI_PREFIX/bin;$DALI_PREFIX/lib;$VCPKG_ROOT/installed/x64-windows/bin;$env:PATH"
-
-`cmd.exe /c` 한 줄 명령으로 같은 값을 설정할 때는 반드시 `set "NAME=value"` 형식을 사용한다.
-`set NAME=value && cmake ...`처럼 쓰면 `&&` 앞 공백이 값 끝에 포함되어
-`C:/work/DALi/dali-env/share/dali /ui/images` 같은 잘못된 install 경로가 생성될 수 있다.
-
-$Common = @(
-  "-G", "Ninja"
-  "-DCMAKE_BUILD_TYPE=Release"
-  "-DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
-  "-DVCPKG_TARGET_TRIPLET=x64-windows"
-  "-DCMAKE_INSTALL_PREFIX=$DALI_PREFIX"
-  "-DCMAKE_PREFIX_PATH=$DALI_PREFIX"
-)
-```
-
-toolchain, architecture 또는 build type을 바꾼 경우 기존 cache를 재사용하지 말고 새로운
-`out` 하위 경로를 사용한다.
-
-## 9. windows-dependencies 빌드
-
-```powershell
-cmake -S "$DALI_ROOT/windows-dependencies/build" `
-      -B "$DALI_OUT/windows-dependencies" @Common
-
-cmake --build "$DALI_OUT/windows-dependencies" `
-      --target install --parallel 8
-
-Test-Path "$DALI_PREFIX/share/dali-windows-dependencies/dali-windows-dependencies-config.cmake"
-```
-
-마지막 결과가 `True`여야 한다.
-
-## 10. TizenVG 설치 확인 또는 개별 재설치
-
-DALi의 CanvasRenderer와 `canvas-view`, `chart-view` sample에는 TizenVG가 필요하다. TizenVG는
-ThorVG 1.0.7 기반에 DALi가 사용하는 Tizen 확장 API를 더한 구현이다. 5절의 통합 setup을
-실행했다면 다음 결과만 확인한다.
-
-```powershell
-Test-Path "$DALI_PREFIX/include/thorvg.h"
-Test-Path "$DALI_PREFIX/bin/thorvg.dll"
-```
-
-설치를 건너뛰었거나 TizenVG만 다시 설치하려면 다음 스크립트를 실행한다.
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$DALI_ROOT/windows-dependencies/vcpkg-script/setup-tizenvg.ps1" `
-  -InstallPrefix "$DALI_PREFIX" `
-  -SourceRoot "$DALI_ROOT/tizenvg" `
-  -BuildRoot "$DALI_OUT/tizenvg"
-```
-
-스크립트는 Meson 0.63.0 이상을 확인하고, 없거나 오래된 경우 local `meson-tools` venv를 준비한 뒤 검증 revision을 checkout하고 `thorvg.h`, `thorvg_lottie.h`, `thorvg.dll` 설치까지 확인한다.
-dali-adaptor의 Windows CMake는 설치된 `thorvg.h`의 `TVG_VERSION_*` macro를 읽어 1.x API
-경로를 선택한다. CanvasRenderer와 Lottie 모두 TizenVG를 사용한다. Lottie frame은
-Windows에서 TBM surface queue 대신 adaptor의 generic CPU PixelBuffer 경로로 전달된다.
-
-Lottie까지 검증해야 하는 환경에서는 설치된 TizenVG에 `thorvg_lottie.h`가 있어야 한다.
-통합 setup script와 위 개별 재설치 script는 기본으로 `svg,lottie` loader와
-`/D_USE_MATH_DEFINES`를 사용한다. 수동 Meson 구성으로 다시 빌드할 때만 같은 option을
-직접 전달한다.
-
-```powershell
-meson setup "$DALI_OUT/tizenvg" "$DALI_ROOT/tizenvg" `
-  --backend ninja `
-  --buildtype release `
-  --default-library shared `
-  --prefix "$DALI_PREFIX" `
-  --libdir lib `
-  -Dloaders=svg,lottie `
-  -Dcpp_args=/D_USE_MATH_DEFINES `
-  -Dstrip=false `
-  --reconfigure
-meson compile -C "$DALI_OUT/tizenvg"
-meson install -C "$DALI_OUT/tizenvg"
-
-Test-Path "$DALI_PREFIX/include/thorvg_lottie.h"
-```
-
-## 11. dali-core 빌드
-
-```powershell
-$CoreArgs = $Common + @(
-  "-DENABLE_PKG_CONFIGURE=OFF"
-  "-DENABLE_LINK_TEST=OFF"
-  "-DINSTALL_CMAKE_MODULES=ON"
-  "-Ddali-windows-dependencies_DIR=$DALI_PREFIX/share/dali-windows-dependencies"
-)
-
-cmake -S "$DALI_ROOT/dali-core/build/tizen" `
-      -B "$DALI_OUT/dali-core" @CoreArgs
-
-cmake --build "$DALI_OUT/dali-core" `
-      --target install --parallel 8
-
-Test-Path "$DALI_PREFIX/bin/dali2-core.dll"
-Test-Path "$DALI_PREFIX/share/dali2-core/dali2-core-config.cmake"
-```
-
-이미 만들어진 build tree에서 core header를 수정하거나 새 patch를 적용했다면 한 번은 clean
-build를 수행한다. 한국어 MSVC의 `/showIncludes` 출력이 Ninja dependency 정보로 인식되지
-않아 header 변경 뒤에도 일부 object가 재컴파일되지 않는 경우가 실제로 확인됐다.
-
-```powershell
-cmake --build "$DALI_OUT/dali-core" --target install --clean-first --parallel 8
-```
-
-## 12. dali-adaptor 빌드
-
-```powershell
-$AdaptorArgs = $Common + @(
-  "-DENABLE_PKG_CONFIGURE=OFF"
-  "-DENABLE_LINK_TEST=OFF"
-  "-DINSTALL_CMAKE_MODULES=ON"
-  "-DPROFILE_LCASE=windows"
-  "-DENABLE_PROFILE=WINDOWS"
-  "-DENABLE_GRAPHICS_BACKEND=GLES"
-  "-DENABLE_VECTOR_BASED_TEXT_RENDERING=OFF"
-  "-Dthorvg_support=ON"
-  "-Ddali-windows-dependencies_DIR=$DALI_PREFIX/share/dali-windows-dependencies"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-)
-
-cmake -S "$DALI_ROOT/dali-adaptor/build/tizen" `
-      -B "$DALI_OUT/dali-adaptor" @AdaptorArgs
-
-cmake --build "$DALI_OUT/dali-adaptor" `
-      --target install --parallel 8
-
-Test-Path "$DALI_PREFIX/bin/dali2-adaptor.dll"
-Test-Path "$DALI_PREFIX/share/dali2-adaptor/dali2-adaptor-config.cmake"
-```
-
-## 13. dali-ui 빌드
-
-```powershell
-$UiArgs = $Common + @(
-  "-DENABLE_PKG_CONFIGURE=OFF"
-  "-DINSTALL_CMAKE_MODULES=ON"
-  "-DENABLE_VECTOR_BASED_TEXT_RENDERING=OFF"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-  "-Ddali2-adaptor_DIR=$DALI_PREFIX/share/dali2-adaptor"
-)
-
-cmake -S "$DALI_ROOT/dali-ui/build/tizen" `
-      -B "$DALI_OUT/dali-ui" @UiArgs
-
-cmake --build "$DALI_OUT/dali-ui" `
-      --target install --parallel 8
-
-Test-Path "$DALI_PREFIX/bin/dali2-ui-foundation.dll"
-Test-Path "$DALI_PREFIX/bin/dali2-ui-components.dll"
-Test-Path "$DALI_PREFIX/share/dali2-ui-foundation/dali2-ui-foundation-config.cmake"
-Test-Path "$DALI_PREFIX/share/dali2-ui-components/dali2-ui-components-config.cmake"
-```
-
-## 14. sample CMake 이식과 범용 빌드
-
-Ubuntu sample 다수는 각 디렉터리의 `CMakeLists.txt`에서 `PkgConfig`와
-`PKG_CHECK_MODULES()`를 직접 사용한다. 이 형태는 Windows의 CMake config package를 찾지
-못하므로 해당 sample을 Windows에서 빌드하기 전에 공통 sample CMake 방식으로 이식해야 한다.
-
-최상위 `samples/CMakeLists.txt`가 `common.cmake`를 포함하므로, sample별 CMake에서는 직접
-package를 찾고 compile/link option을 반복하지 말고 다음 형태를 사용한다.
-
-```cmake
-CMAKE_MINIMUM_REQUIRED(VERSION 3.8.2)
-PROJECT(sample-name.example)
-
-SET(CMAKE_CXX_STANDARD 17)
-DALI_ADD_SAMPLE(sample-name.example sample-name-example.cpp)
-
-# 필요한 경우에만 sample 전용 define, include, library를 target 단위로 추가한다.
-# TARGET_COMPILE_DEFINITIONS(sample-name.example PRIVATE ...)
-# TARGET_INCLUDE_DIRECTORIES(sample-name.example PRIVATE ...)
-# TARGET_LINK_LIBRARIES(sample-name.example PRIVATE ...)
-```
-
-`samples/common.cmake`는 `WIN32`에서 `find_package(... CONFIG)`와 imported target을 사용하고,
-Ubuntu에서는 기존 `pkg-config` package를 사용한다. 따라서 위 방식으로 이식해도 Ubuntu 빌드는
-유지된다. 단, Tizen 전용 API나 Windows에 없는 plugin을 직접 사용하는 sample은 별도의
-platform 조건 또는 Windows 제외 처리가 필요하다.
-
-sample 디렉터리에 `res`가 있으면 `DALI_ADD_SAMPLE()`이 다음 작업도 자동으로 수행한다.
-
-- `res` 전체를 `<CMAKE_INSTALL_PREFIX>/share/dali/samples/<sample>/res/`에 설치
-- Windows의 `RESOURCES_DIR`은 실행 파일의 `bin` 위치를 기준으로
-  `../share/dali/samples/<sample>/res/`를 사용
-- Windows sample 공통 런타임은 `main()` 전에 실제 실행 파일 디렉터리를 확인하므로 어느 shell
-  디렉터리에서 실행해도 같은 리소스를 찾음
-
-다른 sample의 리소스를 공유할 때는 `DALI_SET_SAMPLE_RESOURCES()`를 명시적으로 사용한다.
-예를 들어 `background-blur-dither`는 `image-view/res`를 공유한다. 소스 디렉터리나
-`samples/<sample>/bin/res`를 실행 시점에 참조하지 않는다.
-
-이식이 끝난 sample 디렉터리 이름을 `$SampleNames`에 나열하면 여러 개를 한 번에 configure,
-build, install할 수 있다.
-
-```powershell
-$SampleNames = @(
-  "sample-directory-1"
-  "sample-directory-2"
-)
-$SampleList = $SampleNames -join ";"
-
-$SampleArgs = $Common + @(
-  "-DDALI_UI_SAMPLE_LIST=$SampleList"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-  "-Ddali2-adaptor_DIR=$DALI_PREFIX/share/dali2-adaptor"
-  "-Ddali2-ui-foundation_DIR=$DALI_PREFIX/share/dali2-ui-foundation"
-  "-Ddali2-ui-components_DIR=$DALI_PREFIX/share/dali2-ui-components"
-)
-
-cmake -S "$DALI_ROOT/dali-ui/samples" `
-      -B "$DALI_OUT/dali-ui-samples" @SampleArgs
-
-cmake --build "$DALI_OUT/dali-ui-samples" `
-      --target install --parallel 8
-
-Get-ChildItem "$DALI_PREFIX/bin" -Filter "*.example.exe"
-Get-ChildItem "$DALI_PREFIX/share/dali/samples" -Directory
-```
-
-오늘 검증한 Lottie, chart view, background blur sample 묶음은 다음처럼 한 번에 configure,
-build, install한다. `lottie-animation-view.example`은 `image-view` 디렉터리 안의 target이므로
-`IMAGE_VIEW_SAMPLE_LIST`로 target을 한정한다.
-
-```powershell
-$SampleArgs = $Common + @(
-  "-DDALI_UI_SAMPLE_LIST=image-view;chart-view;background-blur-dither"
-  "-DIMAGE_VIEW_SAMPLE_LIST=lottie-animation-view.example"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-  "-Ddali2-adaptor_DIR=$DALI_PREFIX/share/dali2-adaptor"
-  "-Ddali2-ui-foundation_DIR=$DALI_PREFIX/share/dali2-ui-foundation"
-  "-Ddali2-ui-components_DIR=$DALI_PREFIX/share/dali2-ui-components"
-)
-
-cmake -S "$DALI_ROOT/dali-ui/samples" `
-      -B "$DALI_OUT/dali-ui-samples" @SampleArgs
-
-cmake --build "$DALI_OUT/dali-ui-samples" `
-      --target install --parallel 8
-
-Get-ChildItem "$DALI_PREFIX/bin" -Filter "lottie-animation-view.example.exe"
-Get-ChildItem "$DALI_PREFIX/bin" -Filter "chart-view.example.exe"
-Get-ChildItem "$DALI_PREFIX/bin" -Filter "background-blur-dither.example.exe"
-```
-`DALI_UI_SAMPLE_LIST`를 빈 값으로 설정하면 CMake가 모든 sample 디렉터리를 추가한다. 아직
-이식되지 않았거나 Windows에서 지원하지 않는 sample이 하나라도 있으면 configure/build가
-중단되므로, 전체 이식 전에는 검증된 디렉터리만 명시한다.
-
-설치 후에는 `dali-env` 전체를 다른 위치로 이동할 수 있다. 단, `bin`과
-`share/dali/samples`의 패키지 내부 상대 구조는 유지한다.
-
-설치된 header/API 또는 sample CMake 구성을 바꾼 뒤 기존 sample build tree를 재사용하면 이전
-object가 남아 구 API symbol로 링크될 수 있다. 이 경우 sample만 clean 후 다시 빌드한다.
-
-```powershell
-cmake --build "$DALI_OUT/dali-ui-samples" --target clean
-cmake --build "$DALI_OUT/dali-ui-samples" --target canvas-view.example chart-view.example --parallel 8
-```
-
-Lottie 단독 smoke test는 `image-view` sample 묶음의 다음 target으로 확인한다.
-
-```powershell
-$SampleList = "image-view"
-$SampleArgs = $Common + @(
-  "-DDALI_UI_SAMPLE_LIST=$SampleList"
-  "-Ddali2-core_DIR=$DALI_PREFIX/share/dali2-core"
-  "-Ddali2-adaptor_DIR=$DALI_PREFIX/share/dali2-adaptor"
-  "-Ddali2-ui-foundation_DIR=$DALI_PREFIX/share/dali2-ui-foundation"
-  "-Ddali2-ui-components_DIR=$DALI_PREFIX/share/dali2-ui-components"
-)
-
-cmake -S "$DALI_ROOT/dali-ui/samples" `
-      -B "$DALI_OUT/dali-ui-samples" @SampleArgs
-cmake --build "$DALI_OUT/dali-ui-samples" `
-      --target lottie-animation-view.example --parallel 8
-```
-
-## 15. 실행
-
-새 PowerShell에서 실행한다면 아래 runtime 환경을 먼저 설정한다. 이 부분이 Ubuntu에서
-`setenv`를 실행한 뒤 앱을 구동하는 것과 같은 역할이다. Developer PowerShell이나 MSVC compiler
-환경은 이미 빌드된 앱을 실행할 때는 필요하지 않지만, `PATH`와 `DALI_DATA_*` 등은 새 shell마다
-필요하다.
-
-```powershell
-$DALI_PREFIX = "C:/work/DALi/dali-env"
-$VCPKG_ROOT  = "C:/Tools/DALI_VCPKG/vcpkg"
-
-$env:PATH = "$DALI_PREFIX/bin;$DALI_PREFIX/lib;$VCPKG_ROOT/installed/x64-windows/bin;$env:PATH"
-$env:DESKTOP_PREFIX = $DALI_PREFIX
-$env:DALI_DATA_RO_DIR = "$DALI_PREFIX/share/dali"
-$env:DALI_DATA_RW_DIR = "$DALI_PREFIX/share/dali"
-$env:DALI_DATA_RO_INSTALL_DIR = "$DALI_PREFIX/share/dali"
-$env:FONTCONFIG_FILE = "$DALI_PREFIX/share/dali/fonts.conf"
-
-# 원하는 경우 window 초기 크기를 명시한다.
-$env:DALI_WINDOW_WIDTH = "1920"
-$env:DALI_WINDOW_HEIGHT = "1080"
-
-$SampleExe = "sample-name.example.exe"
-& "$DALI_PREFIX/bin/$SampleExe"
-```
-
-권장 방식은 위와 같이 vcpkg의 release DLL 디렉터리를 `PATH`에 두는 것이다. 실행 파일과 DLL을
-한 디렉터리로 묶어야 하는 독립 배포에서는 동일한 `x64-windows` release DLL만 복사한다.
-sample은 호출한 shell의 현재 디렉터리와 무관하게 실행 파일 위치를 기준으로 설치된 resource를
-찾으므로 `Set-Location "$DALI_PREFIX/bin"`은 필요하지 않다.
-
-```powershell
-Get-ChildItem "$VCPKG_ROOT/installed/x64-windows/bin" -Filter "*.dll" |
-  Copy-Item -Destination "$DALI_PREFIX/bin" -Force
-```
-
-Debug DLL 또는 `x86-windows` DLL을 섞지 않는다. DALi와 TizenVG DLL은 각 library의 install
-단계에서 이미 `$DALI_PREFIX/bin`에 들어간다.
-
-`windows-dependencies` install 단계는 `set-dali-runtime-env.ps1`을 `dali-env` 루트에
-설치한다. 이 script는 `$PSScriptRoot`로 이동된 prefix를 자동 감지하므로 경로 수정이 필요 없다.
-
-```powershell
+Set-Location .\windows-dependencies
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-$DaliEnv = "D:/apps/dali-env"
-. "$DaliEnv/set-dali-runtime-env.ps1"
-& "$DaliEnv/bin/sample-name.example.exe"
 ```
 
-첫 줄은 현재 PowerShell process에만 적용되며 시스템 또는 사용자 실행 정책을 영구 변경하지
-않는다. script 실행이 이미 허용된 환경에서는 생략해도 된다.
+## 2. 사용자가 입력할 수 있는 환경정보
 
-여러 DALi checkout이나 prefix를 번갈아 쓸 수 있으므로 이 값들을 Windows 사용자 환경변수로
-영구 등록하는 것보다는 shell별 script를 사용하는 편이 안전하다.
+대부분의 사용자는 아무것도 설정하지 않아도 된다.
 
-성공 기준:
+### proxy
 
-- `DaliWindow` Win32 window가 생성되고 응답한다.
-- sample 고유의 UI와 resource가 표시되고 입력에 응답한다.
-- log에 `GraphicsBackend = GLES`, `EGL Information`, `Using OpenGL es 3.0`이 보인다.
-- window를 닫았을 때 Windows Application log에 crash가 기록되지 않는다.
-
-첫 실행에서 아래 파일이 없다는 log는 optional GPU cache/config 조회이므로 window와 rendering이
-정상이라면 치명 오류가 아니다.
-
-```text
-%LOCALAPPDATA%\.cache\dali_common_caches\gpu-environment-gles.conf
-```
-
-## 16. 문제 해결
-
-### 창은 열리지만 모든 sample이 흰 화면임
-
-Windows에서 `unsigned long`은 32비트이지만 `std::size_t`와 shader reflection hash는 64비트다.
-`dali-core/dali/internal/update/common/uniform-map.h`의 `UniformPropertyMapping::Hash`가
-`unsigned long`이면 uniform 이름 hash의 상위 32비트가 잘려 `size`, `offset` 같은 visual
-uniform을 찾지 못하고, 결과적으로 모든 quad 크기가 0이 된다. 다음 선언이 반영됐는지 확인한다.
-
-```cpp
-using Hash = std::size_t;
-```
-
-수정 후에는 위 10절의 `--clean-first` 명령으로 core를 다시 빌드·설치하고 실행 중인 sample을
-완전히 종료한 뒤 재실행한다. DLL을 사용하는 process가 남아 있으면 install이 실패하거나 이전
-DLL로 계속 실행될 수 있다.
-
-### `cl.exe`를 찾지 못함
-
-8절의 `VsDevCmd.bat` import를 먼저 실행한다. Visual Studio 설치 위치가 다르면
-`$VsDevCmd`를 실제 경로로 바꾼다.
-
-### vcpkg가 VS 2022 또는 compiler를 찾지 못함
-
-- vcpkg가 정확히 `a58936506`인지 확인한다.
-- 여섯 patch가 모두 적용됐는지 확인한다.
-- `MSVC v143 C++ x64/x86 Build Tools` component가 설치돼 있어야 한다.
-- 보완 patch를 사용하면 English language pack은 필수가 아니다.
+기존 `HTTPS_PROXY` 또는 `HTTP_PROXY`가 있으면 자동으로 사용한다. 직접 입력해야 한다면
+빌드 전에 다음 두 줄만 실행한다.
 
 ```powershell
-git -C C:/Tools/DALI_VCPKG/vcpkg rev-parse --short HEAD
-git -C C:/Tools/DALI_VCPKG/vcpkg status --short
+$env:HTTPS_PROXY = Read-Host "Proxy 주소를 http://host:port 형식으로 입력"
+$env:HTTP_PROXY = $env:HTTPS_PROXY
 ```
 
-### 사외에서 download가 사내 proxy로 향함
+### vcpkg 위치
 
-오래된 `[VCPKG]_0001_Fix_proxy_access.patch`에는 특정 proxy IP가 하드코딩돼 있었다. 이
-문서와 함께 수정된 patch를 사용하고 `VCPKG_PROXY`, `HTTP_PROXY`, `HTTPS_PROXY`에 남은
-값을 제거한다.
-
-### giflib download 실패
-
-구형 NCHC SourceForge URL이 더 이상 동작하지 않는다.
-`[VCPKG]_0002_VS2022_and_modern_downloads.patch` 적용 여부를 확인한다.
-
-### Meson이 x64 build에서 x86을 선택함
-
-동일한 VS 2022 호환 patch가 x64 native file과 architecture 환경을 강제한다. build tree가
-이미 잘못 구성됐다면 새로운 vcpkg buildtree 또는 새 vcpkg 경로에서 다시 시도한다.
-
-### Python `UnicodeDecodeError` 또는 CP949 오류
-
-`dali-ui/scripts/autogen/gen-animation-spec.py`의 파일 입출력에 `encoding='utf-8'` 보완이
-포함돼 있는지 확인한다.
-
-### `Fontconfig error: Cannot load default config file` 또는 글자가 안 보임
-
-`windows-dependencies` 보완본을 다시 설치하고 아래 환경변수를 실행 전에 설정한다.
+기본 위치는 네 저장소가 있는 폴더의 `.deps\vcpkg`다. 다른 위치를 사용해야 할 때만 설정한다.
 
 ```powershell
-$env:FONTCONFIG_FILE = "C:/work/DALi/dali-env/share/dali/fonts.conf"
+$env:DALI_VCPKG_ROOT = Read-Host "vcpkg를 설치할 전체 경로 입력"
 ```
 
-### MSVC C2026: string too big
+## 3. DALi 빌드
 
-shader generator가 generated raw string literal을 8,000 byte 단위로 분할하는 버전인지
-확인한다. generator 변경 후 generated header가 갱신돼야 한다.
+스크립트는 아래 순서대로 실행한다. 각 명령은 경로 탐색, MSVC x64 환경 설정, configure,
+build, install, 결과 검증까지 수행하며 실패하면 즉시 중단한다.
 
-### `FrameRange(int,int)` LNK2019
-
-`SelectableLottieImage::FrameRange`의 out-of-line 생성자 선언과 정의가
-`DALI_UI_API`로 export돼야 한다. foundation DLL을 다시 설치한 뒤 components를 빌드한다.
-
-### sample 실행/종료 시 `0xc0000005` 또는 `0xc0000374`
-
-`dali-ui/samples/CMakeLists.txt`에서 MSVC compile option `/vmg`가 적용되는지 확인한다.
-library와 sample의 member-function pointer ABI가 같아야 한다.
-
-### DLL을 찾지 못함 또는 `0xc000007b`
-
-모든 산출물이 x64인지 확인하고 다음 세 디렉터리를 `PATH`에 넣는다.
-
-```text
-C:\work\DALi\dali-env\bin
-C:\work\DALi\dali-env\lib
-C:\Tools\DALI_VCPKG\vcpkg\installed\x64-windows\bin
-```
+### 삼성 사내망
 
 ```powershell
-$SampleExe = "C:/work/DALi/dali-env/bin/sample-name.example.exe"
-dumpbin /DEPENDENTS $SampleExe
-where.exe libEGL.dll
-where.exe libGLESv2.dll
+.\build_windows_dependencies.ps1
+.\build_dali_core.ps1
+.\build_dali_adaptor.ps1
+.\build_dali_ui.ps1
 ```
 
-### package를 찾지 못함
+첫 번째 명령은 다음 두 작업을 한 번에 수행한다.
 
-`CMAKE_PREFIX_PATH`와 각 `*_DIR`이 `dali-env/share` 아래 설치 package를 가리키는지
-확인한다. vcpkg 안의 오래된 DALi package가 선택되면 안 된다.
+1. vcpkg third-party 패키지와 사내 TizenVG 설치
+2. DALi Windows 호환 패키지인 `windows-dependencies` 빌드·설치
 
-## 17. 최종 산출물
+사용하는 저장소:
 
-정상 완료 시 최소한 다음 파일이 존재한다.
+- vcpkg: `https://github.com/dalihub/vcpkg.git`
+- TizenVG: `https://github.sec.samsung.net/tizen/tizenvg.git`
+
+TizenVG 저장소는 삼성 사내망에서만 접근할 수 있다.
+
+### 사외망
+
+사외에서는 첫 번째 명령에 `-SkipTizenVg`만 추가한다.
+
+```powershell
+.\build_windows_dependencies.ps1 -SkipTizenVg
+.\build_dali_core.ps1
+.\build_dali_adaptor.ps1
+.\build_dali_ui.ps1
+```
+
+TizenVG가 없으면 `build_dali_adaptor.ps1`이 자동으로 `thorvg_support=OFF`를 선택한다.
+일반 DALi와 정적 SVG는 빌드되며 SVG는 NanoSVG fallback을 사용한다. CanvasRenderer와
+내장 Lottie renderer는 사용할 수 없다.
+
+### 선택 옵션
+
+CPU 사용량을 조절하려면 각 스크립트에 `-Jobs`를 지정한다.
+
+```powershell
+.\build_dali_core.ps1 -Jobs 4
+```
+
+third-party 설치는 끝났고 `windows-dependencies`만 다시 빌드하려면 다음과 같이 실행한다.
+
+```powershell
+.\build_windows_dependencies.ps1 -SkipThirdParty
+```
+
+## 4. dali-ui sample 빌드 및 실행
+
+기본값은 `hello-world` sample이다.
+
+```powershell
+.\build_dali_samples.ps1
+.\run_dali_sample.ps1 hello-world.example
+```
+
+여러 sample 디렉터리를 선택할 수도 있다.
+
+```powershell
+.\build_dali_samples.ps1 -Samples hello-world,chart-view
+.\run_dali_sample.ps1 chart-view.example
+```
+
+사내 TizenVG 설치 후 Lottie sample을 빌드하는 예:
+
+```powershell
+.\build_dali_samples.ps1 `
+  -Samples image-view `
+  -ImageViewTargets lottie-animation-view.example
+
+.\run_dali_sample.ps1 lottie-animation-view.example
+```
+
+창 크기는 실행 인자로 지정할 수 있다.
+
+```powershell
+.\run_dali_sample.ps1 hello-world.example -Width 1920 -Height 1080
+```
+
+실행 스크립트가 `PATH`, DALi data 경로, Fontconfig 경로를 자동으로 설정한다.
+
+## 5. 재빌드와 초기화
+
+코드를 수정한 뒤에는 해당 프로젝트부터 뒤쪽 스크립트만 다시 실행하면 된다.
+
+- core 변경: core → adaptor → ui
+- adaptor 변경: adaptor → ui
+- ui 변경: ui
+- sample 변경: sample
+
+스크립트를 반복 실행하면 기존 CMake/Ninja build tree와 dependency cache를 재사용한다.
+다운로드 실패 후에도 같은 명령을 다시 실행하는 것이 가장 빠르다.
+
+완전히 처음부터 다시 설치할 때만 실행 중인 DALi 앱을 모두 종료하고 다음 생성물을 삭제한다.
+이 명령은 네 저장소 자체를 삭제하지 않는다.
+
+```powershell
+$Workspace = Split-Path -Parent (Get-Location).Path
+Remove-Item -LiteralPath `
+  "$Workspace\out", `
+  "$Workspace\dali-env", `
+  "$Workspace\tizenvg", `
+  "$Workspace\.deps" `
+  -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+`windows-dependencies\build`는 이름과 달리 CMake 소스 디렉터리이므로 삭제하면 안 된다.
+
+## 6. 문제 해결
+
+### GitHub 또는 package 다운로드가 느림
+
+같은 명령을 다시 실행한다. 설치 스크립트는 1 KiB/s 미만 전송이 10초간 지속되면 연결을
+중단하고 최대 5회 재시도한다. 기존 다운로드와 package cache는 유지한다.
+
+### proxy 또는 인증서 오류
+
+- `HTTPS_PROXY`와 `HTTP_PROXY`를 확인한다.
+- TLS 검증을 끄지 않는다.
+- 회사 TLS inspection 인증서를 Windows의 신뢰할 수 있는 루트 인증 기관에 설치한다.
+
+### `cl.exe`, CMake 또는 Ninja를 찾지 못함
+
+Visual Studio Installer에서 v143 C++ build tools, Windows SDK, CMake tools가 설치됐는지
+확인한다. 스크립트는 `vswhere.exe`를 사용해 Visual Studio 위치를 자동으로 찾는다.
+
+### 먼저 실행해야 할 package가 없다는 오류
+
+3절의 스크립트를 위에서 아래 순서로 실행한다. 각 스크립트는 필요한 이전 단계가 없으면
+실행해야 할 스크립트 이름과 함께 중단한다.
+
+### install 중 `Access denied`
+
+실행 중인 DALi sample과 DALi DLL을 사용하는 프로세스를 모두 종료하고 같은 빌드 명령을
+다시 실행한다.
+
+### DLL을 찾지 못하거나 `0xc000007b` 발생
+
+직접 EXE를 실행하지 말고 `run_dali_sample.ps1`을 사용한다. 이 스크립트는 DALi와 vcpkg의
+x64 DLL 경로를 자동으로 추가한다.
+
+### Fontconfig 오류
+
+`build_windows_dependencies.ps1`을 먼저 실행하고 sample은 `run_dali_sample.ps1`로 실행한다.
+두 스크립트가 `fonts.conf` 설치와 `FONTCONFIG_FILE` 설정을 처리한다.
+
+### TizenVG 설치가 불완전하다는 오류
+
+사내망에서는 `build_windows_dependencies.ps1`을 다시 실행한다. 사외 clean 환경에서는
+`build_windows_dependencies.ps1 -SkipTizenVg`로 시작한다.
+
+## 7. 생성되는 디렉터리
 
 ```text
-C:\work\DALi\dali-env\bin\dali2-core.dll
-C:\work\DALi\dali-env\bin\dali2-adaptor.dll
-C:\work\DALi\dali-env\bin\dali2-ui-foundation.dll
-C:\work\DALi\dali-env\bin\dali2-ui-components.dll
-C:\work\DALi\dali-env\bin\<선택한-sample>.example.exe
-C:\work\DALi\dali-env\share\dali\samples\<sample>\res\...
-C:\work\DALi\dali-env\set-dali-runtime-env.ps1
+<workspace>\
+  .deps\vcpkg\       # vcpkg checkout과 패키지
+  tizenvg\            # 사내망에서만 생성
+  out\                # CMake/Meson build tree
+  dali-env\           # 최종 DLL, LIB, 헤더, 리소스, sample
 ```
-
-검증된 sample들에서 실제 `DaliWindow` 1456×939 창 생성, ANGLE EGL 초기화, OpenGL ES 3.0
-사용, UI 응답 및 정상 window close 후 crash event 없음까지 확인했다.
