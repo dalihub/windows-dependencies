@@ -126,7 +126,7 @@ run:
 
 ## 4. Building and running dali-ui samples
 
-The default is the `hello-world` sample.
+When `-Samples` is omitted, the script builds every sample directory under `dali-ui/samples`.
 
 ```powershell
 .\build_dali_samples.ps1
