@@ -1,4 +1,4 @@
-$DaliNetworkRetryCount = 5
+$DaliNetworkRetryCount = 10
 $DaliNetworkTimeoutSeconds = 10
 $DaliNetworkLowSpeedBytesPerSecond = 1024
 
