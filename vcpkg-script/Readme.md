@@ -36,6 +36,25 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup-dali-dependencie
   -Proxy proxy.company.example:8080
 ```
 
+If `-Proxy` is omitted, the script also recognizes the existing `HTTPS_PROXY`
+or `HTTP_PROXY` environment variable and forwards it to the pinned vcpkg
+downloader. Git HTTP transfers below 1 KiB/s for 10 seconds retry up
+to five times. A failed partial clone is removed before retrying. vcpkg package
+installation also retries up to five times and reuses its download/package
+cache. On Windows, source archives use the system curl with normal certificate
+and hostname validation but without the CRL check that fails behind the company
+TLS proxy; stalled transfers use a 10-second threshold and five retries. The
+native WinHTTP downloader has the same timeout. The threshold is based on low
+of transfer progress, not total download time, so a healthy large download is
+not cancelled after ten seconds.
+
+When TizenVG needs Meson and Ninja, the script reuses vcpkg's x64 Python or a
+portable local copy and installs the pinned tools with pip retry/timeout
+settings. It exports the Windows trusted root stores to a local PEM bundle so
+pip can validate a company TLS-inspection certificate without disabling TLS
+verification. Once the pinned TizenVG revision exists locally, later runs skip
+the network fetch.
+
 Use `-SkipVcpkg` or `-SkipTizenVg` to reuse a dependency that has already been
 installed. Repository mirror and revision parameters are available for both
 vcpkg and TizenVG.

@@ -14,13 +14,8 @@ $ErrorActionPreference = "Stop"
 $ScriptRoot = $PSScriptRoot
 $InstallPrefix = Join-Path $DaliRoot "dali-env"
 
-if($Proxy)
-{
-  $ProxyAddress = $Proxy -replace '^https?://', ''
-  $env:VCPKG_PROXY = $ProxyAddress
-  $env:HTTP_PROXY = "http://$ProxyAddress"
-  $env:HTTPS_PROXY = "http://$ProxyAddress"
-}
+. (Join-Path $ScriptRoot "dependency-network.ps1")
+Set-DaliProxyEnvironment -Proxy $Proxy
 
 if(-not $SkipVcpkg)
 {
@@ -38,12 +33,20 @@ if(-not $SkipVcpkg)
 
 if(-not $SkipTizenVg)
 {
-  & (Join-Path $ScriptRoot "setup-tizenvg.ps1") `
-    -InstallPrefix $InstallPrefix `
-    -SourceRoot (Join-Path $DaliRoot "tizenvg") `
-    -BuildRoot (Join-Path $DaliRoot "out\tizenvg") `
-    -Repository $TizenVgRepository `
-    -Revision $TizenVgRevision
+  $TizenVgArguments = @{
+    InstallPrefix = $InstallPrefix
+    SourceRoot = (Join-Path $DaliRoot "tizenvg")
+    BuildRoot = (Join-Path $DaliRoot "out\tizenvg")
+    Repository = $TizenVgRepository
+    Revision = $TizenVgRevision
+  }
+  $VcpkgPython = Join-Path $VcpkgRoot "downloads\tools\python\python-3.7.3-amd64\python.exe"
+  if(Test-Path -LiteralPath $VcpkgPython)
+  {
+    $TizenVgArguments.PythonCommand = $VcpkgPython
+  }
+
+  & (Join-Path $ScriptRoot "setup-tizenvg.ps1") @TizenVgArguments
 }
 
 Write-Host "DALi third-party dependency setup completed."

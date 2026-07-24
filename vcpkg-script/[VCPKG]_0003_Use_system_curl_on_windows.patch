@@ -1,0 +1,42 @@
+diff --git a/scripts/cmake/vcpkg_download_distfile.cmake b/scripts/cmake/vcpkg_download_distfile.cmake
+index 8a8efd205..0303e74ba 100644
+--- a/scripts/cmake/vcpkg_download_distfile.cmake
++++ b/scripts/cmake/vcpkg_download_distfile.cmake
+@@ -159,6 +159,37 @@ function(vcpkg_download_distfile VAR)
+                         list(APPEND request_headers HTTPHEADER ${header})
+                     endforeach()
+                 endif()
++                if(WIN32)
++                    find_program(DALI_SYSTEM_CURL NAMES curl.exe curl)
++                    if(DALI_SYSTEM_CURL)
++                        set(curl_header_arguments)
++                        if(vcpkg_download_distfile_HEADERS)
++                            foreach(header ${vcpkg_download_distfile_HEADERS})
++                                list(APPEND curl_header_arguments --header "${header}")
++                            endforeach()
++                        endif()
++                        file(MAKE_DIRECTORY "${DOWNLOADS}/temp")
++                        execute_process(
++                            COMMAND ${DALI_SYSTEM_CURL}
++                                --fail
++                                --location
++                                --ssl-no-revoke
++                                --connect-timeout 10
++                                --speed-limit 1024
++                                --speed-time 10
++                                --retry 5
++                                --retry-delay 1
++                                --output "${download_file_path_part}"
++                                ${curl_header_arguments}
++                                "${url}"
++                            RESULT_VARIABLE dali_curl_status
++                        )
++                        if("${dali_curl_status}" STREQUAL "0")
++                            set(download_success 1)
++                            break()
++                        endif()
++                    endif()
++                endif()
+                 file(DOWNLOAD ${url} "${download_file_path_part}" STATUS download_status ${request_headers})
+                 list(GET download_status 0 status_code)
+                 if (NOT "${status_code}" STREQUAL "0")

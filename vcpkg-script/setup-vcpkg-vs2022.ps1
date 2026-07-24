@@ -11,54 +11,8 @@ $ErrorActionPreference = "Stop"
 $VcpkgCommit = "a58936506"
 $ScriptRoot = $PSScriptRoot
 
-function ConvertTo-CommandLineArgument
-{
-  param([string]$Argument)
+. (Join-Path $ScriptRoot "dependency-network.ps1")
 
-  if($Argument -notmatch '[\s"]')
-  {
-    return $Argument
-  }
-
-  return '"' + ($Argument -replace '\\', '\\' -replace '"', '\"') + '"'
-}
-
-function Invoke-GitTimed
-{
-  param(
-    [string[]]$Arguments,
-    [switch]$AllowFailure,
-    [int]$TimeoutSeconds = 10
-  )
-
-  $StartInfo = [Diagnostics.ProcessStartInfo]::new()
-  $StartInfo.FileName = "git"
-  $StartInfo.Arguments = (($Arguments | ForEach-Object { ConvertTo-CommandLineArgument $_ }) -join " ")
-  $StartInfo.UseShellExecute = $false
-  $StartInfo.RedirectStandardOutput = $true
-  $StartInfo.RedirectStandardError = $true
-  $Process = [Diagnostics.Process]::Start($StartInfo)
-
-  if(-not $Process.WaitForExit($TimeoutSeconds * 1000))
-  {
-    try { $Process.Kill() } catch { }
-    throw "git $($StartInfo.Arguments) timed out after $TimeoutSeconds seconds"
-  }
-
-  $StdOut = $Process.StandardOutput.ReadToEnd()
-  $StdErr = $Process.StandardError.ReadToEnd()
-  if($Process.ExitCode -ne 0 -and -not $AllowFailure)
-  {
-    if($StdErr) { Write-Error $StdErr }
-    throw "git $($StartInfo.Arguments) failed with exit code $($Process.ExitCode)"
-  }
-
-  return [pscustomobject]@{
-    ExitCode = $Process.ExitCode
-    StdOut = $StdOut
-    StdErr = $StdErr
-  }
-}
 function Invoke-Native
 {
   param(
@@ -90,7 +44,7 @@ function Test-PatchApplied
   $ErrorActionPreference = "Continue"
   try
   {
-    $Result = Invoke-GitTimed @("-C", $VcpkgRoot, "apply", "--reverse", "--check", "--ignore-whitespace", $PatchPath) -AllowFailure
+    $Result = Invoke-DaliGit -Arguments @("-C", $VcpkgRoot, "apply", "--reverse", "--check", "--ignore-whitespace", $PatchPath) -AllowFailure
     return ($Result.ExitCode -eq 0)
   }
   finally
@@ -144,11 +98,23 @@ function Test-PatchMarkerApplied
     "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch" {
       return (Test-VcpkgFileContains "ports\gettext\portfile.cmake" "MSGFMT_ARCHIVE")
     }
+    "[VCPKG]_0003_Use_system_curl_on_windows.patch" {
+      return (Test-VcpkgFileContains "scripts\cmake\vcpkg_download_distfile.cmake" "--ssl-no-revoke")
+    }
     "[VCPKG]_0002_VS2022_and_modern_downloads.patch" {
       return ((Test-VcpkgFileContains "scripts\bootstrap.ps1" "v143") -and
-              (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "vcpkg-x64-native.ini") -and
+              (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" 'VCPKG_TARGET_ARCHITECTURE STREQUAL "x64"') -and
               (Test-VcpkgFileContains "toolsrc\src\vcpkg\visualstudio.cpp" "V_143") -and
               (Test-VcpkgFileContains "ports\giflib\portfile.cmake" 'giflib-${GIFLIB_VERSION}.tar.gz'))
+    }
+    "[VCPKG]_0004_Fix_x64_meson_cross_file.patch" {
+      return (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "vcpkg-x64-cross.ini")
+    }
+    "[VCPKG]_0005_Use_x64_python_tool.patch" {
+      return (Test-VcpkgFileContains "scripts\cmake\vcpkg_find_acquire_program.cmake" "python-3.7.3-embed-amd64.zip")
+    }
+    "[VCPKG]_0006_Use_x64_meson_native_build.patch" {
+      return ((Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "--native-file `${_VCPKG_MESON_CROSS_FILE}") -and (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "/MACHINE:X64"))
     }
   }
 
@@ -157,6 +123,38 @@ function Test-PatchMarkerApplied
 function Apply-MissingPatch
 {
   param([string]$PatchName)
+
+  if($PatchName -eq "[VCPKG]_0006_Use_x64_meson_native_build.patch")
+  {
+    $MesonHelperPath = Join-Path $VcpkgRoot "scripts\cmake\vcpkg_configure_meson.cmake"
+    $MesonContent = [IO.File]::ReadAllText($MesonHelperPath, [Text.UTF8Encoding]::new($false))
+    $CrossLine = '        list(APPEND _vcm_OPTIONS --cross-file ${_VCPKG_MESON_CROSS_FILE})'
+    $NativeLine = '        list(APPEND _vcm_OPTIONS --native-file ${_VCPKG_MESON_CROSS_FILE})'
+    $MachineLine = '        set(MESON_COMMON_LDFLAGS "${MESON_COMMON_LDFLAGS} /MACHINE:X64")'
+
+    if($MesonContent.Contains($NativeLine) -and $MesonContent.Contains($MachineLine))
+    {
+      Write-Host "Patch markers already present: $PatchName"
+      return
+    }
+    if($MesonContent.Contains($CrossLine))
+    {
+      $MesonContent = $MesonContent.Replace($CrossLine, $NativeLine)
+    }
+    if(-not $MesonContent.Contains($NativeLine))
+    {
+      throw "Unable to find the patched Meson machine-file option in $MesonHelperPath"
+    }
+    if(-not $MesonContent.Contains($MachineLine))
+    {
+      $NewLine = if($MesonContent.Contains("`r`n")) { "`r`n" } else { "`n" }
+      $MesonContent = $MesonContent.Replace($NativeLine, "$NativeLine$NewLine$MachineLine")
+    }
+
+    [IO.File]::WriteAllText($MesonHelperPath, $MesonContent, [Text.UTF8Encoding]::new($false))
+    Write-Host "Patch applied: $PatchName"
+    return
+  }
 
   $PatchPath = Join-Path $ScriptRoot $PatchName
   if(Test-PatchApplied $PatchPath)
@@ -170,9 +168,10 @@ function Apply-MissingPatch
     return
   }
 
-  Invoke-GitTimed @("-C", $VcpkgRoot, "apply", "--check", "--ignore-whitespace", $PatchPath) | Out-Null
-  Invoke-GitTimed @("-C", $VcpkgRoot, "apply", "--ignore-whitespace", "--whitespace=nowarn", $PatchPath) | Out-Null
+  Invoke-DaliGit -Arguments @("-C", $VcpkgRoot, "apply", "--check", "--ignore-whitespace", $PatchPath) | Out-Null
+  Invoke-DaliGit -Arguments @("-C", $VcpkgRoot, "apply", "--ignore-whitespace", "--whitespace=nowarn", $PatchPath) | Out-Null
   Write-Host "Patch applied: $PatchName"
+  $script:VcpkgNeedsBootstrap = $true
 }
 
 function Get-RequiredVcpkgFiles
@@ -207,11 +206,20 @@ function Invoke-VcpkgInstall
 {
   param([string[]]$PackageList)
 
-  & "$VcpkgRoot\vcpkg.exe" install @PackageList
-  if($LASTEXITCODE -ne 0)
+  for($Attempt = 1; $Attempt -le $DaliNetworkRetryCount; ++$Attempt)
   {
-    throw "vcpkg package installation failed. If this happened on the corporate network with an SSL connect error, rerun with -Proxy host:port or use a corporate mirror."
+    & "$VcpkgRoot\vcpkg.exe" install @PackageList
+    if($LASTEXITCODE -eq 0)
+    {
+      return
+    }
+    if($Attempt -lt $DaliNetworkRetryCount)
+    {
+      Write-Warning "vcpkg install failed (attempt $Attempt/$DaliNetworkRetryCount); retrying so cached downloads and completed packages are reused."
+      Start-Sleep -Seconds 1
+    }
   }
+  throw "vcpkg package installation failed after $DaliNetworkRetryCount attempts. If this happened on the corporate network with an SSL connect error, rerun with -Proxy host:port or use a corporate mirror."
 }
 
 function Repair-GettextToolsIfNeeded
@@ -305,16 +313,14 @@ $Patches = @(
   "[VCPKG-libjpeg-turbo]_0001_Apply_Fix_fill_jpeg_buffer_cb.patch",
   "[VCPKG-pthreads]_0001_Apply_Fix_define_timespec.patch",
   "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch",
-  "[VCPKG]_0002_VS2022_and_modern_downloads.patch"
+  "[VCPKG]_0002_VS2022_and_modern_downloads.patch",
+  "[VCPKG]_0003_Use_system_curl_on_windows.patch",
+  "[VCPKG]_0004_Fix_x64_meson_cross_file.patch",
+  "[VCPKG]_0005_Use_x64_python_tool.patch",
+  "[VCPKG]_0006_Use_x64_meson_native_build.patch"
 )
 
-if($Proxy)
-{
-  $ProxyAddress = $Proxy -replace '^https?://', ''
-  $env:VCPKG_PROXY = $ProxyAddress
-  $env:HTTP_PROXY = "http://$ProxyAddress"
-  $env:HTTPS_PROXY = "http://$ProxyAddress"
-}
+Set-DaliProxyEnvironment -Proxy $Proxy
 
 if(Test-Path -LiteralPath $VcpkgRoot)
 {
@@ -325,7 +331,8 @@ if(Test-Path -LiteralPath $VcpkgRoot)
   if(-not (Test-Path -LiteralPath (Join-Path $VcpkgRoot ".git")))
   {
     throw "VcpkgRoot exists but is not a Git checkout: $VcpkgRoot"
-  }  $CurrentCommit = (Invoke-GitTimed @("-C", $VcpkgRoot, "rev-parse", "--short", "HEAD")).StdOut.Trim()
+  }
+  $CurrentCommit = (Invoke-DaliGit -Arguments @("-C", $VcpkgRoot, "rev-parse", "--short", "HEAD")).StdOut.Trim()
   if($CurrentCommit -ne $VcpkgCommit)
   {
     throw "Unexpected vcpkg revision $CurrentCommit. Expected $VcpkgCommit. Use a fresh VcpkgRoot."
@@ -337,17 +344,26 @@ else
 {
   $VcpkgParent = Split-Path -Parent $VcpkgRoot
   New-Item -ItemType Directory -Force -Path $VcpkgParent | Out-Null
-  Invoke-GitTimed @("clone", $VcpkgRepository, $VcpkgRoot) | Out-Null
-  Invoke-GitTimed @("-C", $VcpkgRoot, "checkout", $VcpkgCommit) | Out-Null
+  Invoke-DaliGitNetwork -Arguments @("clone", "--progress", $VcpkgRepository, $VcpkgRoot) -CleanupPathOnRetry $VcpkgRoot | Out-Null
+  Invoke-DaliGit -Arguments @("-C", $VcpkgRoot, "checkout", $VcpkgCommit) | Out-Null
 }
+
+$script:VcpkgNeedsBootstrap = -not (Test-Path -LiteralPath (Join-Path $VcpkgRoot "vcpkg.exe"))
 
 foreach($PatchName in $Patches)
 {
   Apply-MissingPatch $PatchName
 }
 
-cmd.exe /d /c "`"$VcpkgRoot\bootstrap-vcpkg.bat`" -disableMetrics"
-if($LASTEXITCODE -ne 0) { throw "vcpkg bootstrap failed" }
+if($script:VcpkgNeedsBootstrap)
+{
+  cmd.exe /d /c "`"$VcpkgRoot\bootstrap-vcpkg.bat`" -disableMetrics"
+  if($LASTEXITCODE -ne 0) { throw "vcpkg bootstrap failed" }
+}
+else
+{
+  Write-Host "Reusing existing vcpkg executable: $VcpkgRoot\vcpkg.exe"
+}
 
 if(-not $SkipInstall)
 {

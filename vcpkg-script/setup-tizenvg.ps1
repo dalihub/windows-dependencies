@@ -8,58 +8,16 @@ param(
   [string]$BuildRoot,
   [string]$Repository = "git://git.tizen.org/platform/core/graphics/tizenvg.git",
   [string]$Revision = "ae039a6154a258a8fa19f23b25285acd73d2f6c1",
+  [string]$PythonCommand = "",
   [string]$VsDevCmd = ""
 )
 
 $ErrorActionPreference = "Stop"
 
-function ConvertTo-CommandLineArgument
-{
-  param([string]$Argument)
+$ScriptRoot = $PSScriptRoot
 
-  if($Argument -notmatch '[\s"]')
-  {
-    return $Argument
-  }
+. (Join-Path $ScriptRoot "dependency-network.ps1")
 
-  return '"' + ($Argument -replace '\\', '\\' -replace '"', '\"') + '"'
-}
-
-function Invoke-GitTimed
-{
-  param(
-    [string[]]$Arguments,
-    [int]$TimeoutSeconds = 10
-  )
-
-  $StartInfo = [Diagnostics.ProcessStartInfo]::new()
-  $StartInfo.FileName = "git"
-  $StartInfo.Arguments = (($Arguments | ForEach-Object { ConvertTo-CommandLineArgument $_ }) -join " ")
-  $StartInfo.UseShellExecute = $false
-  $StartInfo.RedirectStandardOutput = $true
-  $StartInfo.RedirectStandardError = $true
-  $Process = [Diagnostics.Process]::Start($StartInfo)
-
-  if(-not $Process.WaitForExit($TimeoutSeconds * 1000))
-  {
-    try { $Process.Kill() } catch { }
-    throw "git $($StartInfo.Arguments) timed out after $TimeoutSeconds seconds"
-  }
-
-  $StdOut = $Process.StandardOutput.ReadToEnd()
-  $StdErr = $Process.StandardError.ReadToEnd()
-  if($Process.ExitCode -ne 0)
-  {
-    if($StdErr) { Write-Error $StdErr }
-    throw "git $($StartInfo.Arguments) failed with exit code $($Process.ExitCode)"
-  }
-
-  return [pscustomobject]@{
-    ExitCode = $Process.ExitCode
-    StdOut = $StdOut
-    StdErr = $StdErr
-  }
-}
 function Invoke-Native
 {
   param(
@@ -67,7 +25,7 @@ function Invoke-Native
     [string[]]$Arguments
   )
 
-  & $Command @Arguments
+  & $Command @Arguments | Out-Host
   if($LASTEXITCODE -ne 0)
   {
     throw "$Command failed with exit code $LASTEXITCODE"
@@ -106,41 +64,155 @@ function Test-MesonVersionSupported
   return ([version]$Matches[1] -ge [version]"0.63.0")
 }
 
-function Resolve-PythonCommand
+function Test-Python3Command
 {
-  $PythonCommand = Get-Command python.exe -ErrorAction SilentlyContinue
-  if($PythonCommand)
+  param([string]$Candidate)
+
+  if(-not $Candidate -or -not (Test-Path -LiteralPath $Candidate))
   {
-    return $PythonCommand.Source
+    return $false
   }
 
-  throw "Python was not found. Install Python 3, or put python.exe in PATH so the script can install local Meson tools."
+  $PreviousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  try
+  {
+    $VersionText = (& $Candidate --version 2>&1 | Select-Object -First 1)
+    return ($LASTEXITCODE -eq 0 -and $VersionText -match '^Python 3\.')
+  }
+  finally
+  {
+    $ErrorActionPreference = $PreviousErrorActionPreference
+  }
+}
+
+function Resolve-PythonCommand
+{
+  if($script:PythonCommand)
+  {
+    if(Test-Python3Command $script:PythonCommand)
+    {
+      return $script:PythonCommand
+    }
+    throw "The requested Python command is not a working Python 3 executable: $script:PythonCommand"
+  }
+
+  $Python = Get-Command python.exe -ErrorAction SilentlyContinue
+  if($Python -and (Test-Python3Command $Python.Source))
+  {
+    return $Python.Source
+  }
+
+  throw "Python 3 was not found. Install Python 3 or run the combined setup so it can reuse vcpkg's Python tool."
 }
 
 function Install-LocalMesonTools
 {
   $ToolRoot = Join-Path $BuildRoot "meson-tools"
   $VenvPython = Join-Path $ToolRoot "Scripts\python.exe"
-  $MesonPath = Join-Path $ToolRoot "Scripts\meson.exe"
+  $PortablePython = Join-Path $ToolRoot "python.exe"
+  $ScriptsDirectory = Join-Path $ToolRoot "Scripts"
+  $MesonPath = Join-Path $ScriptsDirectory "meson.exe"
 
-  if(-not (Test-Path -LiteralPath $VenvPython))
+  if(-not (Test-Path -LiteralPath $VenvPython) -and -not (Test-Path -LiteralPath $PortablePython))
   {
     New-Item -ItemType Directory -Force -Path $ToolRoot | Out-Null
     $Python = Resolve-PythonCommand
     Write-Host "Creating local Meson tool environment: $ToolRoot"
-    Invoke-Native $Python @("-m", "venv", $ToolRoot)
+
+    $PreviousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try
+    {
+      & $Python -c "import venv" 2>$null
+      $HasVenv = ($LASTEXITCODE -eq 0)
+    }
+    finally
+    {
+      $ErrorActionPreference = $PreviousErrorActionPreference
+    }
+
+    if($HasVenv)
+    {
+      Invoke-Native $Python @("-m", "venv", $ToolRoot)
+    }
+    else
+    {
+      Write-Host "Python has no venv module; creating an isolated portable tool copy"
+      $PythonHome = Split-Path -Parent $Python
+      Copy-Item -Path (Join-Path $PythonHome "*") -Destination $ToolRoot -Recurse -Force
+    }
+  }
+
+  $LocalPython = if(Test-Path -LiteralPath $VenvPython) { $VenvPython } else { $PortablePython }
+  if(-not (Test-Python3Command $LocalPython))
+  {
+    throw "Local Python tool environment is invalid: $LocalPython"
+  }
+
+  $CertificateBundle = Join-Path $ToolRoot "windows-root-certificates.pem"
+  $PemBuilder = [Text.StringBuilder]::new()
+  $SeenCertificates = @{}
+  foreach($StoreLocation in @(
+    [Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser,
+    [Security.Cryptography.X509Certificates.StoreLocation]::LocalMachine
+  ))
+  {
+    $Store = [Security.Cryptography.X509Certificates.X509Store]::new(
+      [Security.Cryptography.X509Certificates.StoreName]::Root,
+      $StoreLocation)
+    try
+    {
+      $Store.Open([Security.Cryptography.X509Certificates.OpenFlags]::ReadOnly)
+      foreach($Certificate in $Store.Certificates)
+      {
+        if(-not $SeenCertificates.ContainsKey($Certificate.Thumbprint))
+        {
+          $SeenCertificates[$Certificate.Thumbprint] = $true
+          $null = $PemBuilder.AppendLine("-----BEGIN CERTIFICATE-----")
+          $null = $PemBuilder.AppendLine([Convert]::ToBase64String($Certificate.RawData, [Base64FormattingOptions]::InsertLineBreaks))
+          $null = $PemBuilder.AppendLine("-----END CERTIFICATE-----")
+        }
+      }
+    }
+    finally
+    {
+      $Store.Close()
+    }
+  }
+  [IO.File]::WriteAllText($CertificateBundle, $PemBuilder.ToString(), [Text.Encoding]::ASCII)
+  $env:PIP_CERT = $CertificateBundle
+  $env:SSL_CERT_FILE = $CertificateBundle
+  $PreviousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  try
+  {
+    & $LocalPython -m pip --version 2>$null | Out-Null
+    $HasPip = ($LASTEXITCODE -eq 0)
+  }
+  finally
+  {
+    $ErrorActionPreference = $PreviousErrorActionPreference
+  }
+
+  if(-not $HasPip)
+  {
+    $GetPip = Join-Path $ToolRoot "get-pip.py"
+    Write-Host "Bootstrapping pip for the portable Python tool environment"
+    Invoke-Native "curl.exe" @("--fail", "--location", "--ssl-no-revoke", "--connect-timeout", "$DaliNetworkTimeoutSeconds", "--speed-limit", "$DaliNetworkLowSpeedBytesPerSecond", "--speed-time", "$DaliNetworkTimeoutSeconds", "--retry", "$DaliNetworkRetryCount", "--retry-delay", "1", "--output", $GetPip, "https://bootstrap.pypa.io/pip/3.7/get-pip.py")
+    Invoke-Native $LocalPython @($GetPip)
   }
 
   Write-Host "Installing Meson/Ninja into local tool environment"
-  Invoke-Native $VenvPython @("-m", "pip", "install", "--upgrade", "pip")
-  Invoke-Native $VenvPython @("-m", "pip", "install", "meson==0.63.3", "ninja==1.11.1.1")
+  Invoke-Native $LocalPython @("-m", "pip", "install", "--retries", "$DaliNetworkRetryCount", "--timeout", "$DaliNetworkTimeoutSeconds", "--upgrade", "pip")
+  Invoke-Native $LocalPython @("-m", "pip", "install", "--retries", "$DaliNetworkRetryCount", "--timeout", "$DaliNetworkTimeoutSeconds", "meson==0.63.3", "ninja==1.11.1.1")
 
   if(-not (Test-Path -LiteralPath $MesonPath))
   {
     throw "Local Meson was not installed: $MesonPath"
   }
 
-  $env:PATH = "$(Join-Path $ToolRoot "Scripts");$env:PATH"
+  $env:PATH = "$ScriptsDirectory;$env:PATH"
   return $MesonPath
 }
 
@@ -217,22 +289,30 @@ if(Test-Path -LiteralPath $SourceRoot)
     throw "SourceRoot exists but is not a Git checkout: $SourceRoot"
   }
 
-  $SourceStatus = (Invoke-GitTimed @("-C", $SourceRoot, "status", "--porcelain")).StdOut
+  $SourceStatus = (Invoke-DaliGit -Arguments @("-C", $SourceRoot, "status", "--porcelain")).StdOut
   if($SourceStatus)
   {
     throw "TizenVG checkout has local changes: $SourceRoot"
   }
 
-  Invoke-GitTimed @("-C", $SourceRoot, "fetch", "origin", "tizen") | Out-Null
+  $RevisionCheck = Invoke-DaliGit -Arguments @("-C", $SourceRoot, "cat-file", "-e", "${Revision}^{commit}") -AllowFailure
+  if($RevisionCheck.ExitCode -ne 0)
+  {
+    Invoke-DaliGitNetwork -Arguments @("-C", $SourceRoot, "fetch", "--progress", "origin", "tizen") | Out-Null
+  }
+  else
+  {
+    Write-Host "TizenVG revision $Revision is already available; skipping network fetch."
+  }
 }
 else
 {
   $SourceParent = Split-Path -Parent $SourceRoot
   New-Item -ItemType Directory -Force -Path $SourceParent | Out-Null
-  Invoke-GitTimed @("clone", "--branch", "tizen", $Repository, $SourceRoot) | Out-Null
+  Invoke-DaliGitNetwork -Arguments @("clone", "--progress", "--branch", "tizen", $Repository, $SourceRoot) -CleanupPathOnRetry $SourceRoot | Out-Null
 }
 
-Invoke-GitTimed @("-C", $SourceRoot, "checkout", "--detach", $Revision) | Out-Null
+Invoke-DaliGit -Arguments @("-C", $SourceRoot, "checkout", "--detach", $Revision) | Out-Null
 
 New-Item -ItemType Directory -Force -Path $InstallPrefix | Out-Null
 
