@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [string[]]$Samples = @("hello-world"),
+  [string[]]$Samples = @(),
   [string[]]$ImageViewTargets = @(),
   [string]$VcpkgRoot = "",
   [int]$Jobs = 8
@@ -10,13 +10,26 @@ $ErrorActionPreference = "Stop"
 $ScriptRoot = $PSScriptRoot
 . (Join-Path $ScriptRoot "vcpkg-script\dali-build-common.ps1")
 
-if($Samples.Count -eq 0)
-{
-  throw "Specify at least one sample directory."
-}
-
 $Context = New-DaliBuildContext -WindowsDependenciesRoot $ScriptRoot -VcpkgRoot $VcpkgRoot
 Initialize-DaliBuildEnvironment -Context $Context
+
+$SampleSourceDirectory = Join-Path $Context.DaliRoot "dali-ui\samples"
+Assert-DaliPaths -Paths @($SampleSourceDirectory) -Description "dali-ui samples directory"
+
+if($Samples.Count -eq 0)
+{
+  $Samples = @(
+    Get-ChildItem -LiteralPath $SampleSourceDirectory -Directory |
+      Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "CMakeLists.txt") } |
+      Sort-Object Name |
+      Select-Object -ExpandProperty Name
+  )
+  if($Samples.Count -eq 0)
+  {
+    throw "No sample directories containing CMakeLists.txt were found in $SampleSourceDirectory."
+  }
+  Write-Host "No -Samples value specified. Building all $($Samples.Count) sample directories." -ForegroundColor Cyan
+}
 
 $CorePackage = Join-Path $Context.InstallPrefix "share\dali2-core"
 $AdaptorPackage = Join-Path $Context.InstallPrefix "share\dali2-adaptor"

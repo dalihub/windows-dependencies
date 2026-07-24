@@ -124,7 +124,7 @@ third-party 설치는 끝났고 `windows-dependencies`만 다시 빌드하려면
 
 ## 4. dali-ui sample 빌드 및 실행
 
-기본값은 `hello-world` sample이다.
+인자 없이 실행하면 `dali-ui/samples` 아래의 모든 sample을 빌드한다.
 
 ```powershell
 .\build_dali_samples.ps1
