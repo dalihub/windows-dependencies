@@ -1,0 +1,27 @@
+diff --git a/scripts/cmake/vcpkg_configure_meson.cmake b/scripts/cmake/vcpkg_configure_meson.cmake
+index 844bd1eb5..cb2b789ab 100644
+--- a/scripts/cmake/vcpkg_configure_meson.cmake
++++ b/scripts/cmake/vcpkg_configure_meson.cmake
+@@ -33,8 +33,14 @@ function(vcpkg_configure_meson)
+     if(CMAKE_HOST_WIN32 AND VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
+         set(ENV{PROCESSOR_ARCHITEW6432} "AMD64")
+         set(ENV{PROCESSOR_ARCHITECTURE} "AMD64")
+-        set(_VCPKG_MESON_NATIVE_FILE "${CURRENT_BUILDTREES_DIR}/vcpkg-x64-native.ini")
+-        file(WRITE "${_VCPKG_MESON_NATIVE_FILE}"
++        set(_VCPKG_MESON_CROSS_FILE "${CURRENT_BUILDTREES_DIR}/vcpkg-x64-cross.ini")
++        file(WRITE "${_VCPKG_MESON_CROSS_FILE}"
++            "[binaries]\n"
++            "c = 'cl'\n"
++            "cpp = 'cl'\n"
++            "ar = 'lib'\n"
++            "[properties]\n"
++            "needs_exe_wrapper = false\n"
+             "[host_machine]\n"
+             "system = 'windows'\n"
+             "cpu_family = 'x86_64'\n"
+@@ -43,4 +50,4 @@ function(vcpkg_configure_meson)
+             "cpu = 'x86_64'\n"
+             "endian = 'little'\n")
+-        list(APPEND _vcm_OPTIONS --native-file ${_VCPKG_MESON_NATIVE_FILE})
++        list(APPEND _vcm_OPTIONS --cross-file ${_VCPKG_MESON_CROSS_FILE})
+     endif()

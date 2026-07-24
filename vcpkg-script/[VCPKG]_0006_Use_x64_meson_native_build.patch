@@ -1,0 +1,8 @@
+diff --git a/scripts/cmake/vcpkg_configure_meson.cmake b/scripts/cmake/vcpkg_configure_meson.cmake
+index cb2b789ab..8318e8762 100644
+--- a/scripts/cmake/vcpkg_configure_meson.cmake
++++ b/scripts/cmake/vcpkg_configure_meson.cmake
+@@ -47,1 +47,2 @@ function(vcpkg_configure_meson)
+-        list(APPEND _vcm_OPTIONS --cross-file ${_VCPKG_MESON_CROSS_FILE})
++        list(APPEND _vcm_OPTIONS --native-file ${_VCPKG_MESON_CROSS_FILE})
++        set(MESON_COMMON_LDFLAGS "${MESON_COMMON_LDFLAGS} /MACHINE:X64")
