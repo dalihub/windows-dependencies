@@ -18,14 +18,14 @@ jobs:
 
     steps:
       - name: Check out windows-dependencies
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Compare SDK build inputs
         id: inputs
         shell: pwsh
         run: |
           . .\vcpkg-script\dependency-network.ps1
-          .\new-windows-sdk-manifest.ps1 -Mode Inputs -OutputPath .\build-inputs.json
+          .\windows-sdk-manifest.ps1 -Mode Inputs -OutputPath .\build-inputs.json
           New-Item -ItemType Directory -Force -Path .\previous | Out-Null
           $base = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$env:RELEASE_TAG"
           $downloaded = Invoke-DaliCurlNetwork `
@@ -47,7 +47,30 @@ jobs:
       - name: Build SDK without TizenVG
         if: steps.inputs.outputs.unchanged != 'true'
         shell: pwsh
-        run: .\build_windows_dependencies.ps1 -SkipTizenVg -Clean -Jobs 4
+        run: |
+          $buildScript = Join-Path $env:GITHUB_WORKSPACE "build_windows_dependencies.ps1"
+          $startedAt = Get-Date
+          $buildProcess = Start-Process `
+            -FilePath "pwsh.exe" `
+            -ArgumentList @(
+              "-NoLogo",
+              "-NoProfile",
+              "-File", $buildScript,
+              "-SkipTizenVg",
+              "-Clean",
+              "-Jobs", "4"
+            ) `
+            -NoNewWindow `
+            -PassThru
+
+          while(-not $buildProcess.WaitForExit(60000)) {
+            $elapsed = (Get-Date) - $startedAt
+            Write-Host ("[build-sdk] Still running; elapsed {0:hh\:mm\:ss}" -f $elapsed)
+          }
+
+          if($buildProcess.ExitCode -ne 0) {
+            throw "Windows dependencies SDK build failed with exit code $($buildProcess.ExitCode)"
+          }
 
       - name: Free source-build disk space
         if: steps.inputs.outputs.unchanged != 'true'

@@ -1,153 +1,207 @@
 <img src="https://dalihub.github.io/images/DaliLogo320x200.png">
 
-## Current Windows SDK workflow
+# DALi Windows dependencies
 
-The current source and binary SDK workflow is documented in
+This repository provides the third-party SDK, CMake integration, and runtime
+environment used by the DALi Windows backend. The current workflow targets
+Visual Studio 2022, MSVC v143, x64 Windows, CMake, and Ninja.
+
+The repositories may live below any common workspace directory. The drive and
+workspace directory name are not fixed.
+
+```text
+<workspace>\
+  dali-core\
+  dali-adaptor\
+  dali-ui\
+  windows-dependencies\
+  WindowsDependenciesSDK\  # installed third-party SDK
+  dali-env\                 # installed DALi libraries and samples
+```
+
+For a shorter Korean guide, see
 [WINDOWS-DEVELOPMENT-QUICKSTART-ko.md](WINDOWS-DEVELOPMENT-QUICKSTART-ko.md).
-Repositories may live below any common workspace directory; the directory name
-and drive are not fixed.
+
+## Prerequisites
+
+Install the following tools on Windows:
+
+- Visual Studio 2022 with **Desktop development with C++** and the MSVC v143
+  x64 toolset
+- A Windows SDK supplied by Visual Studio
+- CMake 3.15 or newer
+- Ninja
+- Git
+- PowerShell 7 or Windows PowerShell 5.1
+
+The build scripts locate the Visual Studio environment automatically. They do
+not require a Visual Studio solution or a Developer Command Prompt.
+
+## Install WindowsDependenciesSDK
+
+From the `windows-dependencies` repository, run:
 
 ```powershell
 cd <workspace>\windows-dependencies
 .\install.ps1
+```
 
-cd ..\dali-core
+`install.ps1` first downloads the `windows-sdk-latest` prerelease, verifies its
+SHA-256 file, and installs it as `<workspace>\WindowsDependenciesSDK`. A partial
+archive is kept below `<workspace>\.deps\windows-sdk-download` and is reused
+when a download resumes.
+
+If the release is missing, cannot be downloaded, or fails validation, the same
+SDK layout is built from source. Downloads and completed vcpkg packages are
+reused across retries and later runs.
+
+To test another release repository or force a source build:
+
+```powershell
+.\install.ps1 -ReleaseRepository "owner/windows-dependencies"
+.\install.ps1 -BuildFromSource -Jobs 4
+```
+
+Pass `-Proxy host:port` only when the proxy is not already provided through
+`HTTPS_PROXY` or `HTTP_PROXY`.
+
+### Optional TizenVG support
+
+The published SDK intentionally excludes TizenVG because its repository is
+available only on the Samsung network. After installing the public SDK,
+`install.ps1` probes the TizenVG repository automatically:
+
+- when the repository is reachable, the pinned TizenVG revision is added to
+  `WindowsDependenciesSDK`;
+- when the repository is unavailable, installation continues without it;
+- after the repository is reached, a TizenVG configure, build, or installation
+  failure is treated as an error.
+
+Without TizenVG, dali-adaptor builds without CanvasRenderer and Lottie support.
+No separate internal/external option is required.
+
+## Build DALi repositories
+
+Build each repository from its own directory. Every command configures, builds,
+and installs its project; the build tree remains in `_build\windows` and the
+installed files are collected in `<workspace>\dali-env`.
+
+```powershell
+cd <workspace>\dali-core
 .\build\windows\build.ps1
-cd ..\dali-adaptor
+
+cd <workspace>\dali-adaptor
 .\build\windows\build.ps1
-cd ..\dali-ui
+
+cd <workspace>\dali-ui
 .\build\windows\build.ps1
-cd .\samples
+```
+
+Build in dependency order: core, adaptor, then UI. Common options are:
+
+```powershell
+.\build\windows\build.ps1 -Clean
+.\build\windows\build.ps1 -Configuration Debug
+.\build\windows\build.ps1 -Jobs 4
+```
+
+`-Clean` removes only that repository's `_build\windows` directory before the
+new configure. It does not remove `WindowsDependenciesSDK` or `dali-env`.
+
+## Build and run dali-ui samples
+
+The sample script also configures, builds, and installs its targets into
+`dali-env\bin`.
+
+```powershell
+cd <workspace>\dali-ui\samples
 .\build.ps1
 ```
 
-`install.ps1` installs the published `windows-sdk-latest` prerelease when it is
-available and builds the identical `WindowsDependenciesSDK` layout from source
-otherwise. It automatically adds TizenVG when the internal repository can be
-reached. TizenVG repository unavailability is optional; a TizenVG build failure
-after successful repository access is an error.
+Build selected samples or start with a clean sample build tree:
 
-# Table of Contents
+```powershell
+.\build.ps1 -Samples hello-world,text
+.\build.ps1 -Clean -Samples hello-world
+```
 
-  * [Build Instructions for MS Windows](#build-instructions)
-      * [1. Build DALi and DALi Demo with Visual Studio](#1-build-with-visual-studio)
-      * [2. Build DALi Demo with Visual Studio using DALi VCPKG ports](#2-build-with-vcpkg)
-      * [3. Build DALi windows dependencies with CMake](#3-build-with-cmake)
+Use either of the following runtime environment methods.
 
-# Build Instructions for MS Windows
+Apply the environment to the current PowerShell:
 
-## 1. Build DALi and DALi Demo with Visual Studio
+```powershell
+cd <workspace>
+. .\dali-env\setenv.ps1
+& "$env:DALI_PREFIX\bin\hello-world.example.exe"
+```
 
-### Step 1:
-    Note the windows-dependencies repository has to be at the same level than DALi repositories in the filesystem hierarchy.
-    If a DALi folder has not been created create one and move or clone the windows-dependencies repository to that folder.
-    This repository contains the Visual Studio projects and solution.
+Or open a dedicated DALi development shell:
 
-    mkdir [YourDaliDir]
-    cd [YourDaliDir]
+```powershell
+cd <workspace>
+.\windows-dependencies\dali-shell.ps1
+```
 
-    git clone https://github.com/dalihub/windows-dependencies.git
-    
-### Step2:
-Clone all DALi repos and move to the correct branch:
+Inside that shell, installed applications can be launched by name:
 
-    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-core
-    cd dali-core
-    git checkout devel/master
-    git pull
-    cd ..
+```powershell
+hello-world.example.exe
+```
 
-    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
-    cd dali-adaptor
-    git checkout devel/master
-    git pull
-    cd ..
+Use `-Configuration Debug` with `setenv.ps1` or `dali-shell.ps1` when running a
+Debug build. Window dimensions can be overridden before launch:
 
-    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-toolkit
-    cd dali-toolkit
-    git checkout devel/master
-    git pull
-    cd ..
+```powershell
+$env:DALI_WINDOW_WIDTH = "1920"
+$env:DALI_WINDOW_HEIGHT = "1080"
+```
 
-    git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-demo
-    cd dali-demo
-    git checkout devel/master
-    git pull
-    cd ..
+## Clean builds
 
-### Step3:
-Run the .bat files to config the enviorment. Note the dali-env folder has to be at the same level than dali-core, dali-adaptor, dali-toolkit and dali-demo in the filesystem hierarchy.
+For a clean rebuild of one DALi repository, use its `-Clean` option. For a full
+workspace rebuild, remove the per-repository build trees, the shared `out`
+directory if it exists, `dali-env`, and `WindowsDependenciesSDK`, then run
+`install.ps1` again. The source-build cache below `<workspace>\.deps` is
+independent and may be retained to avoid downloading and rebuilding unchanged
+third-party inputs.
 
-    windows-dependencies\prebuild.bat
-    windows-dependencies\setenv.bat
+## Build the dependency SDK from source
 
-### Step4:
-Install vcpkg to build all the third-party dependecies: go to vcpkg-script, read the Readme.md file for more instructions,
-open a git bash shell for MS Windows (installed with git) and execute the script to install vcpkg.
+Normal users should use `install.ps1`. SDK maintainers can build the public SDK
+layout directly:
 
-    build-deps.sh
+```powershell
+cd <workspace>\windows-dependencies
+.\build_windows_dependencies.ps1 -SkipTizenVg -Clean -Jobs 4
+```
 
-More info on vcpkg can be found here https://github.com/microsoft/vcpkg and here https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
+The command installs the relocatable dependency SDK in
+`<workspace>\WindowsDependenciesSDK`. Low-level vcpkg and TizenVG details are in
+[vcpkg-script/Readme.md](vcpkg-script/Readme.md).
 
-### Step5:
-Open **windows-dependencies\Solution\vc2017\DALi.sln**, set dali-demo as start-up project, build and run.
+## Automated SDK publication
 
-## 2. Build DALi Demo with Visual Studio using DALi VCPKG ports
+`.github/workflows/windows-sdk-latest.yml` runs on a GitHub-hosted Windows 2022
+runner every Sunday at 23:00 Korea Standard Time and also supports manual runs.
+It builds the x64 Release SDK without TizenVG and maintains the
+`windows-sdk-latest` prerelease.
 
-### Step 1:
-    Note the windows-dependencies repository has to be at the same level than DALi repositories in the filesystem hierarchy.
-    If a DALi folder has not been created create one and move or clone the windows-dependencies repository to that folder.
-    This repository contains the Visual Studio projects and solution.
+The release contains:
 
-    mkdir [YourDaliDir]
-    cd [YourDaliDir]
+```text
+DALi-WindowsDependenciesSDK-x64.zip
+DALi-WindowsDependenciesSDK-x64.zip.sha256
+build-inputs.json
+sdk-contents.json
+```
 
-    git clone https://github.com/dalihub/windows-dependencies.git
+When the current build inputs match the published manifest, the scheduled build
+and upload are skipped. When inputs differ but the produced SDK contents remain
+the same, only the input manifest is refreshed. The workflow uses the
+repository-scoped `GITHUB_TOKEN` with `contents: write`; it does not require a
+personal access token or a custom secret.
 
-### Step2:
-Run the .bat files to config the enviorment. Note the dali-env folder has to be at the same level than dali-core, dali-adaptor, dali-toolkit and dali-demo in the filesystem hierarchy.
-
-    windows-dependencies\prebuild.bat
-    windows-dependencies\setenv.bat
-
-### Step3:
-Install vcpkg to build all the third-party dependecies: go to vcpkg-script, read the Readme.md file for more instructions,
-open a git bash shell for MS Windows (installed with git) and execute the script to install vcpkg.
-
-    build-deps.sh
-
-More info on vcpkg can be found here https://github.com/microsoft/vcpkg and here https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
-
-
-### Step4:
-Open **windows-dependencies\Solution\vc2017\DALi-VCPKG.sln**, set dali-demo as start-up project, build and run.
-
-## 3. Build DALi windows dependencies with CMake
-
-DALi can be built with CMake. In this section there are the instructions to build the windows dependencies. See dali-core, dali-adaptor, dali-toolkit and dali-demo README.md files for more instructions.
-
-  * Requirements
-    It's required the version 3.12.2 of CMake and a Git Bash Shell.
-
-  * Notes and troubleshoting:
-    It should be possible to use the MS Visual studio Developer Command Prompt (https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) to build DALi from the command line.
-    However, the CMake version installed with MS Visual Studio 2017 is a bit out of date and some VCPKG modules require a higher version.
-    This instructions have been tested with CMake 3.12.2 on a Git Bash shell.
-
-  * Define an environment variable to set the path to the VCPKG folder
-
-    $ export VCPKG_FOLDER=C:/Users/username/Workspace/VCPKG_TOOL
-
-  * Define an environment variable to set the path where DALi is going to be installed.
-
-    $ export DALI_ENV_FOLDER=C:/Users/username/Workspace/dali-env
-
-  * Execute the following commands to create the makefiles, build and install DALi.
-  
-    $ cmake -g Ninja . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_FOLDER/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=$DALI_ENV_FOLDER
-    $ cmake --build . --target install
-
-
-  * Options:
-    - CMAKE_TOOLCHAIN_FILE  ---> Needed to find packages installed by VCPKG.
-    - CMAKE_INSTALL_PREFIX  ---> Were DALi is installed.
+The workflow publishes only `WindowsDependenciesSDK`. DALi core, adaptor, UI,
+and sample binaries remain source builds performed in their own repositories.
+Future immutable SDK versioning is tracked in
+[WINDOWS-SDK-VERSIONING-TODO.md](WINDOWS-SDK-VERSIONING-TODO.md).

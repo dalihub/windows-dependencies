@@ -14,11 +14,14 @@ if($Mode -eq "Inputs")
 {
   $TrackedFiles = @(& git.exe -C $ScriptRoot ls-files -- `
     "build" "include" "resources" "src" "vcpkg-script" `
-    "build_windows_dependencies.ps1" "package_windows_sdk.ps1")
+    "build_windows_dependencies.ps1" "windows-sdk-manifest.ps1" `
+    "package_windows_sdk.ps1")
   if($LASTEXITCODE -ne 0)
   {
     throw "Unable to enumerate SDK build inputs."
   }
+  $TrackedFiles += "windows-sdk-manifest.ps1"
+  $TrackedFiles = @($TrackedFiles | Where-Object { $_ -notmatch '(?i)(^|/)readme\.md$' })
 
   $Files = foreach($RelativePath in ($TrackedFiles | Sort-Object -Unique))
   {

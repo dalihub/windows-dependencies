@@ -27,11 +27,11 @@ if($InputManifest)
 }
 else
 {
-  & (Join-Path $ScriptRoot "new-windows-sdk-manifest.ps1") -Mode Inputs -OutputPath $SdkInputManifest
+  & (Join-Path $ScriptRoot "windows-sdk-manifest.ps1") -Mode Inputs -OutputPath $SdkInputManifest
 }
 
 $ContentsManifest = Join-Path $OutputDirectory "sdk-contents.json"
-& (Join-Path $ScriptRoot "new-windows-sdk-manifest.ps1") `
+& (Join-Path $ScriptRoot "windows-sdk-manifest.ps1") `
   -Mode Contents -SdkRoot $SdkRoot -OutputPath $ContentsManifest
 Copy-Item -LiteralPath $ContentsManifest -Destination (Join-Path $SdkRoot "sdk-contents.json") -Force
 Copy-Item -LiteralPath $SdkInputManifest -Destination (Join-Path $OutputDirectory "build-inputs.json") -Force
