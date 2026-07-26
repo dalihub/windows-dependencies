@@ -3,8 +3,22 @@ param(
   [string[]]$Samples = @(),
   [string[]]$ImageViewTargets = @(),
   [string]$VcpkgRoot = "",
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Release",
+  [switch]$Clean,
   [int]$Jobs = 8
 )
+
+$ForwardArguments = @{
+  Samples = $Samples
+  ImageViewTargets = $ImageViewTargets
+  VcpkgRoot = $VcpkgRoot
+  Configuration = $Configuration
+  Clean = $Clean
+  Jobs = $Jobs
+}
+& (Join-Path (Split-Path -Parent $PSScriptRoot) "dali-ui\samples\build.ps1") @ForwardArguments
+return
 
 $ErrorActionPreference = "Stop"
 $ScriptRoot = $PSScriptRoot

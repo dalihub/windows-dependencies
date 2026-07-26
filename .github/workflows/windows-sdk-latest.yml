@@ -1,0 +1,131 @@
+name: Windows dependencies SDK
+
+on:
+  schedule:
+    # Sunday 23:00 Asia/Seoul (UTC+9)
+    - cron: "0 14 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-sdk:
+    runs-on: windows-2022
+    timeout-minutes: 360
+    env:
+      RELEASE_TAG: windows-sdk-latest
+
+    steps:
+      - name: Check out windows-dependencies
+        uses: actions/checkout@v4
+
+      - name: Compare SDK build inputs
+        id: inputs
+        shell: pwsh
+        run: |
+          . .\vcpkg-script\dependency-network.ps1
+          .\new-windows-sdk-manifest.ps1 -Mode Inputs -OutputPath .\build-inputs.json
+          New-Item -ItemType Directory -Force -Path .\previous | Out-Null
+          $base = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$env:RELEASE_TAG"
+          $downloaded = Invoke-DaliCurlNetwork `
+            -Uri "$base/build-inputs.json" `
+            -OutputPath .\previous\build-inputs.json `
+            -AllowFailure
+          $unchanged = $false
+          if($downloaded) {
+            $current = Get-Content -LiteralPath .\build-inputs.json -Raw
+            $previous = Get-Content -LiteralPath .\previous\build-inputs.json -Raw
+            $unchanged = ($current -eq $previous)
+            Invoke-DaliCurlNetwork `
+              -Uri "$base/sdk-contents.json" `
+              -OutputPath .\previous\sdk-contents.json `
+              -AllowFailure | Out-Null
+          }
+          "unchanged=$($unchanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
+      - name: Build SDK without TizenVG
+        if: steps.inputs.outputs.unchanged != 'true'
+        shell: pwsh
+        run: .\build_windows_dependencies.ps1 -SkipTizenVg -Clean -Jobs 4
+
+      - name: Free source-build disk space
+        if: steps.inputs.outputs.unchanged != 'true'
+        shell: pwsh
+        run: |
+          $sourceVcpkg = Join-Path (Split-Path -Parent $env:GITHUB_WORKSPACE) ".deps\vcpkg"
+          $sourceVcpkg = [IO.Path]::GetFullPath($sourceVcpkg)
+          $expectedParent = [IO.Path]::GetFullPath((Split-Path -Parent $env:GITHUB_WORKSPACE))
+          if((Split-Path -Leaf $sourceVcpkg) -ne "vcpkg" -or
+             (Split-Path -Parent (Split-Path -Parent $sourceVcpkg)) -ne $expectedParent) {
+            throw "Refusing to remove unexpected vcpkg path: $sourceVcpkg"
+          }
+          if(Test-Path -LiteralPath $sourceVcpkg) {
+            Remove-Item -LiteralPath $sourceVcpkg -Recurse -Force
+          }
+          Get-PSDrive C
+
+      - name: Package SDK
+        if: steps.inputs.outputs.unchanged != 'true'
+        id: package
+        shell: pwsh
+        run: |
+          .\package_windows_sdk.ps1 `
+            -OutputDirectory .\artifacts `
+            -InputManifest .\build-inputs.json
+          $sameContents = $false
+          if(Test-Path -LiteralPath .\previous\sdk-contents.json) {
+            $current = Get-Content -LiteralPath .\artifacts\sdk-contents.json -Raw
+            $previous = Get-Content -LiteralPath .\previous\sdk-contents.json -Raw
+            $sameContents = ($current -eq $previous)
+          }
+          "same_contents=$($sameContents.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
+      - name: Publish windows-sdk-latest prerelease
+        if: steps.inputs.outputs.unchanged != 'true'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          function Invoke-GhRetry([string[]]$Arguments) {
+            for($attempt = 1; $attempt -le 10; ++$attempt) {
+              & gh.exe @Arguments
+              if($LASTEXITCODE -eq 0) { return }
+              if($attempt -lt 10) {
+                Write-Warning "gh failed (attempt $attempt/10); retrying."
+                Start-Sleep -Seconds 1
+              }
+            }
+            throw "gh failed after 10 attempts: $($Arguments -join ' ')"
+          }
+
+          & gh.exe release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY 2>$null
+          if($LASTEXITCODE -ne 0) {
+            Invoke-GhRetry @(
+              "release", "create", $env:RELEASE_TAG,
+              "--repo", $env:GITHUB_REPOSITORY,
+              "--title", "Windows Dependencies SDK (latest)",
+              "--notes", "Automatically built Windows x64 dependencies SDK. TizenVG is added locally when the internal repository is reachable.",
+              "--prerelease"
+            )
+          }
+
+          if("${{ steps.package.outputs.same_contents }}" -eq "true") {
+            Invoke-GhRetry @(
+              "release", "upload", $env:RELEASE_TAG,
+              ".\artifacts\build-inputs.json",
+              "--repo", $env:GITHUB_REPOSITORY,
+              "--clobber"
+            )
+            Write-Host "SDK contents are unchanged; only the build-input manifest was refreshed."
+          } else {
+            Invoke-GhRetry @(
+              "release", "upload", $env:RELEASE_TAG,
+              ".\artifacts\DALi-WindowsDependenciesSDK-x64.zip",
+              ".\artifacts\DALi-WindowsDependenciesSDK-x64.zip.sha256",
+              ".\artifacts\build-inputs.json",
+              ".\artifacts\sdk-contents.json",
+              "--repo", $env:GITHUB_REPOSITORY,
+              "--clobber"
+            )
+          }

@@ -21,7 +21,8 @@ private runtime DLLs are installed below:
 CMake 3.15 or newer is required because the catalog compiler package uses
 Zstandard compression.
 
-Outside the Samsung network, skip TizenVG:
+`windows-dependencies\install.ps1` probes TizenVG automatically. Direct callers
+can still skip TizenVG explicitly when testing the public dependency build:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup-dali-dependencies.ps1 `
@@ -45,8 +46,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup-dali-dependencie
 
 If `-Proxy` is omitted, the script recognizes `HTTPS_PROXY` or `HTTP_PROXY` and
 forwards it to vcpkg. Git HTTP transfers below 1 KiB/s for 10 seconds retry up
-to five times. Failed partial clones are removed before retrying. vcpkg package
-installation also retries up to five times and reuses its download/package
+to ten attempts. Failed partial clones are removed before retrying. vcpkg package
+installation also retries up to ten attempts and reuses its download/package
 cache.
 
 On Windows, source archives use system curl with certificate and hostname
@@ -60,9 +61,9 @@ bundle so pip can validate a company TLS-inspection certificate without
 disabling TLS verification. Once the pinned TizenVG revision exists locally,
 later runs skip the network fetch.
 
-Use `-SkipVcpkg` to reuse an existing vcpkg installation. Use `-SkipTizenVg`
-outside the Samsung network or when an existing TizenVG installation should be
-reused.
+Use `-SkipVcpkg` to reuse an existing vcpkg installation. `-SkipTizenVg` is
+reserved for CI and explicit public-only dependency builds; normal installation
+automatically continues without TizenVG only when its repository is unavailable.
 
 Do not disable TLS verification. Install the company root certificate through
 the approved IT process if HTTPS inspection is used.

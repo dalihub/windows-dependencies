@@ -149,7 +149,8 @@ function Invoke-DaliGitNetwork
   param(
     [Parameter(Mandatory = $true)]
     [string[]]$Arguments,
-    [string]$CleanupPathOnRetry = ""
+    [string]$CleanupPathOnRetry = "",
+    [switch]$AllowFailure
   )
 
   $NetworkArguments = @(
@@ -159,5 +160,66 @@ function Invoke-DaliGitNetwork
 
   return Invoke-DaliGit -Arguments $NetworkArguments `
     -MaxAttempts $DaliNetworkRetryCount `
-    -CleanupPathOnRetry $CleanupPathOnRetry
+    -CleanupPathOnRetry $CleanupPathOnRetry `
+    -AllowFailure:$AllowFailure
+}
+
+function Invoke-DaliCurlNetwork
+{
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Uri,
+    [Parameter(Mandatory = $true)]
+    [string]$OutputPath,
+    [switch]$AllowFailure,
+    [switch]$Resume
+  )
+
+  $OutputParent = Split-Path -Parent $OutputPath
+  if($OutputParent)
+  {
+    New-Item -ItemType Directory -Force -Path $OutputParent | Out-Null
+  }
+
+  for($Attempt = 1; $Attempt -le $DaliNetworkRetryCount; ++$Attempt)
+  {
+    $Arguments = @(
+      "--fail",
+      "--location",
+      "--ssl-no-revoke",
+      "--connect-timeout", "$DaliNetworkTimeoutSeconds",
+      "--speed-limit", "$DaliNetworkLowSpeedBytesPerSecond",
+      "--speed-time", "$DaliNetworkTimeoutSeconds",
+      "--output", $OutputPath
+    )
+    if($Resume -and (Test-Path -LiteralPath $OutputPath))
+    {
+      $Arguments += @("--continue-at", "-")
+    }
+    $Arguments += $Uri
+
+    & curl.exe @Arguments
+    $ExitCode = $LASTEXITCODE
+    if($ExitCode -eq 0)
+    {
+      return $true
+    }
+
+    if($ExitCode -eq 33 -and (Test-Path -LiteralPath $OutputPath))
+    {
+      Remove-Item -LiteralPath $OutputPath -Force
+    }
+
+    if($Attempt -lt $DaliNetworkRetryCount)
+    {
+      Write-Warning "HTTP download failed with curl exit code $ExitCode (attempt $Attempt/$DaliNetworkRetryCount); retrying."
+      Start-Sleep -Seconds 1
+    }
+  }
+
+  if($AllowFailure)
+  {
+    return $false
+  }
+  throw "Download failed after $DaliNetworkRetryCount attempts: $Uri"
 }

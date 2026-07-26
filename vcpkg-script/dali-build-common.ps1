@@ -5,7 +5,8 @@ function New-DaliBuildContext
   param(
     [Parameter(Mandatory = $true)]
     [string]$WindowsDependenciesRoot,
-    [string]$VcpkgRoot = ""
+    [string]$VcpkgRoot = "",
+    [string]$InstallPrefix = ""
   )
 
   $WindowsDependenciesRoot = (Resolve-Path -LiteralPath $WindowsDependenciesRoot).Path
@@ -17,14 +18,27 @@ function New-DaliBuildContext
   }
   if(-not $VcpkgRoot)
   {
-    $VcpkgRoot = Join-Path $DaliRoot ".deps\vcpkg"
+    $InstalledSdkVcpkg = Join-Path $DaliRoot "WindowsDependenciesSDK\vcpkg"
+    if(Test-Path -LiteralPath (Join-Path $InstalledSdkVcpkg "scripts\buildsystems\vcpkg.cmake"))
+    {
+      $VcpkgRoot = $InstalledSdkVcpkg
+    }
+    else
+    {
+      $VcpkgRoot = Join-Path $DaliRoot ".deps\vcpkg"
+    }
+  }
+  if(-not $InstallPrefix)
+  {
+    $InstallPrefix = Join-Path $DaliRoot "dali-env"
   }
 
   return [pscustomobject]@{
     DaliRoot = $DaliRoot
     WindowsDependenciesRoot = $WindowsDependenciesRoot
     VcpkgRoot = [IO.Path]::GetFullPath($VcpkgRoot)
-    InstallPrefix = Join-Path $DaliRoot "dali-env"
+    SdkRoot = Join-Path $DaliRoot "WindowsDependenciesSDK"
+    InstallPrefix = [IO.Path]::GetFullPath($InstallPrefix)
     BuildRoot = Join-Path $DaliRoot "out"
   }
 }
@@ -104,21 +118,25 @@ function Initialize-DaliBuildEnvironment
   Import-DaliMsvcEnvironment
   $env:VSLANG = "1033"
 
-  New-Item -ItemType Directory -Force $Context.InstallPrefix, $Context.BuildRoot | Out-Null
+  New-Item -ItemType Directory -Force $Context.InstallPrefix | Out-Null
 
   $env:DESKTOP_PREFIX = $Context.InstallPrefix
   $env:DALI_DATA_RO_DIR = Join-Path $Context.InstallPrefix "share\dali"
   $env:DALI_DATA_RW_DIR = Join-Path $Context.InstallPrefix "share\dali"
   $env:DALI_DATA_RO_INSTALL_DIR = Join-Path $Context.InstallPrefix "share\dali"
   $env:FONTCONFIG_FILE = Join-Path $Context.InstallPrefix "share\dali\fonts.conf"
-  $env:PATH = "$(Join-Path $Context.InstallPrefix "bin");$(Join-Path $Context.InstallPrefix "lib");$(Join-Path $Context.VcpkgRoot "installed\x64-windows\bin");$env:PATH"
+  $env:DALI_WINDOWS_SDK_ROOT = $Context.SdkRoot
+  $env:DALI_PREFIX = $Context.InstallPrefix
+  $env:PATH = "$(Join-Path $Context.InstallPrefix "bin");$(Join-Path $Context.InstallPrefix "lib");$(Join-Path $Context.SdkRoot "bin");$(Join-Path $Context.SdkRoot "lib");$(Join-Path $Context.VcpkgRoot "installed\x64-windows\bin");$env:PATH"
 }
 
 function Get-DaliCommonCMakeArguments
 {
   param(
     [Parameter(Mandatory = $true)]
-    $Context
+    $Context,
+    [ValidateSet("Debug", "Release")]
+    [string]$Configuration = "Release"
   )
 
   $Python = Join-Path $Context.VcpkgRoot "downloads\tools\python\python-3.7.3-amd64\python.exe"
@@ -126,11 +144,11 @@ function Get-DaliCommonCMakeArguments
 
   return @(
     "-G", "Ninja",
-    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_BUILD_TYPE=$Configuration",
     "-DCMAKE_TOOLCHAIN_FILE=$(Join-Path $Context.VcpkgRoot "scripts\buildsystems\vcpkg.cmake")",
     "-DVCPKG_TARGET_TRIPLET=x64-windows",
     "-DCMAKE_INSTALL_PREFIX=$($Context.InstallPrefix)",
-    "-DCMAKE_PREFIX_PATH=$($Context.InstallPrefix)",
+    "-DCMAKE_PREFIX_PATH=$($Context.InstallPrefix);$($Context.SdkRoot);$(Join-Path $Context.VcpkgRoot "installed\x64-windows")",
     "-DPython3_EXECUTABLE=$Python"
   )
 }
@@ -164,6 +182,7 @@ function Invoke-DaliCMakeProject
     [string]$BuildDirectory,
     [Parameter(Mandatory = $true)]
     [string[]]$ConfigureArguments,
+    [switch]$Clean,
     [int]$Jobs = 8
   )
 
@@ -174,8 +193,32 @@ function Invoke-DaliCMakeProject
 
   Assert-DaliPaths -Paths @($SourceDirectory) -Description "$Name source directory"
 
+  if($Clean -and (Test-Path -LiteralPath $BuildDirectory))
+  {
+    $ResolvedSource = [IO.Path]::GetFullPath($SourceDirectory)
+    $ResolvedBuild = [IO.Path]::GetFullPath($BuildDirectory)
+    if($ResolvedBuild -eq $ResolvedSource -or $ResolvedBuild.Length -lt 10)
+    {
+      throw "Refusing to clean unsafe build directory: $ResolvedBuild"
+    }
+    Remove-Item -LiteralPath $ResolvedBuild -Recurse -Force
+  }
+
   Invoke-DaliNative -Step "Configure $Name" -Command "cmake.exe" `
     -Arguments (@("-S", $SourceDirectory, "-B", $BuildDirectory) + $ConfigureArguments)
   Invoke-DaliNative -Step "Build/install $Name" -Command "cmake.exe" `
     -Arguments @("--build", $BuildDirectory, "--target", "install", "--parallel", "$Jobs")
+}
+
+function Install-DaliRuntimeScripts
+{
+  param(
+    [Parameter(Mandatory = $true)]
+    $Context
+  )
+
+  $RuntimeScript = Join-Path $Context.WindowsDependenciesRoot "resources\set-dali-runtime-env.ps1"
+  Assert-DaliPaths -Paths @($RuntimeScript) -Description "DALi runtime environment script"
+  New-Item -ItemType Directory -Force -Path $Context.InstallPrefix | Out-Null
+  Copy-Item -LiteralPath $RuntimeScript -Destination (Join-Path $Context.InstallPrefix "setenv.ps1") -Force
 }

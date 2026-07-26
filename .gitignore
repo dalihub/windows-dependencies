@@ -14,3 +14,5 @@
 *.idb
 *.cache*
 *.log
+/_build/
+/artifacts/

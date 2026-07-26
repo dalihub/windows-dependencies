@@ -1,5 +1,32 @@
 <img src="https://dalihub.github.io/images/DaliLogo320x200.png">
 
+## Current Windows SDK workflow
+
+The current source and binary SDK workflow is documented in
+[WINDOWS-DEVELOPMENT-QUICKSTART-ko.md](WINDOWS-DEVELOPMENT-QUICKSTART-ko.md).
+Repositories may live below any common workspace directory; the directory name
+and drive are not fixed.
+
+```powershell
+cd <workspace>\windows-dependencies
+.\install.ps1
+
+cd ..\dali-core
+.\build\windows\build.ps1
+cd ..\dali-adaptor
+.\build\windows\build.ps1
+cd ..\dali-ui
+.\build\windows\build.ps1
+cd .\samples
+.\build.ps1
+```
+
+`install.ps1` installs the published `windows-sdk-latest` prerelease when it is
+available and builds the identical `WindowsDependenciesSDK` layout from source
+otherwise. It automatically adds TizenVG when the internal repository can be
+reached. TizenVG repository unavailability is optional; a TizenVG build failure
+after successful repository access is an error.
+
 # Table of Contents
 
   * [Build Instructions for MS Windows](#build-instructions)
