@@ -190,7 +190,8 @@ function Invoke-DaliCurlNetwork
       "--connect-timeout", "$DaliNetworkTimeoutSeconds",
       "--speed-limit", "$DaliNetworkLowSpeedBytesPerSecond",
       "--speed-time", "$DaliNetworkTimeoutSeconds",
-      "--output", $OutputPath
+      "--output", $OutputPath,
+      "--write-out", "%{http_code}"
     )
     if($Resume -and (Test-Path -LiteralPath $OutputPath))
     {
@@ -198,11 +199,28 @@ function Invoke-DaliCurlNetwork
     }
     $Arguments += $Uri
 
-    & curl.exe @Arguments
+    $HttpStatus = (& curl.exe @Arguments)
     $ExitCode = $LASTEXITCODE
     if($ExitCode -eq 0)
     {
       return $true
+    }
+
+    if($ExitCode -eq 22 -and $HttpStatus -eq "404")
+    {
+      if(Test-Path -LiteralPath $OutputPath)
+      {
+        Remove-Item -LiteralPath $OutputPath -Force
+      }
+
+      if($AllowFailure)
+      {
+        Write-Host "Optional download was not found (HTTP 404): $Uri"
+        $global:LASTEXITCODE = 0
+        return $false
+      }
+
+      throw "Download was not found (HTTP 404): $Uri"
     }
 
     if($ExitCode -eq 33 -and (Test-Path -LiteralPath $OutputPath))
@@ -219,6 +237,7 @@ function Invoke-DaliCurlNetwork
 
   if($AllowFailure)
   {
+    $global:LASTEXITCODE = 0
     return $false
   }
   throw "Download failed after $DaliNetworkRetryCount attempts: $Uri"
