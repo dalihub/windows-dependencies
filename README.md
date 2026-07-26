@@ -135,6 +135,14 @@ cd <workspace>
 & "$env:DALI_PREFIX\bin\hello-world.example.exe"
 ```
 
+To set a custom window resolution:
+
+```powershell
+cd <workspace>
+. .\dali-env\setenv.ps1; $env:DALI_WINDOW_WIDTH = "1920"; $env:DALI_WINDOW_HEIGHT = "1080"
+& "$env:DALI_PREFIX\bin\hello-world.example.exe"
+```
+
 Or open a dedicated DALi development shell:
 
 ```powershell
@@ -149,11 +157,12 @@ hello-world.example.exe
 ```
 
 Use `-Configuration Debug` with `setenv.ps1` or `dali-shell.ps1` when running a
-Debug build. Window dimensions can be overridden before launch:
+Debug build. Window dimensions can be set before launch:
 
 ```powershell
 $env:DALI_WINDOW_WIDTH = "1920"
 $env:DALI_WINDOW_HEIGHT = "1080"
+hello-world.example.exe
 ```
 
 ## Clean builds
