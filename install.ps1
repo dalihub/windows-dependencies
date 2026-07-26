@@ -11,7 +11,8 @@ $ErrorActionPreference = "Stop"
 $ScriptRoot = $PSScriptRoot
 $WorkspaceRoot = Split-Path -Parent $ScriptRoot
 $SdkRoot = Join-Path $WorkspaceRoot "WindowsDependenciesSDK"
-$DownloadRoot = Join-Path $WorkspaceRoot ".deps\windows-sdk-download"
+$DependencyRoot = Join-Path $ScriptRoot ".deps"
+$DownloadRoot = Join-Path $DependencyRoot "windows-sdk-download"
 $ArchiveName = "DALi-WindowsDependenciesSDK-x64.zip"
 $ChecksumName = "$ArchiveName.sha256"
 $ArchivePath = Join-Path $DownloadRoot $ArchiveName
@@ -59,7 +60,7 @@ function Install-DownloadedSdk
     return $false
   }
 
-  $ExtractRoot = Join-Path $WorkspaceRoot ".deps\windows-sdk-extract-$([Guid]::NewGuid().ToString('N'))"
+  $ExtractRoot = Join-Path $DependencyRoot "windows-sdk-extract-$([Guid]::NewGuid().ToString('N'))"
   New-Item -ItemType Directory -Force -Path $ExtractRoot | Out-Null
   try
   {

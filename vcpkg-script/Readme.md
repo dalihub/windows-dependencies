@@ -29,7 +29,7 @@ Build both public dependencies and the optional internal extension:
 cd <workspace>\windows-dependencies\vcpkg-script
 .\setup-dali-dependencies.ps1 `
   -DaliRoot <workspace> `
-  -VcpkgRoot <workspace>\.deps\vcpkg `
+  -VcpkgRoot <workspace>\windows-dependencies\.deps\vcpkg `
   -InstallPrefix <workspace>\WindowsDependenciesSDK
 ```
 
@@ -38,7 +38,7 @@ Build only the public dependency set:
 ```powershell
 .\setup-dali-dependencies.ps1 `
   -DaliRoot <workspace> `
-  -VcpkgRoot <workspace>\.deps\vcpkg `
+  -VcpkgRoot <workspace>\windows-dependencies\.deps\vcpkg `
   -InstallPrefix <workspace>\WindowsDependenciesSDK `
   -SkipTizenVg
 ```

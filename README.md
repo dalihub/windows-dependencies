@@ -48,7 +48,7 @@ cd <workspace>\windows-dependencies
 
 `install.ps1` first downloads the `windows-sdk-latest` prerelease, verifies its
 SHA-256 file, and installs it as `<workspace>\WindowsDependenciesSDK`. A partial
-archive is kept below `<workspace>\.deps\windows-sdk-download` and is reused
+archive is kept below `<workspace>\windows-dependencies\.deps\windows-sdk-download` and is reused
 when a download resumes.
 
 If the release is missing, cannot be downloaded, or fails validation, the same
@@ -161,7 +161,7 @@ $env:DALI_WINDOW_HEIGHT = "1080"
 For a clean rebuild of one DALi repository, use its `-Clean` option. For a full
 workspace rebuild, remove the per-repository build trees, the shared `out`
 directory if it exists, `dali-env`, and `WindowsDependenciesSDK`, then run
-`install.ps1` again. The source-build cache below `<workspace>\.deps` is
+`install.ps1` again. The source-build cache below `<workspace>\windows-dependencies\.deps` is
 independent and may be retained to avoid downloading and rebuilding unchanged
 third-party inputs.
 
@@ -182,9 +182,10 @@ The command installs the relocatable dependency SDK in
 ## Automated SDK publication
 
 `.github/workflows/windows-sdk-latest.yml` runs on a GitHub-hosted Windows 2022
-runner every Sunday at 23:00 Korea Standard Time and also supports manual runs.
-It builds the x64 Release SDK without TizenVG and maintains the
-`windows-sdk-latest` prerelease.
+runner when a push to `master` changes an SDK build input. A merged pull request
+normally produces that push; documentation-only changes are ignored. Manual runs
+remain available. The workflow builds the x64 Release SDK without TizenVG and
+maintains the `windows-sdk-latest` prerelease.
 
 The release contains:
 

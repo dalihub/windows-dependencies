@@ -8,4 +8,5 @@
 *.cache*
 *.log
 /_build/
+/.deps/
 /artifacts/

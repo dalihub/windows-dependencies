@@ -25,7 +25,7 @@ function New-DaliBuildContext
     }
     else
     {
-      $VcpkgRoot = Join-Path $DaliRoot ".deps\vcpkg"
+      $VcpkgRoot = Join-Path $WindowsDependenciesRoot ".deps\vcpkg"
     }
   }
   if(-not $InstallPrefix)

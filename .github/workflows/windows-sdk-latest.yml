@@ -1,9 +1,20 @@
 name: Windows dependencies SDK
 
 on:
-  schedule:
-    # Sunday 23:00 Asia/Seoul (UTC+9)
-    - cron: "0 14 * * 0"
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/windows-sdk-latest.yml"
+      - "build/**"
+      - "include/**"
+      - "resources/**"
+      - "src/**"
+      - "vcpkg-script/**"
+      - "!vcpkg-script/Readme.md"
+      - "build_windows_dependencies.ps1"
+      - "package_windows_sdk.ps1"
+      - "windows-sdk-manifest.ps1"
   workflow_dispatch:
 
 permissions:
@@ -76,9 +87,9 @@ jobs:
         if: steps.inputs.outputs.unchanged != 'true'
         shell: pwsh
         run: |
-          $sourceVcpkg = Join-Path (Split-Path -Parent $env:GITHUB_WORKSPACE) ".deps\vcpkg"
+          $sourceVcpkg = Join-Path $env:GITHUB_WORKSPACE ".deps\vcpkg"
           $sourceVcpkg = [IO.Path]::GetFullPath($sourceVcpkg)
-          $expectedParent = [IO.Path]::GetFullPath((Split-Path -Parent $env:GITHUB_WORKSPACE))
+          $expectedParent = [IO.Path]::GetFullPath($env:GITHUB_WORKSPACE)
           if((Split-Path -Leaf $sourceVcpkg) -ne "vcpkg" -or
              (Split-Path -Parent (Split-Path -Parent $sourceVcpkg)) -ne $expectedParent) {
             throw "Refusing to remove unexpected vcpkg path: $sourceVcpkg"

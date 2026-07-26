@@ -16,7 +16,7 @@ $WorkspaceContext = New-DaliBuildContext -WindowsDependenciesRoot $ScriptRoot -V
 $SourceVcpkgRoot = $WorkspaceContext.VcpkgRoot
 if($SourceVcpkgRoot -eq (Join-Path $WorkspaceContext.SdkRoot "vcpkg"))
 {
-  $SourceVcpkgRoot = Join-Path $WorkspaceContext.DaliRoot ".deps\vcpkg"
+  $SourceVcpkgRoot = Join-Path $ScriptRoot ".deps\vcpkg"
 }
 
 if(-not $SkipThirdParty)

@@ -13,6 +13,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ScriptRoot = $PSScriptRoot
+$DependencyRoot = Join-Path (Split-Path -Parent $ScriptRoot) ".deps"
 if(-not $InstallPrefix)
 {
   $InstallPrefix = Join-Path $DaliRoot "WindowsDependenciesSDK"
@@ -37,8 +38,8 @@ if(-not $SkipVcpkg)
 
 if(-not $SkipTizenVg)
 {
-  $TizenVgSourceRoot = Join-Path $DaliRoot "tizenvg"
-  $TizenVgBuildRoot = Join-Path $DaliRoot ".deps\tizenvg-build"
+  $TizenVgSourceRoot = Join-Path $DependencyRoot "tizenvg"
+  $TizenVgBuildRoot = Join-Path $DependencyRoot "tizenvg-build"
   $RevisionAvailable = $false
   if(Test-Path -LiteralPath (Join-Path $TizenVgSourceRoot ".git"))
   {

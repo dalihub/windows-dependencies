@@ -93,9 +93,10 @@ Debug 설치 결과를 실행할 때는 다음과 같이 지정한다.
 
 ## SDK 자동 배포
 
-GitHub Action은 `windows-2022`에서 매주 일요일 14:00 UTC, 한국시간
-일요일 23:00에 실행되며 수동 실행도 지원한다. TizenVG 없이 x64 Release
-SDK를 빌드해 다음 `windows-sdk-latest` prerelease 자산을 관리한다.
+GitHub Action은 SDK 빌드 입력이 바뀐 commit이 `master`에 반영될 때
+`windows-2022`에서 실행된다. 일반적으로 PR merge가 이 push를 만들며 문서만
+바뀐 경우에는 실행하지 않는다. 수동 실행도 지원한다. TizenVG 없이 x64
+Release SDK를 빌드해 다음 `windows-sdk-latest` prerelease 자산을 관리한다.
 
 ```text
 DALi-WindowsDependenciesSDK-x64.zip
