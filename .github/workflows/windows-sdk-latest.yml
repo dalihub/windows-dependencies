@@ -1,0 +1,165 @@
+name: Windows dependencies SDK
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/windows-sdk-latest.yml"
+      - "build/**"
+      - "include/**"
+      - "resources/**"
+      - "src/**"
+      - "vcpkg-script/**"
+      - "!vcpkg-script/Readme.md"
+      - "build_windows_dependencies.ps1"
+      - "package_windows_sdk.ps1"
+      - "windows-sdk-manifest.ps1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-sdk:
+    runs-on: windows-2022
+    timeout-minutes: 360
+    env:
+      RELEASE_TAG: windows-sdk-latest
+
+    steps:
+      - name: Check out windows-dependencies
+        uses: actions/checkout@v5
+
+      - name: Compare SDK build inputs
+        id: inputs
+        shell: pwsh
+        run: |
+          . .\vcpkg-script\dependency-network.ps1
+          .\windows-sdk-manifest.ps1 -Mode Inputs -OutputPath .\build-inputs.json
+          New-Item -ItemType Directory -Force -Path .\previous | Out-Null
+          $base = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$env:RELEASE_TAG"
+          $downloaded = Invoke-DaliCurlNetwork `
+            -Uri "$base/build-inputs.json" `
+            -OutputPath .\previous\build-inputs.json `
+            -AllowFailure
+          $unchanged = $false
+          if($downloaded) {
+            $current = Get-Content -LiteralPath .\build-inputs.json -Raw
+            $previous = Get-Content -LiteralPath .\previous\build-inputs.json -Raw
+            $unchanged = ($current -eq $previous)
+            Invoke-DaliCurlNetwork `
+              -Uri "$base/sdk-contents.json" `
+              -OutputPath .\previous\sdk-contents.json `
+              -AllowFailure | Out-Null
+          }
+          "unchanged=$($unchanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
+      - name: Build SDK without TizenVG
+        if: steps.inputs.outputs.unchanged != 'true'
+        shell: pwsh
+        run: |
+          $buildScript = Join-Path $env:GITHUB_WORKSPACE "build_windows_dependencies.ps1"
+          $startedAt = Get-Date
+          $buildProcess = Start-Process `
+            -FilePath "pwsh.exe" `
+            -ArgumentList @(
+              "-NoLogo",
+              "-NoProfile",
+              "-File", $buildScript,
+              "-SkipTizenVg",
+              "-Clean",
+              "-Jobs", "4"
+            ) `
+            -NoNewWindow `
+            -PassThru
+
+          while(-not $buildProcess.WaitForExit(60000)) {
+            $elapsed = (Get-Date) - $startedAt
+            Write-Host ("[build-sdk] Still running; elapsed {0:hh\:mm\:ss}" -f $elapsed)
+          }
+
+          if($buildProcess.ExitCode -ne 0) {
+            throw "Windows dependencies SDK build failed with exit code $($buildProcess.ExitCode)"
+          }
+
+      - name: Free source-build disk space
+        if: steps.inputs.outputs.unchanged != 'true'
+        shell: pwsh
+        run: |
+          $sourceVcpkg = Join-Path $env:GITHUB_WORKSPACE ".deps\vcpkg"
+          $sourceVcpkg = [IO.Path]::GetFullPath($sourceVcpkg)
+          $expectedParent = [IO.Path]::GetFullPath($env:GITHUB_WORKSPACE)
+          if((Split-Path -Leaf $sourceVcpkg) -ne "vcpkg" -or
+             (Split-Path -Parent (Split-Path -Parent $sourceVcpkg)) -ne $expectedParent) {
+            throw "Refusing to remove unexpected vcpkg path: $sourceVcpkg"
+          }
+          if(Test-Path -LiteralPath $sourceVcpkg) {
+            Remove-Item -LiteralPath $sourceVcpkg -Recurse -Force
+          }
+          Get-PSDrive C
+
+      - name: Package SDK
+        if: steps.inputs.outputs.unchanged != 'true'
+        id: package
+        shell: pwsh
+        run: |
+          .\package_windows_sdk.ps1 `
+            -OutputDirectory .\artifacts `
+            -InputManifest .\build-inputs.json
+          $sameContents = $false
+          if(Test-Path -LiteralPath .\previous\sdk-contents.json) {
+            $current = Get-Content -LiteralPath .\artifacts\sdk-contents.json -Raw
+            $previous = Get-Content -LiteralPath .\previous\sdk-contents.json -Raw
+            $sameContents = ($current -eq $previous)
+          }
+          "same_contents=$($sameContents.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
+      - name: Publish windows-sdk-latest prerelease
+        if: steps.inputs.outputs.unchanged != 'true'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          function Invoke-GhRetry([string[]]$Arguments) {
+            for($attempt = 1; $attempt -le 10; ++$attempt) {
+              & gh.exe @Arguments
+              if($LASTEXITCODE -eq 0) { return }
+              if($attempt -lt 10) {
+                Write-Warning "gh failed (attempt $attempt/10); retrying."
+                Start-Sleep -Seconds 1
+              }
+            }
+            throw "gh failed after 10 attempts: $($Arguments -join ' ')"
+          }
+
+          & gh.exe release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY 2>$null
+          if($LASTEXITCODE -ne 0) {
+            Invoke-GhRetry @(
+              "release", "create", $env:RELEASE_TAG,
+              "--repo", $env:GITHUB_REPOSITORY,
+              "--title", "Windows Dependencies SDK (latest)",
+              "--notes", "Automatically built Windows x64 dependencies SDK. TizenVG is added locally when the internal repository is reachable.",
+              "--prerelease"
+            )
+          }
+
+          if("${{ steps.package.outputs.same_contents }}" -eq "true") {
+            Invoke-GhRetry @(
+              "release", "upload", $env:RELEASE_TAG,
+              ".\artifacts\build-inputs.json",
+              "--repo", $env:GITHUB_REPOSITORY,
+              "--clobber"
+            )
+            Write-Host "SDK contents are unchanged; only the build-input manifest was refreshed."
+          } else {
+            Invoke-GhRetry @(
+              "release", "upload", $env:RELEASE_TAG,
+              ".\artifacts\DALi-WindowsDependenciesSDK-x64.zip",
+              ".\artifacts\DALi-WindowsDependenciesSDK-x64.zip.sha256",
+              ".\artifacts\build-inputs.json",
+              ".\artifacts\sdk-contents.json",
+              "--repo", $env:GITHUB_REPOSITORY,
+              "--clobber"
+            )
+          }
