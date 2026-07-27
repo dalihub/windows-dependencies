@@ -108,7 +108,7 @@ Build in dependency order: core, adaptor, then UI. Common options are:
 `-Clean` removes only that repository's `_build\windows` directory before the
 new configure. It does not remove `WindowsDependenciesSDK` or `dali-env`.
 
-## Build and run dali-ui samples
+## Run dali-ui samples
 
 The sample script also configures, builds, and installs its targets into
 `dali-env\bin`.
@@ -125,9 +125,7 @@ Build selected samples or start with a clean sample build tree:
 .\build.ps1 -Clean -Samples hello-world
 ```
 
-Use either of the following runtime environment methods.
-
-Apply the environment to the current PowerShell:
+To run samples, apply the runtime environment to your PowerShell session:
 
 ```powershell
 cd <workspace>
@@ -135,35 +133,19 @@ cd <workspace>
 & "$env:DALI_PREFIX\bin\hello-world.example.exe"
 ```
 
-To set a custom window resolution:
+This environment setup is required every time you open a new PowerShell terminal.
+
+To set a custom window resolution before running an application:
 
 ```powershell
 cd <workspace>
-. .\dali-env\setenv.ps1; $env:DALI_WINDOW_WIDTH = "1920"; $env:DALI_WINDOW_HEIGHT = "1080"
+. .\dali-env\setenv.ps1
+$env:DALI_WINDOW_WIDTH = "1920"
+$env:DALI_WINDOW_HEIGHT = "1080"
 & "$env:DALI_PREFIX\bin\hello-world.example.exe"
 ```
 
-Or open a dedicated DALi development shell:
-
-```powershell
-cd <workspace>
-.\windows-dependencies\dali-shell.ps1
-```
-
-Inside that shell, installed applications can be launched by name:
-
-```powershell
-hello-world.example.exe
-```
-
-Use `-Configuration Debug` with `setenv.ps1` or `dali-shell.ps1` when running a
-Debug build. Window dimensions can be set before launch:
-
-```powershell
-$env:DALI_WINDOW_WIDTH = "1920"
-$env:DALI_WINDOW_HEIGHT = "1080"
-hello-world.example.exe
-```
+Use `-Configuration Debug` with `setenv.ps1` when running a Debug build.
 
 ## Clean builds
 
