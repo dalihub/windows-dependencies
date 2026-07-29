@@ -317,7 +317,9 @@ $Patches = @(
   "[VCPKG]_0003_Use_system_curl_on_windows.patch",
   "[VCPKG]_0004_Fix_x64_meson_cross_file.patch",
   "[VCPKG]_0005_Use_x64_python_tool.patch",
-  "[VCPKG]_0006_Use_x64_meson_native_build.patch"
+  "[VCPKG]_0006_Use_x64_meson_native_build.patch",
+  "[VCPKG-zlib]_0001_Use_https_fossil_archive.patch",
+  "[VCPKG-zlib]_0002_Use_github_source_archive.patch"
 )
 
 Set-DaliProxyEnvironment -Proxy $Proxy
