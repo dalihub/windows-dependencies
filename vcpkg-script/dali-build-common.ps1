@@ -136,7 +136,7 @@ function Get-DaliCommonCMakeArguments
     [Parameter(Mandatory = $true)]
     $Context,
     [ValidateSet("Debug", "Release")]
-    [string]$Configuration = "Debug"
+    [string]$Configuration = "Release"
   )
 
   $Python = Join-Path $Context.VcpkgRoot "downloads\tools\python\python-3.7.3-amd64\python.exe"

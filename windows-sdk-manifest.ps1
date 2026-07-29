@@ -4,9 +4,7 @@ param(
   [string]$Mode,
   [Parameter(Mandatory = $true)]
   [string]$OutputPath,
-  [string]$SdkRoot = "",
-  [ValidateSet("Debug", "Release")]
-  [string]$Configuration = "Debug"
+  [string]$SdkRoot = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -48,7 +46,7 @@ if($Mode -eq "Inputs")
   $Manifest = [ordered]@{
     schema = 1
     architecture = "x64"
-    configuration = $Configuration
+    configuration = "Release"
     runner = "windows-2022"
     visualStudio = $VsVersion
     files = @($Files)

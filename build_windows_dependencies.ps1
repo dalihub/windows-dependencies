@@ -1,7 +1,5 @@
 [CmdletBinding()]
 param(
-  [ValidateSet("Debug", "Release")]
-  [string]$Configuration = "Debug",
   [string]$Proxy = "",
   [string]$VcpkgRoot = "",
   [switch]$SkipTizenVg,
@@ -50,7 +48,6 @@ if(-not $SkipThirdParty -and -not $SkipTizenVg)
     VcpkgRoot = (Join-Path $WorkspaceContext.SdkRoot "vcpkg")
     InstallPrefix = $WorkspaceContext.SdkRoot
     SkipVcpkg = $true
-    Configuration = $Configuration
   }
   if($Proxy)
   {
@@ -64,7 +61,7 @@ $Context = New-DaliBuildContext `
   -VcpkgRoot (Join-Path $WorkspaceContext.SdkRoot "vcpkg") `
   -InstallPrefix $WorkspaceContext.SdkRoot
 Initialize-DaliBuildEnvironment -Context $Context
-$Common = Get-DaliCommonCMakeArguments -Context $Context -Configuration $Configuration
+$Common = Get-DaliCommonCMakeArguments -Context $Context
 
 Invoke-DaliCMakeProject `
   -Name "windows-dependencies" `
