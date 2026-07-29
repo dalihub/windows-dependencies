@@ -9,7 +9,9 @@ param(
   [string]$Repository = "https://github.sec.samsung.net/tizen/tizenvg.git",
   [string]$Revision = "ae039a6154a258a8fa19f23b25285acd73d2f6c1",
   [string]$PythonCommand = "",
-  [string]$VsDevCmd = ""
+  [string]$VsDevCmd = "",
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Debug"
 )
 
 $ErrorActionPreference = "Stop"
@@ -316,12 +318,24 @@ Invoke-DaliGit -Arguments @("-C", $SourceRoot, "checkout", "--detach", $Revision
 
 New-Item -ItemType Directory -Force -Path $InstallPrefix | Out-Null
 
+if($Configuration -eq "Debug")
+{
+  $MesonBuildType = "debug"
+  $MesonVsCrt = "mdd"
+}
+else
+{
+  $MesonBuildType = "release"
+  $MesonVsCrt = "md"
+}
+
 $MesonArguments = @(
   "setup"
   $BuildRoot
   $SourceRoot
   "--backend", "ninja"
-  "--buildtype", "release"
+  "--buildtype", $MesonBuildType
+  "-Db_vscrt=$MesonVsCrt"
   "--default-library", "shared"
   "--prefix", $InstallPrefix
   "--libdir", "lib"
