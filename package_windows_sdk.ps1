@@ -1,5 +1,7 @@
 [CmdletBinding()]
 param(
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Debug",
   [string]$SdkRoot = "",
   [string]$OutputDirectory = "",
   [string]$InputManifest = ""
@@ -27,16 +29,16 @@ if($InputManifest)
 }
 else
 {
-  & (Join-Path $ScriptRoot "windows-sdk-manifest.ps1") -Mode Inputs -OutputPath $SdkInputManifest
+  & (Join-Path $ScriptRoot "windows-sdk-manifest.ps1") -Mode Inputs -OutputPath $SdkInputManifest -Configuration $Configuration
 }
 
-$ContentsManifest = Join-Path $OutputDirectory "sdk-contents.json"
+$ContentsManifest = Join-Path $OutputDirectory "sdk-contents-$Configuration.json"
 & (Join-Path $ScriptRoot "windows-sdk-manifest.ps1") `
   -Mode Contents -SdkRoot $SdkRoot -OutputPath $ContentsManifest
 Copy-Item -LiteralPath $ContentsManifest -Destination (Join-Path $SdkRoot "sdk-contents.json") -Force
-Copy-Item -LiteralPath $SdkInputManifest -Destination (Join-Path $OutputDirectory "build-inputs.json") -Force
+Copy-Item -LiteralPath $SdkInputManifest -Destination (Join-Path $OutputDirectory "build-inputs-$Configuration.json") -Force
 
-$ArchiveName = "DALi-WindowsDependenciesSDK-x64.zip"
+$ArchiveName = "DALi-WindowsDependenciesSDK-x64-$Configuration.zip"
 $ArchivePath = Join-Path $OutputDirectory $ArchiveName
 if(Test-Path -LiteralPath $ArchivePath) { Remove-Item -LiteralPath $ArchivePath -Force }
 & tar.exe -a -c -f $ArchivePath -C $SdkRoot .

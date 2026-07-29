@@ -24,6 +24,12 @@ jobs:
   build-sdk:
     runs-on: windows-2022
     timeout-minutes: 360
+    strategy:
+      max-parallel: 1
+      matrix:
+        configuration: [Debug, Release]
+    env:
+      CONFIGURATION: ${{ matrix.configuration }}
 
     steps:
       - name: Check out windows-dependencies
@@ -40,6 +46,7 @@ jobs:
               "-NoLogo",
               "-NoProfile",
               "-File", $buildScript,
+              "-Configuration", $env:CONFIGURATION,
               "-SkipTizenVg",
               "-Clean",
               "-Jobs", "4"

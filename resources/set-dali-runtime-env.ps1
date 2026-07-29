@@ -1,7 +1,4 @@
-param(
-  [ValidateSet("Debug", "Release")]
-  [string]$Configuration = "Release"
-)
+$Configuration = "Debug"
 
 $DaliPrefix = [IO.Path]::GetFullPath($PSScriptRoot)
 $WorkspaceRoot = Split-Path -Parent $DaliPrefix

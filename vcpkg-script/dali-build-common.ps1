@@ -136,7 +136,7 @@ function Get-DaliCommonCMakeArguments
     [Parameter(Mandatory = $true)]
     $Context,
     [ValidateSet("Debug", "Release")]
-    [string]$Configuration = "Release"
+    [string]$Configuration = "Debug"
   )
 
   $Python = Join-Path $Context.VcpkgRoot "downloads\tools\python\python-3.7.3-amd64\python.exe"
@@ -214,11 +214,21 @@ function Install-DaliRuntimeScripts
 {
   param(
     [Parameter(Mandatory = $true)]
-    $Context
+    $Context,
+    [ValidateSet("Debug", "Release")]
+    [string]$Configuration = "Debug"
   )
 
   $RuntimeScript = Join-Path $Context.WindowsDependenciesRoot "resources\set-dali-runtime-env.ps1"
+  $GeneratedRuntimeScript = Join-Path $Context.InstallPrefix "setenv.ps1"
   Assert-DaliPaths -Paths @($RuntimeScript) -Description "DALi runtime environment script"
   New-Item -ItemType Directory -Force -Path $Context.InstallPrefix | Out-Null
-  Copy-Item -LiteralPath $RuntimeScript -Destination (Join-Path $Context.InstallPrefix "setenv.ps1") -Force
+  $RuntimeScriptContent = Get-Content -LiteralPath $RuntimeScript -Raw
+  $ConfigurationPattern = '(?m)^(\s*\$Configuration\s*=\s*")[^"\r\n]*(")(\r?)$'
+  if($RuntimeScriptContent -notmatch $ConfigurationPattern)
+  {
+    throw "DALi runtime environment script does not define a Configuration default: $RuntimeScript"
+  }
+  $RuntimeScriptContent = $RuntimeScriptContent -replace $ConfigurationPattern, ('$1' + $Configuration + '$2$3')
+  [IO.File]::WriteAllText($GeneratedRuntimeScript, $RuntimeScriptContent, [System.Text.UTF8Encoding]::new($false))
 }
