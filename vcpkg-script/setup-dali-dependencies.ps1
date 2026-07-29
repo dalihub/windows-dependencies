@@ -1,7 +1,5 @@
 [CmdletBinding()]
 param(
-  [ValidateSet("Debug", "Release")]
-  [string]$Configuration = "Debug",
   [string]$DaliRoot = "C:\work\DALi",
   [string]$VcpkgRoot = "C:\Tools\DALI_VCPKG\vcpkg",
   [string]$VcpkgRepository = "https://github.com/dalihub/vcpkg.git",
@@ -73,7 +71,6 @@ if(-not $SkipTizenVg)
     BuildRoot = $TizenVgBuildRoot
     Repository = $TizenVgRepository
     Revision = $TizenVgRevision
-    Configuration = $Configuration
   }
   $VcpkgPython = Join-Path $VcpkgRoot "downloads\tools\python\python-3.7.3-amd64\python.exe"
   if(Test-Path -LiteralPath $VcpkgPython)
