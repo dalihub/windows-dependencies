@@ -1,0 +1,64 @@
+name: Windows dependencies SDK PR build
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/windows-sdk-pr.yml"
+      - "build/**"
+      - "include/**"
+      - "resources/**"
+      - "src/**"
+      - "vcpkg-script/**"
+      - "!vcpkg-script/Readme.md"
+      - "build_windows_dependencies.ps1"
+      - "windows-sdk-manifest.ps1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-sdk-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build-sdk:
+    runs-on: windows-2022
+    timeout-minutes: 360
+    strategy:
+      max-parallel: 2
+      matrix:
+        configuration: [Debug, Release]
+    env:
+      CONFIGURATION: ${{ matrix.configuration }}
+
+    steps:
+      - name: Check out windows-dependencies
+        uses: actions/checkout@v5
+
+      - name: Build SDK without TizenVG
+        shell: pwsh
+        run: |
+          $buildScript = Join-Path $env:GITHUB_WORKSPACE "build_windows_dependencies.ps1"
+          $startedAt = Get-Date
+          $buildProcess = Start-Process `
+            -FilePath "pwsh.exe" `
+            -ArgumentList @(
+              "-NoLogo",
+              "-NoProfile",
+              "-File", $buildScript,
+              "-Configuration", $env:CONFIGURATION,
+              "-SkipTizenVg",
+              "-Clean",
+              "-Jobs", "4"
+            ) `
+            -NoNewWindow `
+            -PassThru
+
+          while(-not $buildProcess.WaitForExit(60000)) {
+            $elapsed = (Get-Date) - $startedAt
+            Write-Host ("[build-sdk] Still running; elapsed {0:hh\:mm\:ss}" -f $elapsed)
+          }
+
+          if($buildProcess.ExitCode -ne 0) {
+            throw "Windows dependencies SDK build failed with exit code $($buildProcess.ExitCode)"
+          }
