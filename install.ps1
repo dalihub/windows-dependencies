@@ -1,5 +1,7 @@
 [CmdletBinding()]
 param(
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Debug",
   [string]$Proxy = "",
   [string]$ReleaseRepository = "dalihub/windows-dependencies",
   [string]$ReleaseTag = "windows-sdk-latest",
@@ -13,7 +15,7 @@ $WorkspaceRoot = Split-Path -Parent $ScriptRoot
 $SdkRoot = Join-Path $WorkspaceRoot "WindowsDependenciesSDK"
 $DependencyRoot = Join-Path $ScriptRoot ".deps"
 $DownloadRoot = Join-Path $DependencyRoot "windows-sdk-download"
-$ArchiveName = "DALi-WindowsDependenciesSDK-x64.zip"
+$ArchiveName = "DALi-WindowsDependenciesSDK-x64-$Configuration.zip"
 $ChecksumName = "$ArchiveName.sha256"
 $ArchivePath = Join-Path $DownloadRoot $ArchiveName
 $ChecksumPath = Join-Path $DownloadRoot $ChecksumName
@@ -123,6 +125,7 @@ if(-not $InstalledRelease)
 {
   Write-Host "No usable published SDK was found. Building the same SDK layout from source." -ForegroundColor Yellow
   $BuildArguments = @{
+    Configuration = $Configuration
     SkipTizenVg = $true
     Clean = $true
     Jobs = $Jobs
@@ -139,6 +142,7 @@ $TizenVgArguments = @{
   VcpkgRoot = (Join-Path $SdkRoot "vcpkg")
   InstallPrefix = $SdkRoot
   SkipVcpkg = $true
+  Configuration = $Configuration
 }
 if($Proxy)
 {
