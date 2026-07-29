@@ -31,7 +31,9 @@ $env:DESKTOP_PREFIX = $DaliPrefix
 $env:DALI_DATA_RO_DIR = "$DaliPrefix\share\dali"
 $env:DALI_DATA_RW_DIR = "$DaliPrefix\share\dali"
 $env:DALI_DATA_RO_INSTALL_DIR = "$DaliPrefix\share\dali"
-$env:FONTCONFIG_FILE = "$DaliPrefix\share\dali\fonts.conf"
+$FontConfigRoot = Join-Path $SdkRoot "share\dali"
+$env:FONTCONFIG_PATH = $FontConfigRoot
+$env:FONTCONFIG_FILE = Join-Path $FontConfigRoot "fonts.conf"
 
 Write-Host "DALi runtime environment configured."
 Write-Host "  SDK:    $SdkRoot"
