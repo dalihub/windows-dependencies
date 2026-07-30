@@ -1,8 +1,4 @@
 [CmdletBinding()]
-param(
-  [ValidateSet("Debug", "Release")]
-  [string]$Configuration = "Release"
-)
 
 $ErrorActionPreference = "Stop"
 $WorkspaceRoot = Split-Path -Parent $PSScriptRoot
@@ -19,4 +15,4 @@ if(-not $Shell)
 }
 
 $EscapedSetEnv = $SetEnvScript.Replace("'", "''")
-& $Shell.Source -NoExit -NoLogo -Command ". '$EscapedSetEnv' -Configuration $Configuration"
+& $Shell.Source -NoExit -NoLogo -Command ". '$EscapedSetEnv'"

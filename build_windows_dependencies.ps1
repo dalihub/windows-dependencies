@@ -1,5 +1,7 @@
 [CmdletBinding()]
 param(
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Debug",
   [string]$Proxy = "",
   [string]$VcpkgRoot = "",
   [switch]$SkipTizenVg,
@@ -48,6 +50,7 @@ if(-not $SkipThirdParty -and -not $SkipTizenVg)
     VcpkgRoot = (Join-Path $WorkspaceContext.SdkRoot "vcpkg")
     InstallPrefix = $WorkspaceContext.SdkRoot
     SkipVcpkg = $true
+    Configuration = $Configuration
   }
   if($Proxy)
   {
@@ -61,7 +64,7 @@ $Context = New-DaliBuildContext `
   -VcpkgRoot (Join-Path $WorkspaceContext.SdkRoot "vcpkg") `
   -InstallPrefix $WorkspaceContext.SdkRoot
 Initialize-DaliBuildEnvironment -Context $Context
-$Common = Get-DaliCommonCMakeArguments -Context $Context
+$Common = Get-DaliCommonCMakeArguments -Context $Context -Configuration $Configuration
 
 Invoke-DaliCMakeProject `
   -Name "windows-dependencies" `
@@ -77,5 +80,5 @@ Assert-DaliPaths -Paths @(
   (Join-Path $Context.VcpkgRoot "installed\x64-windows\include")
 ) -Description "windows-dependencies installation output"
 
-Install-DaliRuntimeScripts -Context (New-DaliBuildContext -WindowsDependenciesRoot $ScriptRoot)
+Install-DaliRuntimeScripts -Context (New-DaliBuildContext -WindowsDependenciesRoot $ScriptRoot) -Configuration $Configuration
 Write-Host "`nWindowsDependenciesSDK setup completed in $($Context.SdkRoot)." -ForegroundColor Green
