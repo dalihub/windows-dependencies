@@ -1,0 +1,164 @@
+diff --git a/build/windows.cmake b/build/windows.cmake
+index 470fedeae..8153f206a 100644
+--- a/build/windows.cmake
++++ b/build/windows.cmake
+@@ -14,6 +14,14 @@ SET (TOOL_ROOT ${STARFISH_ROOT}/tool)
+ #######################################################
+ IF (${ARCH} STREQUAL "x86")
+     SET(WINDOWS_ARCH "Win32")
++ELSEIF (${ARCH} STREQUAL "x64")
++    # x64 builds take third-party dependencies from vcpkg instead of the
++    # vendored Win32-only projects/binaries. Pass VCPKG_INSTALLED_DIR
++    # (e.g. .../vcpkg/installed/x64-windows).
++    SET(WINDOWS_ARCH "x64")
++    IF (NOT DEFINED VCPKG_INSTALLED_DIR)
++        MESSAGE(FATAL_ERROR "x64 requires -DVCPKG_INSTALLED_DIR=<vcpkg>/installed/x64-windows")
++    ENDIF()
+ ELSE()
+     MESSAGE(FATAL_ERROR "Unsupported arch")
+ ENDIF()
+@@ -24,8 +32,11 @@ ELSE()
+     SET(WINDOWS_MODE "Release")
+ ENDIF()
+ 
++SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /DEBUG")
++
+ SET(STARFISH_CXXFLAGS
+         /std:c++14
++        /Zi
+         /Oy-
+         /fp:strict
+         /Zc:__cplusplus
+@@ -73,7 +84,6 @@ SET(STARFISH_DEFINES
+         -DSTARFISH_ENABLE_CSS_WEBKIT_TRANSFORM_PREFIX
+         -DSTARFISH_ENABLE_CSS_WEBKIT_TRANSITION_PREFIX
+         -DSTARFISH_ENABLE_ANIMATION
+-        -DSTARFISH_ENABLE_WEBSOCKET
+         -DSTARFISH_IGNORE_CROSS_ORIGIN
+         -DSTARFISH_IGNORE_SSL_VERIFYPEER
+         -DSTARFISH_BACKEND_STR="windows"
+@@ -124,6 +134,17 @@ SET (STARFISH_INCLUDE_DIRS
+     ${THIRD_PARTY_ROOT}/windows/glew/include
+     )
+ 
++IF (${ARCH} STREQUAL "x64")
++    # vcpkg headers; the vendored third_party/windows include dirs above are
++    # empty (uninitialised submodules) so they are harmless to keep listed.
++    SET (STARFISH_INCLUDE_DIRS
++        ${STARFISH_INCLUDE_DIRS}
++        ${VCPKG_INSTALLED_DIR}/include
++        ${VCPKG_INSTALLED_DIR}/include/cairo
++        ${VCPKG_INSTALLED_DIR}/include/harfbuzz
++        )
++ENDIF()
++
+ SET (STARFISH_DEPENDENCIES)
+ SET (STARFISH_THIRD_PARTY_INCLUDE_DIRS)
+ SET (STARFISH_THIRD_PARTY_LINK_LIBRARIES)
+@@ -201,6 +222,7 @@ SET (STARFISH_INCLUDE_DIRS
+ # THIRD_PARTY (build outside)
+ #######################################################
+ 
++IF (${ARCH} STREQUAL "x86")
+ # libpng
+ SET (LIBPNG_TARGET ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libpng.lib ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libpng16.dll ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/zlib1.dll)
+ ADD_CUSTOM_COMMAND (OUTPUT ${LIBPNG_TARGET}
+@@ -343,6 +365,28 @@ SET (STARFISH_DEPENDENCIES
+     windows_pthread
+     copy_glewdll
+ )
++ELSE() # x64: link the vcpkg-built dependencies instead of the vendored ones
++SET (STARFISH_THIRD_PARTY_INCLUDE_DIRS ${VCPKG_INSTALLED_DIR}/include)
++SET (STARFISH_THIRD_PARTY_LINK_LIBRARIES ${STARFISH_THIRD_PARTY_LINK_LIBRARIES}
++    ${VCPKG_INSTALLED_DIR}/lib/libpng16.lib
++    ${VCPKG_INSTALLED_DIR}/lib/zlib.lib
++    ${VCPKG_INSTALLED_DIR}/lib/libcurl.lib
++    ${VCPKG_INSTALLED_DIR}/lib/gif.lib
++    ${VCPKG_INSTALLED_DIR}/lib/harfbuzz.lib
++    ${VCPKG_INSTALLED_DIR}/lib/cairo.lib
++    ${VCPKG_INSTALLED_DIR}/lib/fontconfig.lib
++    ${VCPKG_INSTALLED_DIR}/lib/freetype.lib
++    ${VCPKG_INSTALLED_DIR}/lib/websockets.lib
++    # vcpkg 2019.09's openssl port is 1.0.2 (libeay32/ssleay32); the LWE code
++    # uses the matching 1.0-era API (CRYPTO_set_locking_callback, SHA*_CTX).
++    ${VCPKG_INSTALLED_DIR}/lib/libeay32.lib
++    ${VCPKG_INSTALLED_DIR}/lib/ssleay32.lib
++    ${VCPKG_INSTALLED_DIR}/lib/pthreadVC3.lib
++    ${VCPKG_INSTALLED_DIR}/lib/glew32.lib
++    ws2_32.lib
++    crypt32.lib
++)
++ENDIF()
+ 
+ #######################################################
+ # THIRD_PARTY (build here)
+diff --git a/src/platform/message_loop/MessageLoopWindows.cpp b/src/platform/message_loop/MessageLoopWindows.cpp
+index 45ae92170..4a8e327a1 100644
+--- a/src/platform/message_loop/MessageLoopWindows.cpp
++++ b/src/platform/message_loop/MessageLoopWindows.cpp
+@@ -319,11 +319,32 @@ void MessageLoopWindows::init()
+         needsInit = false;
+         pthread_mutex_init(&g_threadSyncFlowControler, NULL);
+     }
++    // Ensure this thread owns a Win32 message queue before other threads
++    // PostThreadMessage to it (the queue is lazily created on the first
++    // message API call, and posts to a queue-less thread are dropped).
++    MSG message;
++    PeekMessage(&message, NULL, WM_USER, WM_USER, PM_NOREMOVE);
+ }
+ 
+ void MessageLoopWindows::run()
+ {
+-    STARFISH_UNIMPLEMENTED();
++    // Message pump for the dedicated LWE thread (thread mode). The winform
++    // shell instead pumps through the exported startMessageLoop(), which
++    // resolves the loop instance from its WebContainer; here each idler
++    // message carries its owning loop in IdlerData::m_ml.
++    MSG message;
++    BOOL ret;
++    while ((ret = GetMessage(&message, NULL, 0, 0)) != 0) {
++        if (ret == -1) {
++            break;
++        }
++        MessageLoopWindows* target = nullptr;
++        if (message.message == IDLE_MESSAGE ||
++            message.message == IDLE_MESSAGE_FROM_OTHER_THREAD) {
++            target = ((IdlerData*)message.wParam)->m_ml;
++        }
++        MessageLoopImpl::processMessage(target, message);
++    }
+ }
+ 
+ void MessageLoopWindows::stop()
+@@ -340,7 +361,10 @@ void MessageLoopWindows::runOnMainThreadSync(
+     }
+ 
+     pthread_mutex_lock(&g_threadSyncFlowControler);
+-    PostMessage(NULL, IDLE_MESSAGE_FROM_OTHER_THREAD_SYNC, (size_t)&functor, 0);
++    // PostMessage(NULL, ...) would post to the *calling* thread's queue;
++    // the functor must run on the LWE main thread, like the async variant.
++    PostThreadMessage(mainThreadID(), IDLE_MESSAGE_FROM_OTHER_THREAD_SYNC,
++                      (size_t)&functor, 0);
+     pthread_mutex_lock(&g_threadSyncFlowControler);
+     pthread_mutex_unlock(&g_threadSyncFlowControler);
+ }
+diff --git a/src/public/delegate/LWEDelegate.cpp b/src/public/delegate/LWEDelegate.cpp
+index b734cb0f0..db90f4adf 100644
+--- a/src/public/delegate/LWEDelegate.cpp
++++ b/src/public/delegate/LWEDelegate.cpp
+@@ -76,6 +76,15 @@ void LWE::Initialize(const char* storageDirectoryPath, uint32_t option)
+     if (backend == "glib_headless") {
+         rendererType = Starfish::StarfishRendererType::kHeadless;
+     }
++#if defined(STARFISH_WINDOWS)
++    if (backend == "windows") {
++        // Embedders on this backend use the render-to-buffer container path
++        // (WebContainer::Create) without a RendererGLConfiguration, so GL
++        // canvas surfaces would invoke empty std::function GL callbacks.
++        // Use the software (cairo) canvas surface instead.
++        rendererType = Starfish::StarfishRendererType::kSoftware;
++    }
++#endif
+ #ifdef STARFISH_ENABLE_TEST
+     setenv("BACKEND", backend.data(), TRUE);
+ #endif

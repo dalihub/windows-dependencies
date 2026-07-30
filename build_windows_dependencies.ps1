@@ -2,6 +2,11 @@
 param(
   [string]$Proxy = "",
   [string]$VcpkgRoot = "",
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Release",
+  [string]$StarfishRepository = "",
+  [string]$StarfishRevision = "",
+  [switch]$SkipStarfish,
   [switch]$SkipTizenVg,
   [switch]$SkipThirdParty,
   [switch]$Clean,
@@ -48,6 +53,7 @@ if(-not $SkipThirdParty -and -not $SkipTizenVg)
     VcpkgRoot = (Join-Path $WorkspaceContext.SdkRoot "vcpkg")
     InstallPrefix = $WorkspaceContext.SdkRoot
     SkipVcpkg = $true
+    Configuration = $Configuration
   }
   if($Proxy)
   {
@@ -61,7 +67,35 @@ $Context = New-DaliBuildContext `
   -VcpkgRoot (Join-Path $WorkspaceContext.SdkRoot "vcpkg") `
   -InstallPrefix $WorkspaceContext.SdkRoot
 Initialize-DaliBuildEnvironment -Context $Context
-$Common = Get-DaliCommonCMakeArguments -Context $Context
+
+# LWE (Starfish) web engine SDK. Optional: a failure only warns, WebView is
+# simply unavailable and setup-starfish.ps1 can be re-run standalone.
+if(-not $SkipStarfish)
+{
+  $StarfishArguments = @{
+    InstallPrefix = $Context.InstallPrefix
+    Jobs = $Jobs
+  }
+  if($StarfishRepository)
+  {
+    $StarfishArguments.Repository = $StarfishRepository
+  }
+  if($StarfishRevision)
+  {
+    $StarfishArguments.Revision = $StarfishRevision
+  }
+  try
+  {
+    & (Join-Path $ScriptRoot "vcpkg-script/setup-starfish.ps1") @StarfishArguments
+  }
+  catch
+  {
+    Write-Warning "LWE (Starfish) SDK setup failed: $($_.Exception.Message)"
+    Write-Warning "WebView will be unavailable; re-run vcpkg-script/setup-starfish.ps1 after fixing."
+  }
+}
+
+$Common = Get-DaliCommonCMakeArguments -Context $Context -Configuration $Configuration
 
 Invoke-DaliCMakeProject `
   -Name "windows-dependencies" `
