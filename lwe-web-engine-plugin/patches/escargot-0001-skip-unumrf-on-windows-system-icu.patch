@@ -1,0 +1,32 @@
+diff --git a/src/intl/IntlNumberFormat.cpp b/src/intl/IntlNumberFormat.cpp
+index 9ce5b87..c00ccca 100644
+--- a/src/intl/IntlNumberFormat.cpp
++++ b/src/intl/IntlNumberFormat.cpp
+@@ -634,6 +634,11 @@ void IntlNumberFormat::initialize(ExecutionState& state, Object* numberFormat, V
+     if (true
+ #if defined(ENABLE_RUNTIME_ICU_BINDER)
+         && versionArray[0] >= 68
++#endif
++#if defined(ENABLE_RUNTIME_ICU_BINDER) && defined(_WIN32)
++        // Windows' system icu.dll reports ICU >= 68 but does not export the
++        // unumrf_* (NumberRangeFormatter) C API; skip range support there.
++        && false
+ #endif
+     ) {
+         data->numberRangeFormatter = unumrf_openForSkeletonWithCollapseAndIdentityFallback((UChar*)skeleton.data(), skeleton.length(),
+diff --git a/src/intl/IntlPluralRules.cpp b/src/intl/IntlPluralRules.cpp
+index f7cd732..675609a 100644
+--- a/src/intl/IntlPluralRules.cpp
++++ b/src/intl/IntlPluralRules.cpp
+@@ -129,6 +129,11 @@ IntlPluralRulesObject::IntlPluralRulesObject(ExecutionState& state, Object* prot
+     if (true
+ #if defined(ENABLE_RUNTIME_ICU_BINDER)
+         && versionArray[0] >= 68
++#endif
++#if defined(ENABLE_RUNTIME_ICU_BINDER) && defined(_WIN32)
++        // Windows' system icu.dll reports ICU >= 68 but does not export the
++        // unumrf_* (NumberRangeFormatter) C API; skip range support there.
++        && false
+ #endif
+     ) {
+         m_icuNumberRangeFormat = unumrf_openForSkeletonWithCollapseAndIdentityFallback((UChar*)skeleton.data(), skeleton.length(),
