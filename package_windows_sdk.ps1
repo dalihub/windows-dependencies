@@ -20,6 +20,19 @@ if(-not (Test-Path -LiteralPath $Toolchain))
 {
   throw "WindowsDependenciesSDK is incomplete: $Toolchain"
 }
+
+$InstalledRoot = Join-Path $SdkRoot "vcpkg\installed\x64-windows"
+$SelectedBin = Join-Path $InstalledRoot "$($Configuration.ToLowerInvariant())\bin"
+$OtherConfiguration = if($Configuration -eq "Debug") { "release" } else { "debug" }
+if(-not (Test-Path -LiteralPath $SelectedBin))
+{
+  throw "WindowsDependenciesSDK does not contain its $Configuration runtime directory: $SelectedBin"
+}
+if((Test-Path -LiteralPath (Join-Path $InstalledRoot "bin")) -or
+   (Test-Path -LiteralPath (Join-Path $InstalledRoot "$OtherConfiguration\bin")))
+{
+  throw "WindowsDependenciesSDK mixes Debug and Release vcpkg runtime files."
+}
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 
 $SdkInputManifest = Join-Path $SdkRoot "build-inputs.json"
@@ -30,6 +43,12 @@ if($InputManifest)
 else
 {
   & (Join-Path $ScriptRoot "windows-sdk-manifest.ps1") -Mode Inputs -OutputPath $SdkInputManifest -Configuration $Configuration
+}
+
+$ManifestConfiguration = (Get-Content -LiteralPath $SdkInputManifest -Raw | ConvertFrom-Json).configuration
+if($ManifestConfiguration -ne $Configuration)
+{
+  throw "The SDK build-input manifest contains $ManifestConfiguration files, not $Configuration files."
 }
 
 $ContentsManifest = Join-Path $OutputDirectory "sdk-contents-$Configuration.json"

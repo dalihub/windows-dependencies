@@ -1,0 +1,284 @@
+diff --git a/ports/angle/portfile.cmake b/ports/angle/portfile.cmake
+index b9f42c6de..75990cb4e 100644
+--- a/ports/angle/portfile.cmake
++++ b/ports/angle/portfile.cmake
+@@ -31,7 +31,6 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/commit.h DESTINATION ${SOURCE_PATH})
+ vcpkg_configure_cmake(
+     SOURCE_PATH ${SOURCE_PATH}
+     PREFER_NINJA
+-    OPTIONS_DEBUG -DDISABLE_INSTALL_HEADERS=1
+     OPTIONS
+         -D${ANGLE_CPU_BITNESS}=1
+ )
+diff --git a/ports/bzip2/portfile.cmake b/ports/bzip2/portfile.cmake
+index 25e3df10f..300eeed38 100644
+--- a/ports/bzip2/portfile.cmake
++++ b/ports/bzip2/portfile.cmake
+@@ -19,7 +19,6 @@ vcpkg_configure_cmake(
+     SOURCE_PATH ${SOURCE_PATH}
+     PREFER_NINJA
+     OPTIONS_DEBUG
+-        -DBZIP2_SKIP_HEADERS=ON
+         -DBZIP2_SKIP_TOOLS=ON
+ )
+ 
+diff --git a/ports/fontconfig/portfile.cmake b/ports/fontconfig/portfile.cmake
+index 403f7d7fb..b74583e90 100644
+--- a/ports/fontconfig/portfile.cmake
++++ b/ports/fontconfig/portfile.cmake
+@@ -26,7 +26,6 @@ vcpkg_configure_cmake(
+         -DFC_INCLUDE_DIR=${CMAKE_CURRENT_LIST_DIR}/include
+     OPTIONS_DEBUG
+         -DFC_SKIP_TOOLS=ON
+-        -DFC_SKIP_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/gettext/portfile.cmake b/ports/gettext/portfile.cmake
+index a9ab3d2e7..9342ee873 100644
+--- a/ports/gettext/portfile.cmake
++++ b/ports/gettext/portfile.cmake
+@@ -40,7 +40,6 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/libgnuintl.win32.h DESTINATION ${SOURCE_PATH
+ vcpkg_configure_cmake(
+     SOURCE_PATH ${SOURCE_PATH}/gettext-runtime
+     PREFER_NINJA
+-    OPTIONS_DEBUG -DDISABLE_INSTALL_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/giflib/portfile.cmake b/ports/giflib/portfile.cmake
+index 7ca1478f7..eaab22453 100644
+--- a/ports/giflib/portfile.cmake
++++ b/ports/giflib/portfile.cmake
+@@ -27,8 +27,6 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
+ vcpkg_configure_cmake(
+     SOURCE_PATH ${SOURCE_PATH}
+     PREFER_NINJA
+-    OPTIONS_DEBUG
+-        -DGIFLIB_SKIP_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/glib/portfile.cmake b/ports/glib/portfile.cmake
+index 41c3c5017..a20e4a988 100644
+--- a/ports/glib/portfile.cmake
++++ b/ports/glib/portfile.cmake
+@@ -46,7 +46,6 @@ vcpkg_configure_cmake(
+     OPTIONS ${FEATURE_OPTIONS}
+         -DGLIB_VERSION=${GLIB_VERSION}
+     OPTIONS_DEBUG
+-        -DGLIB_SKIP_HEADERS=ON
+         -DGLIB_SKIP_TOOLS=ON
+ )
+ 
+diff --git a/ports/harfbuzz/portfile.cmake b/ports/harfbuzz/portfile.cmake
+index 98e6b15af..76ce54700 100644
+--- a/ports/harfbuzz/portfile.cmake
++++ b/ports/harfbuzz/portfile.cmake
+@@ -65,8 +65,6 @@ vcpkg_configure_cmake(
+         -DHB_HAVE_GLIB=${HAVE_GLIB}
+         -DHB_HAVE_GRAPHITE2=${HB_HAVE_GRAPHITE2}
+         -DHB_BUILD_TESTS=OFF
+-    OPTIONS_DEBUG
+-        -DSKIP_INSTALL_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/libffi/portfile.cmake b/ports/libffi/portfile.cmake
+index f023521c8..088e322df 100644
+--- a/ports/libffi/portfile.cmake
++++ b/ports/libffi/portfile.cmake
+@@ -24,8 +24,6 @@ vcpkg_configure_cmake(
+     PREFER_NINJA
+     OPTIONS
+         -DFFI_CONFIG_FILE=${CMAKE_CURRENT_LIST_DIR}/fficonfig.h
+-    OPTIONS_DEBUG
+-        -DFFI_SKIP_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/libiconv/portfile.cmake b/ports/libiconv/portfile.cmake
+index 488cc3b2f..413524447 100644
+--- a/ports/libiconv/portfile.cmake
++++ b/ports/libiconv/portfile.cmake
+@@ -29,7 +29,6 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
+ vcpkg_configure_cmake(
+     SOURCE_PATH ${SOURCE_PATH}
+     PREFER_NINJA
+-    OPTIONS_DEBUG -DDISABLE_INSTALL_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/libjpeg-turbo/portfile.cmake b/ports/libjpeg-turbo/portfile.cmake
+index 3ebb51dd1..cc570f0e5 100644
+--- a/ports/libjpeg-turbo/portfile.cmake
++++ b/ports/libjpeg-turbo/portfile.cmake
+@@ -40,7 +40,6 @@ vcpkg_configure_cmake(
+         -DINSTALL_DOCS=OFF
+         -DWITH_CRT_DLL=${WITH_CRT_DLL}
+         ${LIBJPEGTURBO_SIMD}
+-    OPTIONS_DEBUG -DINSTALL_HEADERS=OFF
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/libpng/portfile.cmake b/ports/libpng/portfile.cmake
+index 829719d3f..12cee0b80 100644
+--- a/ports/libpng/portfile.cmake
++++ b/ports/libpng/portfile.cmake
+@@ -59,8 +59,6 @@ vcpkg_configure_cmake(
+         -DSKIP_INSTALL_EXECUTABLES=ON
+         -DSKIP_INSTALL_FILES=ON
+         -DSKIP_INSTALL_SYMLINK=ON
+-    OPTIONS_DEBUG
+-        -DSKIP_INSTALL_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/ports/pthreads/portfile.cmake b/ports/pthreads/portfile.cmake
+index 393fefddc..92911ba63 100644
+--- a/ports/pthreads/portfile.cmake
++++ b/ports/pthreads/portfile.cmake
+@@ -28,28 +28,36 @@ find_program(NMAKE nmake REQUIRED)
+ ################
+ # Release build
+ ################
+-message(STATUS "Building ${TARGET_TRIPLET}-rel")
+-file(TO_NATIVE_PATH "${CURRENT_PACKAGES_DIR}" INST_DIR_REL)
+-vcpkg_execute_required_process(
+-    COMMAND ${NMAKE} -f Makefile all install
+-        "DESTROOT=\"${INST_DIR_REL}\""
+-    WORKING_DIRECTORY ${SOURCE_PATH}
+-    LOGNAME nmake-build-${TARGET_TRIPLET}-release
+-)
+-message(STATUS "Building ${TARGET_TRIPLET}-rel done")
++if(NOT DEFINED VCPKG_BUILD_TYPE OR VCPKG_BUILD_TYPE STREQUAL "release")
++  message(STATUS "Building ${TARGET_TRIPLET}-rel")
++  file(TO_NATIVE_PATH "${CURRENT_PACKAGES_DIR}" INST_DIR_REL)
++  vcpkg_execute_required_process(
++      COMMAND ${NMAKE} -f Makefile all install
++          "DESTROOT=\"${INST_DIR_REL}\""
++      WORKING_DIRECTORY ${SOURCE_PATH}
++      LOGNAME nmake-build-${TARGET_TRIPLET}-release
++  )
++  message(STATUS "Building ${TARGET_TRIPLET}-rel done")
++endif()
+ 
+ ################
+ # Debug build
+ ################
+-message(STATUS "Building ${TARGET_TRIPLET}-dbg")
+-file(TO_NATIVE_PATH "${CURRENT_PACKAGES_DIR}/debug" INST_DIR_DBG)
+-vcpkg_execute_required_process(
+-    COMMAND ${NMAKE} /G -f Makefile all install
+-        "DESTROOT=\"${INST_DIR_DBG}\""
+-    WORKING_DIRECTORY ${SOURCE_PATH}
+-    LOGNAME nmake-build-${TARGET_TRIPLET}-debug
+-)
+-message(STATUS "Building ${TARGET_TRIPLET}-dbg done")
++if(NOT DEFINED VCPKG_BUILD_TYPE OR VCPKG_BUILD_TYPE STREQUAL "debug")
++  message(STATUS "Building ${TARGET_TRIPLET}-dbg")
++  file(TO_NATIVE_PATH "${CURRENT_PACKAGES_DIR}/debug" INST_DIR_DBG)
++  vcpkg_execute_required_process(
++      COMMAND ${NMAKE} /G -f Makefile all install
++          "DESTROOT=\"${INST_DIR_DBG}\""
++      WORKING_DIRECTORY ${SOURCE_PATH}
++      LOGNAME nmake-build-${TARGET_TRIPLET}-debug
++  )
++  message(STATUS "Building ${TARGET_TRIPLET}-dbg done")
++endif()
++
++if(DEFINED VCPKG_BUILD_TYPE AND VCPKG_BUILD_TYPE STREQUAL "debug" AND EXISTS "${CURRENT_PACKAGES_DIR}/debug/include")
++  file(COPY "${CURRENT_PACKAGES_DIR}/debug/include/" DESTINATION "${CURRENT_PACKAGES_DIR}/include")
++endif()
+ 
+ file(REMOVE "${CURRENT_PACKAGES_DIR}/bin/pthreadVC3d.dll")
+ file(REMOVE "${CURRENT_PACKAGES_DIR}/bin/pthreadVCE3d.dll")
+diff --git a/ports/zlib/portfile.cmake b/ports/zlib/portfile.cmake
+index 78030309b..ea47aafc8 100644
+--- a/ports/zlib/portfile.cmake
++++ b/ports/zlib/portfile.cmake
+@@ -25,8 +25,6 @@ vcpkg_configure_cmake(
+     OPTIONS
+         -DSKIP_INSTALL_FILES=ON
+         -DSKIP_BUILD_EXAMPLES=ON
+-    OPTIONS_DEBUG
+-        -DSKIP_INSTALL_HEADERS=ON
+ )
+ 
+ vcpkg_install_cmake()
+diff --git a/scripts/cmake/vcpkg_fixup_cmake_targets.cmake b/scripts/cmake/vcpkg_fixup_cmake_targets.cmake
+index c383fcb56..2ccae6e46 100644
+--- a/scripts/cmake/vcpkg_fixup_cmake_targets.cmake
++++ b/scripts/cmake/vcpkg_fixup_cmake_targets.cmake
+@@ -177,6 +177,13 @@ function(vcpkg_fixup_cmake_targets)
+         string(REPLACE "${CMAKE_CURRENT_PACKAGES_DIR}" "\${CMAKE_CURRENT_LIST_DIR}/../.." _contents "${_contents}")
+         file(WRITE ${CMAKE_FILE} "${_contents}")
+     endforeach()
++
++    if(DEFINED VCPKG_BUILD_TYPE AND VCPKG_BUILD_TYPE STREQUAL "debug")
++        file(GLOB_RECURSE RELEASE_LIB_FILES "${CURRENT_PACKAGES_DIR}/lib/*")
++        if(NOT RELEASE_LIB_FILES)
++            file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/lib")
++        endif()
++    endif()
+ endfunction()
+ 
+ 
+diff --git a/scripts/cmake/vcpkg_install_cmake.cmake b/scripts/cmake/vcpkg_install_cmake.cmake
+index ab72d054e..14a03cda1 100644
+--- a/scripts/cmake/vcpkg_install_cmake.cmake
++++ b/scripts/cmake/vcpkg_install_cmake.cmake
+@@ -22,4 +22,14 @@
+ ## * [opencv](https://github.com/Microsoft/vcpkg/blob/master/ports/opencv/portfile.cmake)
+ function(vcpkg_install_cmake)
+     vcpkg_build_cmake(LOGFILE_ROOT install TARGET install ${ARGN})
++    if(DEFINED VCPKG_BUILD_TYPE AND VCPKG_BUILD_TYPE STREQUAL "debug" AND EXISTS "${CURRENT_PACKAGES_DIR}/debug/include")
++        file(COPY "${CURRENT_PACKAGES_DIR}/debug/include/" DESTINATION "${CURRENT_PACKAGES_DIR}/include")
++        file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
++    endif()
++    if(DEFINED VCPKG_BUILD_TYPE AND VCPKG_BUILD_TYPE STREQUAL "debug" AND EXISTS "${CURRENT_PACKAGES_DIR}/debug/lib/cmake")
++        file(COPY "${CURRENT_PACKAGES_DIR}/debug/lib/cmake/" DESTINATION "${CURRENT_PACKAGES_DIR}/lib/cmake")
++    endif()
++    if(DEFINED VCPKG_BUILD_TYPE AND VCPKG_BUILD_TYPE STREQUAL "debug" AND EXISTS "${CURRENT_PACKAGES_DIR}/debug/share")
++        file(COPY "${CURRENT_PACKAGES_DIR}/debug/share/" DESTINATION "${CURRENT_PACKAGES_DIR}/share")
++    endif()
+ endfunction()
+diff --git a/scripts/cmake/vcpkg_install_meson.cmake b/scripts/cmake/vcpkg_install_meson.cmake
+index 7ab9d55b3..d3977ad10 100644
+--- a/scripts/cmake/vcpkg_install_meson.cmake
++++ b/scripts/cmake/vcpkg_install_meson.cmake
+@@ -4,18 +4,22 @@ function(vcpkg_install_meson)
+ 
+     unset(ENV{DESTDIR}) # installation directory was already specified with '--prefix' option
+ 
+-    message(STATUS "Package ${TARGET_TRIPLET}-rel")
+-    vcpkg_execute_required_process(
+-        COMMAND ${NINJA} install -v
+-        WORKING_DIRECTORY ${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-rel
+-        LOGNAME package-${TARGET_TRIPLET}-rel
+-    )
++    if(NOT DEFINED VCPKG_BUILD_TYPE OR VCPKG_BUILD_TYPE STREQUAL "release")
++        message(STATUS "Package ${TARGET_TRIPLET}-rel")
++        vcpkg_execute_required_process(
++            COMMAND ${NINJA} install -v
++            WORKING_DIRECTORY ${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-rel
++            LOGNAME package-${TARGET_TRIPLET}-rel
++        )
++    endif()
+ 
+-    message(STATUS "Package ${TARGET_TRIPLET}-dbg")
+-    vcpkg_execute_required_process(
+-        COMMAND ${NINJA} install -v
+-        WORKING_DIRECTORY ${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-dbg
+-        LOGNAME package-${TARGET_TRIPLET}-dbg
+-    )
++    if(NOT DEFINED VCPKG_BUILD_TYPE OR VCPKG_BUILD_TYPE STREQUAL "debug")
++        message(STATUS "Package ${TARGET_TRIPLET}-dbg")
++        vcpkg_execute_required_process(
++            COMMAND ${NINJA} install -v
++            WORKING_DIRECTORY ${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-dbg
++            LOGNAME package-${TARGET_TRIPLET}-dbg
++        )
++    endif()
+ 
+ endfunction()

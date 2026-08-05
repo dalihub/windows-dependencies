@@ -127,7 +127,7 @@ function Initialize-DaliBuildEnvironment
   $env:FONTCONFIG_FILE = Join-Path $Context.InstallPrefix "share\dali\fonts.conf"
   $env:DALI_WINDOWS_SDK_ROOT = $Context.SdkRoot
   $env:DALI_PREFIX = $Context.InstallPrefix
-  $env:PATH = "$(Join-Path $Context.InstallPrefix "bin");$(Join-Path $Context.InstallPrefix "lib");$(Join-Path $Context.SdkRoot "bin");$(Join-Path $Context.SdkRoot "lib");$(Join-Path $Context.VcpkgRoot "installed\x64-windows\bin");$env:PATH"
+  $env:PATH = "$(Join-Path $Context.InstallPrefix "bin");$(Join-Path $Context.InstallPrefix "lib");$(Join-Path $Context.SdkRoot "bin");$(Join-Path $Context.SdkRoot "lib");$env:PATH"
 }
 
 function Get-DaliCommonCMakeArguments
@@ -142,15 +142,45 @@ function Get-DaliCommonCMakeArguments
   $Python = Join-Path $Context.VcpkgRoot "downloads\tools\python\python-3.7.3-amd64\python.exe"
   Assert-DaliPaths -Paths @($Python) -Description "vcpkg Python; run build_windows_dependencies.ps1 first"
 
-  return @(
+  $VcpkgInstalledRoot = Join-Path $Context.VcpkgRoot "installed\x64-windows"
+  $ConfigurationName = $Configuration.ToLowerInvariant()
+  $VcpkgRuntimeRoot = Join-Path $VcpkgInstalledRoot $ConfigurationName
+  $VcpkgBin = Join-Path $VcpkgRuntimeRoot "bin"
+  $VcpkgLibraryRoot = if($Configuration -eq "Debug")
+  {
+    Join-Path $VcpkgInstalledRoot "debug\lib"
+  }
+  else
+  {
+    Join-Path $VcpkgInstalledRoot "lib"
+  }
+  Assert-DaliPaths -Paths @($VcpkgBin, $VcpkgLibraryRoot) -Description "$Configuration vcpkg SDK"
+  $env:PATH = "$VcpkgBin;$env:PATH"
+
+  $Arguments = @(
     "-G", "Ninja",
     "-DCMAKE_BUILD_TYPE=$Configuration",
     "-DCMAKE_TOOLCHAIN_FILE=$(Join-Path $Context.VcpkgRoot "scripts\buildsystems\vcpkg.cmake")",
     "-DVCPKG_TARGET_TRIPLET=x64-windows",
+    "-DVCPKG_APPLOCAL_DEPS=OFF",
     "-DCMAKE_INSTALL_PREFIX=$($Context.InstallPrefix)",
     "-DCMAKE_PREFIX_PATH=$($Context.InstallPrefix);$($Context.SdkRoot);$(Join-Path $Context.VcpkgRoot "installed\x64-windows")",
+    "-DCMAKE_LIBRARY_PATH=$VcpkgLibraryRoot",
+    "-DCMAKE_PROGRAM_PATH=$VcpkgBin;$(Join-Path $VcpkgInstalledRoot "tools")",
     "-DPython3_EXECUTABLE=$Python"
   )
+
+  # DALi adaptor uses a plain find_library(turbojpeg), while the pinned vcpkg
+  # port gives the Debug import library a `d` postfix. Point it at the selected
+  # configuration explicitly so a Debug-only SDK never falls back to Release.
+  $TurboJpegName = if($Configuration -eq "Debug") { "turbojpegd.lib" } else { "turbojpeg.lib" }
+  $TurboJpegLibrary = Join-Path $VcpkgLibraryRoot $TurboJpegName
+  if(Test-Path -LiteralPath $TurboJpegLibrary)
+  {
+    $Arguments += "-DTURBO_JPEG_LIBRARY=$TurboJpegLibrary"
+  }
+
+  return $Arguments
 }
 
 function Invoke-DaliNative

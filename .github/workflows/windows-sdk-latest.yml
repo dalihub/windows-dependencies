@@ -60,7 +60,7 @@ jobs:
           }
           "unchanged=$($unchanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
 
-      - name: Build SDK without TizenVG
+      - name: Build configuration-specific SDK
         if: steps.inputs.outputs.unchanged != 'true'
         shell: pwsh
         run: |
@@ -73,7 +73,6 @@ jobs:
               "-NoProfile",
               "-File", $buildScript,
               "-Configuration", $env:CONFIGURATION,
-              "-SkipTizenVg",
               "-Clean",
               "-Jobs", "4"
             ) `
@@ -145,7 +144,7 @@ jobs:
             & gh.exe release create $env:RELEASE_TAG `
               --repo $env:GITHUB_REPOSITORY `
               --title "Windows Dependencies SDK (latest)" `
-              --notes "Automatically built Windows x64 dependencies SDK (Debug and Release). TizenVG is added locally when the internal repository is reachable." `
+              --notes "Automatically built Windows x64 dependency SDKs. Debug and Release are published as separate configuration-only archives." `
               --prerelease
             if($LASTEXITCODE -ne 0) {
               & gh.exe release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY 2>$null

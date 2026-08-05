@@ -4,7 +4,6 @@ param(
   [string]$Configuration = "Debug",
   [string]$Proxy = "",
   [string]$VcpkgRoot = "",
-  [switch]$SkipTizenVg,
   [switch]$SkipThirdParty,
   [switch]$Clean,
   [int]$Jobs = 8
@@ -24,10 +23,8 @@ if($SourceVcpkgRoot -eq (Join-Path $WorkspaceContext.SdkRoot "vcpkg"))
 if(-not $SkipThirdParty)
 {
   $DependencyArguments = @{
-    DaliRoot = $WorkspaceContext.DaliRoot
+    Configuration = $Configuration
     VcpkgRoot = $SourceVcpkgRoot
-    InstallPrefix = $WorkspaceContext.SdkRoot
-    SkipTizenVg = $true
   }
   if($Proxy)
   {
@@ -37,27 +34,12 @@ if(-not $SkipThirdParty)
 }
 
 $StageArguments = @{
+  Configuration = $Configuration
   VcpkgRoot = $SourceVcpkgRoot
   SdkRoot = $WorkspaceContext.SdkRoot
   Clean = $Clean
 }
 & (Join-Path $ScriptRoot "vcpkg-script\stage-windows-sdk.ps1") @StageArguments
-
-if(-not $SkipThirdParty -and -not $SkipTizenVg)
-{
-  $TizenVgArguments = @{
-    DaliRoot = $WorkspaceContext.DaliRoot
-    VcpkgRoot = (Join-Path $WorkspaceContext.SdkRoot "vcpkg")
-    InstallPrefix = $WorkspaceContext.SdkRoot
-    SkipVcpkg = $true
-    Configuration = $Configuration
-  }
-  if($Proxy)
-  {
-    $TizenVgArguments.Proxy = $Proxy
-  }
-  & (Join-Path $ScriptRoot "vcpkg-script\setup-dali-dependencies.ps1") @TizenVgArguments
-}
 
 $Context = New-DaliBuildContext `
   -WindowsDependenciesRoot $ScriptRoot `

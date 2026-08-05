@@ -47,7 +47,9 @@ cd <workspace>\windows-dependencies
 ```
 
 `install.ps1` first downloads the `windows-sdk-latest` prerelease, verifies its
-SHA-256 file, and installs it as `<workspace>\WindowsDependenciesSDK`. A partial
+SHA-256 file, and installs the archive matching `-Configuration` as
+`<workspace>\WindowsDependenciesSDK`. Debug is the default. Each archive contains
+only its requested configuration. A partial
 archive is kept below `<workspace>\windows-dependencies\.deps\windows-sdk-download` and is reused
 when a download resumes.
 
@@ -59,26 +61,22 @@ To test another release repository or force a source build:
 
 ```powershell
 .\install.ps1 -ReleaseRepository "owner/windows-dependencies"
+.\install.ps1 -Configuration Release
 .\install.ps1 -BuildFromSource -Jobs 4
 ```
 
 Pass `-Proxy host:port` only when the proxy is not already provided through
 `HTTPS_PROXY` or `HTTP_PROXY`.
 
-### Optional TizenVG support
+TizenVG is not fetched or built by this repository. Internal extensions are
+managed independently from the public Windows dependency SDK.
 
-The published SDK intentionally excludes TizenVG because its repository is
-available only on the Samsung network. After installing the public SDK,
-`install.ps1` probes the TizenVG repository automatically:
+The vcpkg runtime layout is explicit in both archives:
 
-- when the repository is reachable, the pinned TizenVG revision is added to
-  `WindowsDependenciesSDK`;
-- when the repository is unavailable, installation continues without it;
-- after the repository is reached, a TizenVG configure, build, or installation
-  failure is treated as an error.
-
-Without TizenVG, dali-adaptor builds without CanvasRenderer and Lottie support.
-No separate internal/external option is required.
+```text
+vcpkg\installed\x64-windows\debug\bin\    # Debug archive only
+vcpkg\installed\x64-windows\release\bin\  # Release archive only
+```
 
 ## Build DALi repositories
 
@@ -145,7 +143,8 @@ $env:DALI_WINDOW_HEIGHT = "1080"
 & "$env:DALI_PREFIX\bin\hello-world.example.exe"
 ```
 
-Use `-Configuration Debug` with `setenv.ps1` when running a Debug build.
+`setenv.ps1` is generated for the installed SDK configuration, so switching
+configuration requires installing and rebuilding that configuration first.
 
 ## Clean builds
 
@@ -163,11 +162,11 @@ layout directly:
 
 ```powershell
 cd <workspace>\windows-dependencies
-.\build_windows_dependencies.ps1 -SkipTizenVg -Clean -Jobs 4
+.\build_windows_dependencies.ps1 -Configuration Debug -Clean -Jobs 4
 ```
 
 The command installs the relocatable dependency SDK in
-`<workspace>\WindowsDependenciesSDK`. Low-level vcpkg and TizenVG details are in
+`<workspace>\WindowsDependenciesSDK`. Low-level vcpkg details are in
 [vcpkg-script/Readme.md](vcpkg-script/Readme.md).
 
 ## Automated SDK publication
@@ -175,16 +174,18 @@ The command installs the relocatable dependency SDK in
 `.github/workflows/windows-sdk-latest.yml` runs on a GitHub-hosted Windows 2022
 runner when a push to `master` changes an SDK build input. A merged pull request
 normally produces that push; documentation-only changes are ignored. Manual runs
-remain available. The workflow builds the x64 Release SDK without TizenVG and
-maintains the `windows-sdk-latest` prerelease.
+remain available. The workflow builds separate configuration-only x64 Debug
+and Release SDKs and maintains the `windows-sdk-latest` prerelease.
 
 The release contains:
 
 ```text
-DALi-WindowsDependenciesSDK-x64.zip
-DALi-WindowsDependenciesSDK-x64.zip.sha256
-build-inputs.json
-sdk-contents.json
+DALi-WindowsDependenciesSDK-x64-Debug.zip
+DALi-WindowsDependenciesSDK-x64-Debug.zip.sha256
+DALi-WindowsDependenciesSDK-x64-Release.zip
+DALi-WindowsDependenciesSDK-x64-Release.zip.sha256
+build-inputs-Debug.json / build-inputs-Release.json
+sdk-contents-Debug.json / sdk-contents-Release.json
 ```
 
 When the current build inputs match the published manifest, the scheduled build

@@ -20,8 +20,6 @@ Before publishing stable SDK releases, decide and document the following:
 - Define retention and rollback rules for immutable releases.
 - Define how security fixes in third-party dependencies trigger a new SDK
   release.
-- Decide whether the internal TizenVG extension has an independent version and
-  compatibility manifest.
 - Add checksum signing or release signing in addition to the SHA-256 file.
 - Document the migration and deprecation policy for applications consuming an
   older SDK.

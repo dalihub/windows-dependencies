@@ -1,5 +1,7 @@
 [CmdletBinding()]
 param(
+  [ValidateSet("Debug", "Release")]
+  [string]$Configuration = "Debug",
   [string]$VcpkgRoot = "C:\Tools\DALI_VCPKG\vcpkg",
   [string]$VcpkgRepository = "https://github.com/dalihub/vcpkg.git",
   [string]$Proxy = "",
@@ -10,6 +12,11 @@ param(
 $ErrorActionPreference = "Stop"
 $VcpkgCommit = "a58936506"
 $ScriptRoot = $PSScriptRoot
+$VcpkgRoot = [IO.Path]::GetFullPath($VcpkgRoot)
+$VcpkgTriplet = "x64-windows"
+$VcpkgBuildType = $Configuration.ToLowerInvariant()
+$InstalledTripletRoot = Join-Path $VcpkgRoot "installed\$VcpkgTriplet"
+$ConfigurationMarker = Join-Path $InstalledTripletRoot ".dali-configuration"
 
 . (Join-Path $ScriptRoot "dependency-network.ps1")
 
@@ -116,6 +123,28 @@ function Test-PatchMarkerApplied
     "[VCPKG]_0006_Use_x64_meson_native_build.patch" {
       return ((Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "--native-file `${_VCPKG_MESON_CROSS_FILE}") -and (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "/MACHINE:X64"))
     }
+    "[VCPKG]_0007_Support_configuration_only_builds.patch" {
+      return ((Test-VcpkgFileContains "scripts\cmake\vcpkg_install_cmake.cmake" 'VCPKG_BUILD_TYPE STREQUAL "debug"') -and
+              (Test-VcpkgFileContains "scripts\cmake\vcpkg_install_cmake.cmake" "debug/lib/cmake") -and
+              (Test-VcpkgFileContains "scripts\cmake\vcpkg_fixup_cmake_targets.cmake" "RELEASE_LIB_FILES") -and
+              (Test-VcpkgFileContains "scripts\cmake\vcpkg_install_meson.cmake" 'VCPKG_BUILD_TYPE STREQUAL "release"') -and
+              -not (Test-VcpkgFileContains "ports\zlib\portfile.cmake" "SKIP_INSTALL_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\libpng\portfile.cmake" "SKIP_INSTALL_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\libjpeg-turbo\portfile.cmake" "INSTALL_HEADERS=OFF") -and
+              -not (Test-VcpkgFileContains "ports\giflib\portfile.cmake" "GIFLIB_SKIP_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\fontconfig\portfile.cmake" "FC_SKIP_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\bzip2\portfile.cmake" "BZIP2_SKIP_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\glib\portfile.cmake" "GLIB_SKIP_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\libffi\portfile.cmake" "FFI_SKIP_HEADERS=ON") -and
+              -not (Test-VcpkgFileContains "ports\libiconv\portfile.cmake" "DISABLE_INSTALL_HEADERS=ON") -and
+              (Test-VcpkgFileContains "ports\pthreads\portfile.cmake" 'VCPKG_BUILD_TYPE STREQUAL "release"'))
+    }
+    "[VCPKG-zlib]_0001_Use_https_fossil_archive.patch" {
+      return (Test-VcpkgFileContains "ports\zlib\portfile.cmake" "https://github.com/madler/zlib/archive/refs/tags/")
+    }
+    "[VCPKG-zlib]_0002_Use_github_source_archive.patch" {
+      return (Test-VcpkgFileContains "ports\zlib\portfile.cmake" "https://github.com/madler/zlib/archive/refs/tags/")
+    }
   }
 
   return $false
@@ -176,11 +205,20 @@ function Apply-MissingPatch
 
 function Get-RequiredVcpkgFiles
 {
+  $LibraryRoot = if($Configuration -eq "Debug")
+  {
+    Join-Path $InstalledTripletRoot "debug"
+  }
+  else
+  {
+    $InstalledTripletRoot
+  }
+
   return @(
-    (Join-Path $VcpkgRoot "installed\x64-windows\include\libintl.h"),
-    (Join-Path $VcpkgRoot "installed\x64-windows\lib\libintl.lib"),
-    (Join-Path $VcpkgRoot "installed\x64-windows\bin\libintl.dll"),
-    (Join-Path $VcpkgRoot "installed\x64-windows\tools\gettext\msgfmt.exe")
+    (Join-Path $InstalledTripletRoot "include\libintl.h"),
+    (Join-Path $LibraryRoot "lib\libintl.lib"),
+    (Join-Path $LibraryRoot "bin\libintl.dll"),
+    (Join-Path $InstalledTripletRoot "tools\gettext\msgfmt.exe")
   )
 }
 
@@ -230,13 +268,95 @@ function Repair-GettextToolsIfNeeded
   }
 
   Write-Warning "gettext/libintl/msgfmt outputs are incomplete. Reinstalling gettext-dependent vcpkg packages."
-  & "$VcpkgRoot\vcpkg.exe" remove "gettext:x64-windows" --recurse
+  & "$VcpkgRoot\vcpkg.exe" remove "gettext:$VcpkgTriplet" --recurse
   if($LASTEXITCODE -ne 0)
   {
     Write-Warning "gettext removal failed or gettext was not installed. Continuing with install."
   }
 
-  Invoke-VcpkgInstall @("gettext:x64-windows", "cairo:x64-windows")
+  Invoke-VcpkgInstall @("gettext:$VcpkgTriplet", "cairo:$VcpkgTriplet")
+}
+
+function Set-DaliVcpkgTriplet
+{
+  $TripletPath = Join-Path $VcpkgRoot "triplets\$VcpkgTriplet.cmake"
+  $TripletContent = @"
+set(VCPKG_TARGET_ARCHITECTURE x64)
+set(VCPKG_CRT_LINKAGE dynamic)
+set(VCPKG_LIBRARY_LINKAGE dynamic)
+set(VCPKG_BUILD_TYPE $VcpkgBuildType)
+"@
+  [IO.File]::WriteAllText($TripletPath, $TripletContent, [Text.UTF8Encoding]::new($false))
+  Write-Host "Configured $VcpkgTriplet for $Configuration-only packages."
+}
+
+function Reset-VcpkgPackagesForConfiguration
+{
+  if(-not (Test-Path -LiteralPath $InstalledTripletRoot))
+  {
+    return
+  }
+
+  $InstalledConfiguration = ""
+  if(Test-Path -LiteralPath $ConfigurationMarker)
+  {
+    $InstalledConfiguration = (Get-Content -LiteralPath $ConfigurationMarker -Raw).Trim()
+  }
+  if($InstalledConfiguration -eq $Configuration)
+  {
+    return
+  }
+
+  Write-Host "Replacing the existing vcpkg package set with $Configuration-only packages."
+  $InstalledPackageSpecs = @(
+    & "$VcpkgRoot\vcpkg.exe" list |
+      ForEach-Object {
+        if($_ -match '^([^\[\s:]+)(?:\[[^\]]+\])?:x64-windows\s')
+        {
+          "$($matches[1]):$VcpkgTriplet"
+        }
+      } |
+      Sort-Object -Unique
+  )
+  if($LASTEXITCODE -ne 0)
+  {
+    throw "Unable to list the previous $VcpkgTriplet package set."
+  }
+  if($InstalledPackageSpecs.Count -gt 0)
+  {
+    & "$VcpkgRoot\vcpkg.exe" remove @InstalledPackageSpecs --recurse
+    if($LASTEXITCODE -ne 0)
+    {
+      throw "Unable to remove the previous $VcpkgTriplet package set."
+    }
+  }
+
+  # Old vcpkg leaves files promoted by our Debug-only compatibility patch and
+  # reuses the previous package staging directories. Remove both exact target
+  # locations so a configuration switch cannot carry Debug files into Release
+  # (or Release files into Debug).
+  $InstalledRoot = [IO.Path]::GetFullPath((Join-Path $VcpkgRoot "installed"))
+  if([IO.Path]::GetFullPath((Split-Path -Parent $InstalledTripletRoot)) -ne $InstalledRoot)
+  {
+    throw "Refusing to clean unexpected installed triplet path: $InstalledTripletRoot"
+  }
+  if(Test-Path -LiteralPath $InstalledTripletRoot)
+  {
+    Remove-Item -LiteralPath $InstalledTripletRoot -Recurse -Force
+  }
+
+  $PackagesRoot = [IO.Path]::GetFullPath((Join-Path $VcpkgRoot "packages"))
+  if(Test-Path -LiteralPath $PackagesRoot)
+  {
+    foreach($PackageDirectory in (Get-ChildItem -LiteralPath $PackagesRoot -Directory -Filter "*_$VcpkgTriplet"))
+    {
+      if([IO.Path]::GetFullPath((Split-Path -Parent $PackageDirectory.FullName)) -ne $PackagesRoot)
+      {
+        throw "Refusing to clean unexpected package path: $($PackageDirectory.FullName)"
+      }
+      Remove-Item -LiteralPath $PackageDirectory.FullName -Recurse -Force
+    }
+  }
 }
 function Resolve-CMakeCommand
 {
@@ -318,6 +438,7 @@ $Patches = @(
   "[VCPKG]_0004_Fix_x64_meson_cross_file.patch",
   "[VCPKG]_0005_Use_x64_python_tool.patch",
   "[VCPKG]_0006_Use_x64_meson_native_build.patch",
+  "[VCPKG]_0007_Support_configuration_only_builds.patch",
   "[VCPKG-zlib]_0001_Use_https_fossil_archive.patch",
   "[VCPKG-zlib]_0002_Use_github_source_archive.patch"
 )
@@ -357,6 +478,8 @@ foreach($PatchName in $Patches)
   Apply-MissingPatch $PatchName
 }
 
+Set-DaliVcpkgTriplet
+
 if($script:VcpkgNeedsBootstrap)
 {
   cmd.exe /d /c "`"$VcpkgRoot\bootstrap-vcpkg.bat`" -disableMetrics"
@@ -369,11 +492,14 @@ else
 
 if(-not $SkipInstall)
 {
+  Reset-VcpkgPackagesForConfiguration
+  New-Item -ItemType Directory -Force -Path $InstalledTripletRoot | Out-Null
+  [IO.File]::WriteAllText($ConfigurationMarker, "$Configuration`n", [Text.UTF8Encoding]::new($false))
   Invoke-VcpkgInstall $Packages
   Repair-GettextToolsIfNeeded
   Assert-RequiredVcpkgFiles
 
-  $Msgfmt = Join-Path $VcpkgRoot "installed\x64-windows\tools\gettext\msgfmt.exe"
+  $Msgfmt = Join-Path $InstalledTripletRoot "tools\gettext\msgfmt.exe"
   & $Msgfmt --version | Select-Object -First 1
   if($LASTEXITCODE -ne 0) { throw "msgfmt validation failed" }
 }
