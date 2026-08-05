@@ -35,7 +35,7 @@ jobs:
       - name: Check out windows-dependencies
         uses: actions/checkout@v5
 
-      - name: Build SDK without TizenVG
+      - name: Build configuration-specific SDK
         shell: pwsh
         run: |
           $buildScript = Join-Path $env:GITHUB_WORKSPACE "build_windows_dependencies.ps1"
@@ -47,7 +47,6 @@ jobs:
               "-NoProfile",
               "-File", $buildScript,
               "-Configuration", $env:CONFIGURATION,
-              "-SkipTizenVg",
               "-Clean",
               "-Jobs", "4"
             ) `

@@ -6,46 +6,35 @@ available and by the scheduled SDK build.
 
 ## Dependency sources
 
-The source revisions are pinned by the scripts:
-
-- vcpkg: `https://github.com/dalihub/vcpkg.git`
-- TizenVG: `https://github.sec.samsung.net/tizen/tizenvg.git` (Samsung network
-  only)
+The vcpkg source revision is pinned by the scripts and cloned from
+`https://github.com/dalihub/vcpkg.git`.
 
 The vcpkg setup builds the x64 Windows libraries required by the DALi backend,
 including ANGLE, Cairo, Fontconfig, FreeType, HarfBuzz, gettext, image codecs,
 and their transitive dependencies. It also installs native `libintl` and
 `msgfmt.exe`.
 
-TizenVG is optional only when its repository cannot be reached. If it is
-reachable, failures while checking out, configuring, building, or installing
-the pinned revision are reported as errors.
+Debug and Release are built separately. The selected configuration is the only
+one installed in the staged SDK and its runtime DLLs are exposed below the
+explicit `debug\bin` or `release\bin` directory.
 
 ## Direct maintainer use
 
-Build both public dependencies and the optional internal extension:
+Build the public dependency set:
 
 ```powershell
 cd <workspace>\windows-dependencies\vcpkg-script
 .\setup-dali-dependencies.ps1 `
-  -DaliRoot <workspace> `
+  -Configuration Debug `
   -VcpkgRoot <workspace>\windows-dependencies\.deps\vcpkg `
-  -InstallPrefix <workspace>\WindowsDependenciesSDK
+  -Proxy host:port
 ```
 
-Build only the public dependency set:
+Omit `-Proxy` when the proxy is already supplied through the environment. Use
+`-Configuration Release` to replace the source vcpkg package set with Release-only
+packages.
 
 ```powershell
-.\setup-dali-dependencies.ps1 `
-  -DaliRoot <workspace> `
-  -VcpkgRoot <workspace>\windows-dependencies\.deps\vcpkg `
-  -InstallPrefix <workspace>\WindowsDependenciesSDK `
-  -SkipTizenVg
-```
-
-`-SkipVcpkg` reuses an already staged vcpkg SDK when only the TizenVG extension
-is required. `-Proxy host:port` overrides proxy environment variables.
-
 ## Network and retry behavior
 
 GitHub clone, fetch, and download operations retry up to ten times. Git uses a
@@ -59,6 +48,3 @@ validation enabled. CRL checks that commonly fail behind a corporate TLS proxy
 are skipped, but TLS verification itself remains enabled. Do not disable TLS
 verification; install the approved corporate root certificate when HTTPS
 inspection is used.
-
-TizenVG uses the x64 Python distributed by vcpkg when possible. Its Meson/Ninja
-tool environment and the pinned source checkout are reused by later runs.

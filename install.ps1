@@ -77,6 +77,30 @@ function Install-DownloadedSdk
       throw "The SDK archive does not contain its vcpkg toolchain."
     }
 
+    $InputManifest = Join-Path $ExtractRoot "build-inputs.json"
+    if(-not (Test-Path -LiteralPath $InputManifest))
+    {
+      throw "The SDK archive does not contain its build-input manifest."
+    }
+    $ArchivedConfiguration = (Get-Content -LiteralPath $InputManifest -Raw | ConvertFrom-Json).configuration
+    if($ArchivedConfiguration -ne $Configuration)
+    {
+      throw "The SDK archive contains $ArchivedConfiguration files, not $Configuration files."
+    }
+
+    $InstalledRoot = Join-Path $ExtractRoot "vcpkg\installed\x64-windows"
+    $SelectedBin = Join-Path $InstalledRoot "$($Configuration.ToLowerInvariant())\bin"
+    $OtherConfiguration = if($Configuration -eq "Debug") { "release" } else { "debug" }
+    if(-not (Test-Path -LiteralPath $SelectedBin))
+    {
+      throw "The SDK archive does not contain its $Configuration runtime directory: $SelectedBin"
+    }
+    if((Test-Path -LiteralPath (Join-Path $InstalledRoot "bin")) -or
+       (Test-Path -LiteralPath (Join-Path $InstalledRoot "$OtherConfiguration\bin")))
+    {
+      throw "The SDK archive mixes Debug and Release vcpkg runtime files."
+    }
+
     $BackupRoot = "$SdkRoot.previous"
     if(Test-Path -LiteralPath $BackupRoot)
     {
@@ -126,7 +150,6 @@ if(-not $InstalledRelease)
   Write-Host "No usable published SDK was found. Building the same SDK layout from source." -ForegroundColor Yellow
   $BuildArguments = @{
     Configuration = $Configuration
-    SkipTizenVg = $true
     Clean = $true
     Jobs = $Jobs
   }
@@ -136,19 +159,6 @@ if(-not $InstalledRelease)
   }
   & (Join-Path $ScriptRoot "build_windows_dependencies.ps1") @BuildArguments
 }
-
-$TizenVgArguments = @{
-  DaliRoot = $WorkspaceRoot
-  VcpkgRoot = (Join-Path $SdkRoot "vcpkg")
-  InstallPrefix = $SdkRoot
-  SkipVcpkg = $true
-  Configuration = $Configuration
-}
-if($Proxy)
-{
-  $TizenVgArguments.Proxy = $Proxy
-}
-& (Join-Path $ScriptRoot "vcpkg-script\setup-dali-dependencies.ps1") @TizenVgArguments
 
 $RuntimeContext = New-DaliBuildContext -WindowsDependenciesRoot $ScriptRoot
 Install-DaliRuntimeScripts -Context $RuntimeContext -Configuration $Configuration

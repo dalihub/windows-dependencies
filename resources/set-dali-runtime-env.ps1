@@ -15,8 +15,7 @@ $RuntimePaths = @(
   (Join-Path $DaliPrefix "lib"),
   (Join-Path $SdkRoot "bin"),
   (Join-Path $SdkRoot "lib"),
-  $(if($Configuration -eq "Debug") { Join-Path $VcpkgRoot "installed\x64-windows\debug\bin" }),
-  (Join-Path $VcpkgRoot "installed\x64-windows\bin")
+  (Join-Path $VcpkgRoot "installed\x64-windows\$($Configuration.ToLowerInvariant())\bin")
 ) | Where-Object { Test-Path -LiteralPath $_ }
 $ExistingPaths = @($env:PATH -split ';' | Where-Object { $_ })
 $env:PATH = (@($RuntimePaths) + $ExistingPaths | Select-Object -Unique) -join ';'
