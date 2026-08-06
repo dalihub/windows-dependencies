@@ -96,7 +96,7 @@ function Install-DownloadedSdk
       throw "The SDK archive does not contain its $Configuration runtime directory: $SelectedBin"
     }
     if((Test-Path -LiteralPath (Join-Path $InstalledRoot "bin")) -or
-       (Test-Path -LiteralPath (Join-Path $InstalledRoot "$OtherConfiguration\bin")))
+       (Test-Path -LiteralPath (Join-Path $InstalledRoot $OtherConfiguration)))
     {
       throw "The SDK archive mixes Debug and Release vcpkg runtime files."
     }

@@ -188,7 +188,7 @@ build-inputs-Debug.json / build-inputs-Release.json
 sdk-contents-Debug.json / sdk-contents-Release.json
 ```
 
-When the current build inputs match the published manifest, the scheduled build
+When the current build inputs match the published manifest, the workflow build
 and upload are skipped. When inputs differ but the produced SDK contents remain
 the same, only the input manifest is refreshed. The workflow uses the
 repository-scoped `GITHUB_TOKEN` with `contents: write`; it does not require a
@@ -196,5 +196,3 @@ personal access token or a custom secret.
 
 The workflow publishes only `WindowsDependenciesSDK`. DALi core, adaptor, UI,
 and sample binaries remain source builds performed in their own repositories.
-Future immutable SDK versioning is tracked in
-[WINDOWS-SDK-VERSIONING-TODO.md](WINDOWS-SDK-VERSIONING-TODO.md).

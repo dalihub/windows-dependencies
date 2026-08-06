@@ -29,9 +29,31 @@ if(-not (Test-Path -LiteralPath $SelectedBin))
   throw "WindowsDependenciesSDK does not contain its $Configuration runtime directory: $SelectedBin"
 }
 if((Test-Path -LiteralPath (Join-Path $InstalledRoot "bin")) -or
-   (Test-Path -LiteralPath (Join-Path $InstalledRoot "$OtherConfiguration\bin")))
+   (Test-Path -LiteralPath (Join-Path $InstalledRoot $OtherConfiguration)))
 {
   throw "WindowsDependenciesSDK mixes Debug and Release vcpkg runtime files."
+}
+
+$InfoRoot = Join-Path $SdkRoot "vcpkg\installed\vcpkg\info"
+if(Test-Path -LiteralPath $InfoRoot)
+{
+  $ForbiddenEntryPattern = if($Configuration -eq "Debug")
+  {
+    '^x64-windows/(?:bin|release)(?:/|$)'
+  }
+  else
+  {
+    '^x64-windows/(?:bin|debug)(?:/|$)'
+  }
+  $ForbiddenMetadata = @(
+    Get-ChildItem -LiteralPath $InfoRoot -File -Filter "*.list" |
+      Select-String -Pattern $ForbiddenEntryPattern |
+      Select-Object -First 1
+  )
+  if($ForbiddenMetadata.Count -gt 0)
+  {
+    throw "WindowsDependenciesSDK metadata mixes Debug and Release files: $($ForbiddenMetadata[0])"
+  }
 }
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 

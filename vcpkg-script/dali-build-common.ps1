@@ -60,6 +60,27 @@ function Assert-DaliPaths
   }
 }
 
+function Set-DaliPathEnvironment
+{
+  param(
+    [string[]]$Paths = @(),
+    [string[]]$ManagedPaths = @()
+  )
+
+  $NormalizedManagedPaths = @(
+    $ManagedPaths |
+      Where-Object { $_ } |
+      ForEach-Object { [IO.Path]::GetFullPath($_).TrimEnd('\') }
+  )
+  $ExistingPaths = @(
+    $env:PATH -split ';' |
+      Where-Object { $_ } |
+      Where-Object { [IO.Path]::GetFullPath($_).TrimEnd('\') -notin $NormalizedManagedPaths }
+  )
+  $SelectedPaths = @($Paths | Where-Object { Test-Path -LiteralPath $_ })
+  $env:PATH = (@($SelectedPaths) + $ExistingPaths | Select-Object -Unique) -join ';'
+}
+
 function Import-DaliMsvcEnvironment
 {
   $Compiler = Get-Command cl.exe -ErrorAction SilentlyContinue
@@ -127,7 +148,18 @@ function Initialize-DaliBuildEnvironment
   $env:FONTCONFIG_FILE = Join-Path $Context.InstallPrefix "share\dali\fonts.conf"
   $env:DALI_WINDOWS_SDK_ROOT = $Context.SdkRoot
   $env:DALI_PREFIX = $Context.InstallPrefix
-  $env:PATH = "$(Join-Path $Context.InstallPrefix "bin");$(Join-Path $Context.InstallPrefix "lib");$(Join-Path $Context.SdkRoot "bin");$(Join-Path $Context.SdkRoot "lib");$env:PATH"
+  $VcpkgInstalledRoot = Join-Path $Context.VcpkgRoot "installed\x64-windows"
+  Set-DaliPathEnvironment `
+    -Paths @((Join-Path $Context.InstallPrefix "bin")) `
+    -ManagedPaths @(
+      (Join-Path $Context.InstallPrefix "bin"),
+      (Join-Path $Context.InstallPrefix "lib"),
+      (Join-Path $Context.SdkRoot "bin"),
+      (Join-Path $Context.SdkRoot "lib"),
+      (Join-Path $VcpkgInstalledRoot "bin"),
+      (Join-Path $VcpkgInstalledRoot "debug\bin"),
+      (Join-Path $VcpkgInstalledRoot "release\bin")
+    )
 }
 
 function Get-DaliCommonCMakeArguments
@@ -155,7 +187,17 @@ function Get-DaliCommonCMakeArguments
     Join-Path $VcpkgInstalledRoot "lib"
   }
   Assert-DaliPaths -Paths @($VcpkgBin, $VcpkgLibraryRoot) -Description "$Configuration vcpkg SDK"
-  $env:PATH = "$VcpkgBin;$env:PATH"
+  Set-DaliPathEnvironment `
+    -Paths @($VcpkgBin, (Join-Path $Context.InstallPrefix "bin")) `
+    -ManagedPaths @(
+      (Join-Path $Context.InstallPrefix "bin"),
+      (Join-Path $Context.InstallPrefix "lib"),
+      (Join-Path $Context.SdkRoot "bin"),
+      (Join-Path $Context.SdkRoot "lib"),
+      (Join-Path $VcpkgInstalledRoot "bin"),
+      (Join-Path $VcpkgInstalledRoot "debug\bin"),
+      (Join-Path $VcpkgInstalledRoot "release\bin")
+    )
 
   $Arguments = @(
     "-G", "Ninja",

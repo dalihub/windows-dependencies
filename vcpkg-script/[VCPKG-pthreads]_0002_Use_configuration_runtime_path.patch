@@ -1,0 +1,27 @@
+diff --git a/ports/pthreads/vcpkg-cmake-wrapper.cmake b/ports/pthreads/vcpkg-cmake-wrapper.cmake
+--- a/ports/pthreads/vcpkg-cmake-wrapper.cmake
++++ b/ports/pthreads/vcpkg-cmake-wrapper.cmake
+@@ -77,3 +77,6 @@
+-set(PThreads4W_DLL_DIR ${PThreads4W_INCLUDE_DIR})
+-list(TRANSFORM PThreads4W_DLL_DIR APPEND "/../bin")
++if(PThreads4W_LIBRARY_DEBUG)
++  set(PThreads4W_DLL_DIR "${PThreads4W_INCLUDE_DIR}/../debug/bin")
++else()
++  set(PThreads4W_DLL_DIR "${PThreads4W_INCLUDE_DIR}/../bin")
++endif()
+ message(STATUS "PThreads4W_DLL_DIR: ${PThreads4W_DLL_DIR}")
+@@ -81,8 +84,7 @@
+-find_file(PThreads4W_LIBRARY_RELEASE_DLL NAMES pthreadVC${PThreads4W_MAJOR_VERSION}.dll PATHS ${PThreads4W_DLL_DIR})
+-find_file(PThreads4W_LIBRARY_DEBUG_DLL NAMES pthreadVC${PThreads4W_MAJOR_VERSION}d.dll PATHS ${PThreads4W_DLL_DIR})
+-find_file(PThreads4W_CXXEXC_LIBRARY_RELEASE_DLL NAMES pthreadVCE${PThreads4W_MAJOR_VERSION}.dll PATHS ${PThreads4W_DLL_DIR})
+-find_file(PThreads4W_CXXEXC_LIBRARY_DEBUG_DLL NAMES pthreadVCE${PThreads4W_MAJOR_VERSION}d.dll PATHS ${PThreads4W_DLL_DIR})
+-find_file(PThreads4W_STRUCTEXC_LIBRARY_RELEASE_DLL NAMES pthreadVSE${PThreads4W_MAJOR_VERSION}.dll PATHS ${PThreads4W_DLL_DIR})
+-find_file(PThreads4W_STRUCTEXC_LIBRARY_DEBUG_DLL NAMES pthreadVSE${PThreads4W_MAJOR_VERSION}d.dll PATHS ${PThreads4W_DLL_DIR})
+-
++find_file(PThreads4W_LIBRARY_RELEASE_DLL NAMES pthreadVC${PThreads4W_MAJOR_VERSION}.dll PATHS ${PThreads4W_DLL_DIR} NO_DEFAULT_PATH)
++find_file(PThreads4W_LIBRARY_DEBUG_DLL NAMES pthreadVC${PThreads4W_MAJOR_VERSION}d.dll PATHS ${PThreads4W_DLL_DIR} NO_DEFAULT_PATH)
++find_file(PThreads4W_CXXEXC_LIBRARY_RELEASE_DLL NAMES pthreadVCE${PThreads4W_MAJOR_VERSION}.dll PATHS ${PThreads4W_DLL_DIR} NO_DEFAULT_PATH)
++find_file(PThreads4W_CXXEXC_LIBRARY_DEBUG_DLL NAMES pthreadVCE${PThreads4W_MAJOR_VERSION}d.dll PATHS ${PThreads4W_DLL_DIR} NO_DEFAULT_PATH)
++find_file(PThreads4W_STRUCTEXC_LIBRARY_RELEASE_DLL NAMES pthreadVSE${PThreads4W_MAJOR_VERSION}.dll PATHS ${PThreads4W_DLL_DIR} NO_DEFAULT_PATH)
++find_file(PThreads4W_STRUCTEXC_LIBRARY_DEBUG_DLL NAMES pthreadVSE${PThreads4W_MAJOR_VERSION}d.dll PATHS ${PThreads4W_DLL_DIR} NO_DEFAULT_PATH)
+ #Compatibility definitions, deprecated

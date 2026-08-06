@@ -86,8 +86,8 @@ cd <workspace>
 .\windows-dependencies\dali-shell.ps1
 ```
 
-이 셸에서는 `dali-env\bin`, SDK의 `bin`과 vcpkg runtime `bin`이 PATH에
-설정되므로 설치된 sample 실행 파일을 이름으로 실행할 수 있다.
+이 셸에서는 `dali-env\bin`과 선택한 구성의 vcpkg runtime `bin`만 DALi
+경로로 PATH에 설정되므로 설치된 sample 실행 파일을 이름으로 실행할 수 있다.
 
 ## SDK 자동 배포
 
@@ -108,5 +108,3 @@ sdk-contents-Debug.json / sdk-contents-Release.json
 빌드 입력 manifest가 기존 구성과 같으면 빌드와 업로드를 모두
 건너뛴다. 입력이 달라도 SDK 파일 내용이 같으면 ZIP은 유지하고 다음
 실행의 비교를 위해 입력 manifest만 갱신한다.
-
-정식 버전 정책은 `WINDOWS-SDK-VERSIONING-TODO.md`에 정리되어 있다.
