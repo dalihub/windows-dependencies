@@ -18,6 +18,8 @@ $SourceTripletRoot = Join-Path $SourceInstalledRoot "x64-windows"
 $SourceConfigurationMarker = Join-Path $SourceTripletRoot ".dali-configuration"
 $SdkInstalledRoot = Join-Path $SdkVcpkgRoot "installed"
 $SdkTripletRoot = Join-Path $SdkInstalledRoot "x64-windows"
+$ConfigurationDirectory = $Configuration.ToLowerInvariant()
+$OtherConfiguration = if($Configuration -eq "Debug") { "release" } else { "debug" }
 
 if($Clean -and (Test-Path -LiteralPath $SdkRoot))
 {
@@ -49,14 +51,26 @@ if($BuiltConfiguration -ne $Configuration)
 
 $SourceDebugBin = Join-Path $SourceTripletRoot "debug\bin"
 $SourceReleaseBin = Join-Path $SourceTripletRoot "bin"
+$SourceOtherConfigurationRoot = if($Configuration -eq "Debug")
+{
+  Join-Path $SourceTripletRoot "release"
+}
+else
+{
+  Join-Path $SourceTripletRoot "debug"
+}
 if($Configuration -eq "Debug")
 {
-  if(-not (Test-Path -LiteralPath $SourceDebugBin) -or (Test-Path -LiteralPath $SourceReleaseBin))
+  if(-not (Test-Path -LiteralPath $SourceDebugBin) -or
+     (Test-Path -LiteralPath $SourceReleaseBin) -or
+     (Test-Path -LiteralPath $SourceOtherConfigurationRoot))
   {
     throw "The source vcpkg tree is not Debug-only: $SourceTripletRoot"
   }
 }
-elseif(-not (Test-Path -LiteralPath $SourceReleaseBin) -or (Test-Path -LiteralPath $SourceDebugBin))
+elseif(-not (Test-Path -LiteralPath $SourceReleaseBin) -or
+       (Test-Path -LiteralPath $SourceDebugBin) -or
+       (Test-Path -LiteralPath $SourceOtherConfigurationRoot))
 {
   throw "The source vcpkg tree is not Release-only: $SourceTripletRoot"
 }
@@ -95,40 +109,65 @@ if($Configuration -eq "Release")
   $ReleaseRoot = Join-Path $SdkTripletRoot "release"
   New-Item -ItemType Directory -Force -Path $ReleaseRoot | Out-Null
   Move-Item -LiteralPath (Join-Path $SdkTripletRoot "bin") -Destination (Join-Path $ReleaseRoot "bin")
+}
 
-  $CMakeFiles = Get-ChildItem -LiteralPath (Join-Path $SdkTripletRoot "share") -File -Recurse -Filter "*.cmake"
-  foreach($CMakeFile in $CMakeFiles)
+$InfoRoot = Join-Path $SdkInstalledRoot "vcpkg\info"
+if(Test-Path -LiteralPath $InfoRoot)
+{
+  $ExcludedEntryPattern = if($Configuration -eq "Debug")
   {
-    $Content = [IO.File]::ReadAllText($CMakeFile.FullName)
-    $Updated = $Content.Replace('${_IMPORT_PREFIX}/bin/', '${_IMPORT_PREFIX}/release/bin/')
-    $Updated = $Updated.Replace('${PACKAGE_PREFIX_DIR}/bin/', '${PACKAGE_PREFIX_DIR}/release/bin/')
-    $Updated = $Updated.Replace('${CMAKE_CURRENT_LIST_DIR}/../../bin/', '${CMAKE_CURRENT_LIST_DIR}/../../release/bin/')
-    if($Updated -ne $Content)
-    {
-      [IO.File]::WriteAllText($CMakeFile.FullName, $Updated, [Text.UTF8Encoding]::new($false))
-    }
+    '^x64-windows/(?:bin|release)(?:/|$)'
+  }
+  else
+  {
+    '^x64-windows/debug(?:/|$)'
   }
 
-  $InfoRoot = Join-Path $SdkInstalledRoot "vcpkg\info"
-  if(Test-Path -LiteralPath $InfoRoot)
+  foreach($ListFile in (Get-ChildItem -LiteralPath $InfoRoot -File -Filter "*.list"))
   {
-    foreach($ListFile in (Get-ChildItem -LiteralPath $InfoRoot -File -Filter "*.list"))
+    $Lines = [IO.File]::ReadAllLines($ListFile.FullName)
+    $SelectedLines = @(
+      $Lines |
+        Where-Object { $_ -notmatch $ExcludedEntryPattern } |
+        ForEach-Object {
+          if($Configuration -eq "Release")
+          {
+            $_.Replace('x64-windows/bin/', 'x64-windows/release/bin/')
+          }
+          else
+          {
+            $_
+          }
+        }
+    )
+    if(($SelectedLines.Count -ne $Lines.Count) -or
+       (($SelectedLines -join "`n") -ne ($Lines -join "`n")))
     {
-      $Content = [IO.File]::ReadAllText($ListFile.FullName)
-      $Updated = $Content.Replace('x64-windows/bin/', 'x64-windows/release/bin/')
-      if($Updated -ne $Content)
-      {
-        [IO.File]::WriteAllText($ListFile.FullName, $Updated, [Text.UTF8Encoding]::new($false))
-      }
+      [IO.File]::WriteAllLines($ListFile.FullName, $SelectedLines, [Text.UTF8Encoding]::new($false))
     }
   }
 }
 
-$SelectedBin = Join-Path $SdkTripletRoot "$($Configuration.ToLowerInvariant())\bin"
-$OtherConfiguration = if($Configuration -eq "Debug") { "release" } else { "debug" }
+$CMakeFiles = Get-ChildItem -LiteralPath (Join-Path $SdkTripletRoot "share") -File -Recurse -Filter "*.cmake"
+foreach($CMakeFile in $CMakeFiles)
+{
+  $Content = [IO.File]::ReadAllText($CMakeFile.FullName)
+  $Updated = $Content.Replace('${_IMPORT_PREFIX}/bin/', "`${_IMPORT_PREFIX}/$ConfigurationDirectory/bin/")
+  $Updated = $Updated.Replace('${PACKAGE_PREFIX_DIR}/bin/', "`${PACKAGE_PREFIX_DIR}/$ConfigurationDirectory/bin/")
+  $Updated = $Updated.Replace('${CMAKE_CURRENT_LIST_DIR}/../../bin/', "`${CMAKE_CURRENT_LIST_DIR}/../../$ConfigurationDirectory/bin/")
+  $Updated = $Updated.Replace('${PThreads4W_INCLUDE_DIR}/../debug/bin', "`${PThreads4W_INCLUDE_DIR}/../$ConfigurationDirectory/bin")
+  $Updated = $Updated.Replace('${PThreads4W_INCLUDE_DIR}/../release/bin', "`${PThreads4W_INCLUDE_DIR}/../$ConfigurationDirectory/bin")
+  $Updated = $Updated.Replace('${PThreads4W_INCLUDE_DIR}/../bin', "`${PThreads4W_INCLUDE_DIR}/../$ConfigurationDirectory/bin")
+  if($Updated -ne $Content)
+  {
+    [IO.File]::WriteAllText($CMakeFile.FullName, $Updated, [Text.UTF8Encoding]::new($false))
+  }
+}
+
+$SelectedBin = Join-Path $SdkTripletRoot "$ConfigurationDirectory\bin"
 if(-not (Test-Path -LiteralPath $SelectedBin) -or
    (Test-Path -LiteralPath (Join-Path $SdkTripletRoot "bin")) -or
-   (Test-Path -LiteralPath (Join-Path $SdkTripletRoot "$OtherConfiguration\bin")))
+   (Test-Path -LiteralPath (Join-Path $SdkTripletRoot $OtherConfiguration)))
 {
   throw "The staged vcpkg SDK is not $Configuration-only: $SdkTripletRoot"
 }

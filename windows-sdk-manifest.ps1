@@ -22,7 +22,6 @@ if($Mode -eq "Inputs")
   {
     throw "Unable to enumerate SDK build inputs."
   }
-  $TrackedFiles += "windows-sdk-manifest.ps1"
   $TrackedFiles = @($TrackedFiles | Where-Object { $_ -notmatch '(?i)(^|/)readme\.md$' })
 
   $Files = foreach($RelativePath in ($TrackedFiles | Sort-Object -Unique))

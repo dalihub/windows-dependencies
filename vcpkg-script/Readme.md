@@ -2,7 +2,7 @@
 
 Normal users should run `windows-dependencies\install.ps1`. The scripts in this
 directory are the lower-level implementation used when a published SDK is not
-available and by the scheduled SDK build.
+available and by the SDK build workflow.
 
 ## Dependency sources
 
@@ -34,7 +34,6 @@ Omit `-Proxy` when the proxy is already supplied through the environment. Use
 `-Configuration Release` to replace the source vcpkg package set with Release-only
 packages.
 
-```powershell
 ## Network and retry behavior
 
 GitHub clone, fetch, and download operations retry up to ten times. Git uses a

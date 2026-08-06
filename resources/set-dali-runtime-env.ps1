@@ -10,14 +10,25 @@ if(-not (Test-Path -LiteralPath $SdkRoot))
   throw "WindowsDependenciesSDK was not found beside dali-env: $SdkRoot"
 }
 
+$VcpkgInstalledRoot = Join-Path $VcpkgRoot "installed\x64-windows"
 $RuntimePaths = @(
+  (Join-Path $DaliPrefix "bin"),
+  (Join-Path $VcpkgInstalledRoot "$($Configuration.ToLowerInvariant())\bin")
+) | Where-Object { Test-Path -LiteralPath $_ }
+$ManagedPaths = @(
   (Join-Path $DaliPrefix "bin"),
   (Join-Path $DaliPrefix "lib"),
   (Join-Path $SdkRoot "bin"),
   (Join-Path $SdkRoot "lib"),
-  (Join-Path $VcpkgRoot "installed\x64-windows\$($Configuration.ToLowerInvariant())\bin")
-) | Where-Object { Test-Path -LiteralPath $_ }
-$ExistingPaths = @($env:PATH -split ';' | Where-Object { $_ })
+  (Join-Path $VcpkgInstalledRoot "bin"),
+  (Join-Path $VcpkgInstalledRoot "debug\bin"),
+  (Join-Path $VcpkgInstalledRoot "release\bin")
+) | ForEach-Object { [IO.Path]::GetFullPath($_).TrimEnd('\') }
+$ExistingPaths = @(
+  $env:PATH -split ';' |
+    Where-Object { $_ } |
+    Where-Object { [IO.Path]::GetFullPath($_).TrimEnd('\') -notin $ManagedPaths }
+)
 $env:PATH = (@($RuntimePaths) + $ExistingPaths | Select-Object -Unique) -join ';'
 $env:DALI_WINDOWS_SDK_ROOT = $SdkRoot
 $env:DALI_PREFIX = $DaliPrefix

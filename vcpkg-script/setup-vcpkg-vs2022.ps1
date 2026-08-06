@@ -20,20 +20,6 @@ $ConfigurationMarker = Join-Path $InstalledTripletRoot ".dali-configuration"
 
 . (Join-Path $ScriptRoot "dependency-network.ps1")
 
-function Invoke-Native
-{
-  param(
-    [string]$Command,
-    [string[]]$Arguments
-  )
-
-  & $Command @Arguments
-  if($LASTEXITCODE -ne 0)
-  {
-    throw "$Command failed with exit code $LASTEXITCODE"
-  }
-}
-
 function Test-RequiredFile
 {
   param([string]$Path)
@@ -102,6 +88,10 @@ function Test-PatchMarkerApplied
       return ((Test-VcpkgFileContains "ports\pthreads\portfile.cmake" "0001_fix_define_timespec.patch") -and
               (Test-Path -LiteralPath (Join-Path $VcpkgRoot "ports\pthreads\0001_fix_define_timespec.patch")))
     }
+    "[VCPKG-pthreads]_0002_Use_configuration_runtime_path.patch" {
+      return ((Test-VcpkgFileContains "ports\pthreads\vcpkg-cmake-wrapper.cmake" "../debug/bin") -and
+              (Test-VcpkgFileContains "ports\pthreads\vcpkg-cmake-wrapper.cmake" "NO_DEFAULT_PATH"))
+    }
     "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch" {
       return (Test-VcpkgFileContains "ports\gettext\portfile.cmake" "MSGFMT_ARCHIVE")
     }
@@ -114,14 +104,13 @@ function Test-PatchMarkerApplied
               (Test-VcpkgFileContains "toolsrc\src\vcpkg\visualstudio.cpp" "V_143") -and
               (Test-VcpkgFileContains "ports\giflib\portfile.cmake" 'giflib-${GIFLIB_VERSION}.tar.gz'))
     }
-    "[VCPKG]_0004_Fix_x64_meson_cross_file.patch" {
-      return (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "vcpkg-x64-cross.ini")
+    "[VCPKG]_0004_Configure_x64_meson_native_build.patch" {
+      return ((Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "vcpkg-x64-native.ini") -and
+              (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "needs_exe_wrapper = false") -and
+              (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "/MACHINE:X64"))
     }
     "[VCPKG]_0005_Use_x64_python_tool.patch" {
       return (Test-VcpkgFileContains "scripts\cmake\vcpkg_find_acquire_program.cmake" "python-3.7.3-embed-amd64.zip")
-    }
-    "[VCPKG]_0006_Use_x64_meson_native_build.patch" {
-      return ((Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "--native-file `${_VCPKG_MESON_CROSS_FILE}") -and (Test-VcpkgFileContains "scripts\cmake\vcpkg_configure_meson.cmake" "/MACHINE:X64"))
     }
     "[VCPKG]_0007_Support_configuration_only_builds.patch" {
       return ((Test-VcpkgFileContains "scripts\cmake\vcpkg_install_cmake.cmake" 'VCPKG_BUILD_TYPE STREQUAL "debug"') -and
@@ -139,10 +128,7 @@ function Test-PatchMarkerApplied
               -not (Test-VcpkgFileContains "ports\libiconv\portfile.cmake" "DISABLE_INSTALL_HEADERS=ON") -and
               (Test-VcpkgFileContains "ports\pthreads\portfile.cmake" 'VCPKG_BUILD_TYPE STREQUAL "release"'))
     }
-    "[VCPKG-zlib]_0001_Use_https_fossil_archive.patch" {
-      return (Test-VcpkgFileContains "ports\zlib\portfile.cmake" "https://github.com/madler/zlib/archive/refs/tags/")
-    }
-    "[VCPKG-zlib]_0002_Use_github_source_archive.patch" {
+    "[VCPKG-zlib]_0001_Use_github_source_archive.patch" {
       return (Test-VcpkgFileContains "ports\zlib\portfile.cmake" "https://github.com/madler/zlib/archive/refs/tags/")
     }
   }
@@ -152,38 +138,6 @@ function Test-PatchMarkerApplied
 function Apply-MissingPatch
 {
   param([string]$PatchName)
-
-  if($PatchName -eq "[VCPKG]_0006_Use_x64_meson_native_build.patch")
-  {
-    $MesonHelperPath = Join-Path $VcpkgRoot "scripts\cmake\vcpkg_configure_meson.cmake"
-    $MesonContent = [IO.File]::ReadAllText($MesonHelperPath, [Text.UTF8Encoding]::new($false))
-    $CrossLine = '        list(APPEND _vcm_OPTIONS --cross-file ${_VCPKG_MESON_CROSS_FILE})'
-    $NativeLine = '        list(APPEND _vcm_OPTIONS --native-file ${_VCPKG_MESON_CROSS_FILE})'
-    $MachineLine = '        set(MESON_COMMON_LDFLAGS "${MESON_COMMON_LDFLAGS} /MACHINE:X64")'
-
-    if($MesonContent.Contains($NativeLine) -and $MesonContent.Contains($MachineLine))
-    {
-      Write-Host "Patch markers already present: $PatchName"
-      return
-    }
-    if($MesonContent.Contains($CrossLine))
-    {
-      $MesonContent = $MesonContent.Replace($CrossLine, $NativeLine)
-    }
-    if(-not $MesonContent.Contains($NativeLine))
-    {
-      throw "Unable to find the patched Meson machine-file option in $MesonHelperPath"
-    }
-    if(-not $MesonContent.Contains($MachineLine))
-    {
-      $NewLine = if($MesonContent.Contains("`r`n")) { "`r`n" } else { "`n" }
-      $MesonContent = $MesonContent.Replace($NativeLine, "$NativeLine$NewLine$MachineLine")
-    }
-
-    [IO.File]::WriteAllText($MesonHelperPath, $MesonContent, [Text.UTF8Encoding]::new($false))
-    Write-Host "Patch applied: $PatchName"
-    return
-  }
 
   $PatchPath = Join-Path $ScriptRoot $PatchName
   if(Test-PatchApplied $PatchPath)
@@ -358,6 +312,59 @@ function Reset-VcpkgPackagesForConfiguration
     }
   }
 }
+
+function Remove-OppositeConfigurationOutputs
+{
+  $PathsToRemove = if($Configuration -eq "Debug")
+  {
+    @(
+      (Join-Path $InstalledTripletRoot "bin"),
+      (Join-Path $InstalledTripletRoot "release")
+    )
+  }
+  else
+  {
+    @((Join-Path $InstalledTripletRoot "debug"))
+  }
+
+  foreach($PathToRemove in $PathsToRemove)
+  {
+    if(-not (Test-Path -LiteralPath $PathToRemove))
+    {
+      continue
+    }
+    if([IO.Path]::GetFullPath((Split-Path -Parent $PathToRemove)) -ne [IO.Path]::GetFullPath($InstalledTripletRoot))
+    {
+      throw "Refusing to clean unexpected configuration path: $PathToRemove"
+    }
+    Remove-Item -LiteralPath $PathToRemove -Recurse -Force
+  }
+
+  $InfoRoot = Join-Path $VcpkgRoot "installed\vcpkg\info"
+  if(Test-Path -LiteralPath $InfoRoot)
+  {
+    $TripletPattern = [regex]::Escape($VcpkgTriplet)
+    $ExcludedEntryPattern = if($Configuration -eq "Debug")
+    {
+      "^$TripletPattern/(?:bin|release)(?:/|$)"
+    }
+    else
+    {
+      "^$TripletPattern/debug(?:/|$)"
+    }
+
+    foreach($ListFile in (Get-ChildItem -LiteralPath $InfoRoot -File -Filter "*.list"))
+    {
+      $Lines = [IO.File]::ReadAllLines($ListFile.FullName)
+      $SelectedLines = @($Lines | Where-Object { $_ -notmatch $ExcludedEntryPattern })
+      if($SelectedLines.Count -ne $Lines.Count)
+      {
+        [IO.File]::WriteAllLines($ListFile.FullName, $SelectedLines, [Text.UTF8Encoding]::new($false))
+      }
+    }
+  }
+}
+
 function Resolve-CMakeCommand
 {
   $Existing = Get-Command cmake.exe -ErrorAction SilentlyContinue
@@ -432,15 +439,14 @@ $Patches = @(
   "[VCPKG-getopt]_0001_Apply_Fix_extern_c.patch",
   "[VCPKG-libjpeg-turbo]_0001_Apply_Fix_fill_jpeg_buffer_cb.patch",
   "[VCPKG-pthreads]_0001_Apply_Fix_define_timespec.patch",
+  "[VCPKG-pthreads]_0002_Use_configuration_runtime_path.patch",
   "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch",
   "[VCPKG]_0002_VS2022_and_modern_downloads.patch",
   "[VCPKG]_0003_Use_system_curl_on_windows.patch",
-  "[VCPKG]_0004_Fix_x64_meson_cross_file.patch",
+  "[VCPKG]_0004_Configure_x64_meson_native_build.patch",
   "[VCPKG]_0005_Use_x64_python_tool.patch",
-  "[VCPKG]_0006_Use_x64_meson_native_build.patch",
   "[VCPKG]_0007_Support_configuration_only_builds.patch",
-  "[VCPKG-zlib]_0001_Use_https_fossil_archive.patch",
-  "[VCPKG-zlib]_0002_Use_github_source_archive.patch"
+  "[VCPKG-zlib]_0001_Use_github_source_archive.patch"
 )
 
 Set-DaliProxyEnvironment -Proxy $Proxy
@@ -497,6 +503,7 @@ if(-not $SkipInstall)
   [IO.File]::WriteAllText($ConfigurationMarker, "$Configuration`n", [Text.UTF8Encoding]::new($false))
   Invoke-VcpkgInstall $Packages
   Repair-GettextToolsIfNeeded
+  Remove-OppositeConfigurationOutputs
   Assert-RequiredVcpkgFiles
 
   $Msgfmt = Join-Path $InstalledTripletRoot "tools\gettext\msgfmt.exe"

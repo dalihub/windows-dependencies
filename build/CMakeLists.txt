@@ -74,7 +74,6 @@ INSTALL(FILES ${INCLUDE_DALI_HEADERS} DESTINATION include/dali )
 INSTALL(FILES ${ROOT_SRC_DIR}/resources/fonts.conf DESTINATION share/dali )
 INSTALL(DIRECTORY DESTINATION share/dali/fonts )
 INSTALL(DIRECTORY DESTINATION share/dali/fontconfig/conf.d )
-INSTALL(FILES ${ROOT_SRC_DIR}/resources/set-dali-runtime-env.ps1 DESTINATION . )
 INSTALL( TARGETS ${name}
   EXPORT ${name}-targets
   ARCHIVE DESTINATION lib

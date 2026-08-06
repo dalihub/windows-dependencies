@@ -11,6 +11,7 @@ on:
       - "vcpkg-script/**"
       - "!vcpkg-script/Readme.md"
       - "build_windows_dependencies.ps1"
+      - "package_windows_sdk.ps1"
       - "windows-sdk-manifest.ps1"
 
 permissions:
@@ -61,3 +62,25 @@ jobs:
           if($buildProcess.ExitCode -ne 0) {
             throw "Windows dependencies SDK build failed with exit code $($buildProcess.ExitCode)"
           }
+
+      - name: Free source-build disk space
+        shell: pwsh
+        run: |
+          $sourceVcpkg = Join-Path $env:GITHUB_WORKSPACE ".deps\vcpkg"
+          $sourceVcpkg = [IO.Path]::GetFullPath($sourceVcpkg)
+          $expectedParent = [IO.Path]::GetFullPath($env:GITHUB_WORKSPACE)
+          if((Split-Path -Leaf $sourceVcpkg) -ne "vcpkg" -or
+             (Split-Path -Parent (Split-Path -Parent $sourceVcpkg)) -ne $expectedParent) {
+            throw "Refusing to remove unexpected vcpkg path: $sourceVcpkg"
+          }
+          if(Test-Path -LiteralPath $sourceVcpkg) {
+            Remove-Item -LiteralPath $sourceVcpkg -Recurse -Force
+          }
+          Get-PSDrive C
+
+      - name: Package configuration-specific SDK
+        shell: pwsh
+        run: |
+          .\package_windows_sdk.ps1 `
+            -Configuration $env:CONFIGURATION `
+            -OutputDirectory .\artifacts
