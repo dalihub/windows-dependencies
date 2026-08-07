@@ -92,8 +92,16 @@ function Test-PatchMarkerApplied
       return ((Test-VcpkgFileContains "ports\pthreads\vcpkg-cmake-wrapper.cmake" "../debug/bin") -and
               (Test-VcpkgFileContains "ports\pthreads\vcpkg-cmake-wrapper.cmake" "NO_DEFAULT_PATH"))
     }
+    "[VCPKG-pcre]_0001_Use_sourceforge_download.patch" {
+      return ((Test-VcpkgFileContains "ports\pcre\portfile.cmake" "https://downloads.sourceforge.net/project/pcre/") -and
+              -not (Test-VcpkgFileContains "ports\pcre\portfile.cmake" "https://ftp.pcre.org/"))
+    }
     "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch" {
       return (Test-VcpkgFileContains "ports\gettext\portfile.cmake" "MSGFMT_ARCHIVE")
+    }
+    "[VCPKG-fontconfig]_0001_Add_release_archive_mirror.patch" {
+      return ((Test-VcpkgFileContains "ports\fontconfig\portfile.cmake" "https://mirror.cs.vt.edu/") -and
+              (Test-VcpkgFileContains "ports\fontconfig\portfile.cmake" 'FILENAME "fontconfig-${FONTCONFIG_VERSION}.tar.xz"'))
     }
     "[VCPKG]_0003_Use_system_curl_on_windows.patch" {
       return (Test-VcpkgFileContains "scripts\cmake\vcpkg_download_distfile.cmake" "--ssl-no-revoke")
@@ -440,7 +448,9 @@ $Patches = @(
   "[VCPKG-libjpeg-turbo]_0001_Apply_Fix_fill_jpeg_buffer_cb.patch",
   "[VCPKG-pthreads]_0001_Apply_Fix_define_timespec.patch",
   "[VCPKG-pthreads]_0002_Use_configuration_runtime_path.patch",
+  "[VCPKG-pcre]_0001_Use_sourceforge_download.patch",
   "[VCPKG-gettext]_0001_Install_msgfmt_tool.patch",
+  "[VCPKG-fontconfig]_0001_Add_release_archive_mirror.patch",
   "[VCPKG]_0002_VS2022_and_modern_downloads.patch",
   "[VCPKG]_0003_Use_system_curl_on_windows.patch",
   "[VCPKG]_0004_Configure_x64_meson_native_build.patch",

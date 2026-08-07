@@ -1,0 +1,14 @@
+diff --git a/ports/fontconfig/portfile.cmake b/ports/fontconfig/portfile.cmake
+--- a/ports/fontconfig/portfile.cmake
++++ b/ports/fontconfig/portfile.cmake
+@@ -3,6 +3,7 @@ include(vcpkg_common_functions)
+ set(FONTCONFIG_VERSION 2.13.92)
+ vcpkg_download_distfile(ARCHIVE
+-    URLS "https://www.freedesktop.org/software/fontconfig/release/fontconfig-${FONTCONFIG_VERSION}.tar.gz"
+-    FILENAME "fontconfig-${FONTCONFIG_VERSION}.tar.gz"
+-    SHA512 bc6719c04489c3baba9c59ee722a2fce2707f92f95432ab2c00d3f13353c603ccd1c43f751231a42c22fac7908561f7efe734718142061934e9809cac9b6071d
++    URLS "https://www.freedesktop.org/software/fontconfig/release/fontconfig-${FONTCONFIG_VERSION}.tar.xz"
++         "https://mirror.cs.vt.edu/pub/slackware/slackware64-15.0/source/x/fontconfig/fontconfig-${FONTCONFIG_VERSION}.tar.xz"
++    FILENAME "fontconfig-${FONTCONFIG_VERSION}.tar.xz"
++    SHA512 3c8c75ac51cb45531aa02654ce6e32e6db2650679531d2c84df00dd38425c27344599484b2625983ec55b1ba7bab3be8464d7eb75286ea3a0e97a361d2ae91d4
+ )
