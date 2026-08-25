@@ -1,5 +1,5 @@
 diff --git a/toolsrc/src/vcpkg/base/downloads.cpp b/toolsrc/src/vcpkg/base/downloads.cpp
-index df6b1be09..8dc8d1a7e 100644
+index df6b1be..21466d6 100644
 --- a/toolsrc/src/vcpkg/base/downloads.cpp
 +++ b/toolsrc/src/vcpkg/base/downloads.cpp
 @@ -4,11 +4,11 @@
@@ -16,7 +16,7 @@ index df6b1be09..8dc8d1a7e 100644
  #endif
  
  namespace vcpkg::Downloads
-@@ -35,37 +35,62 @@ namespace vcpkg::Downloads
+@@ -35,37 +35,65 @@ namespace vcpkg::Downloads
                             target_file_path,
                             std::to_string(err));
  
@@ -27,30 +27,6 @@ index df6b1be09..8dc8d1a7e 100644
 -                                    WINHTTP_NO_PROXY_BYPASS,
 -                                    0);
 -        Checks::check_exit(VCPKG_LINE_INFO, hSession, "WinHttpOpen() failed: %d", GetLastError());
--
--        // Win7 IE Proxy fallback
--        if (IsWindows7OrGreater() && !IsWindows8Point1OrGreater())
--        {
--            // First check if any proxy has been found automatically
--            WINHTTP_PROXY_INFO proxyInfo;
--            DWORD proxyInfoSize = sizeof(WINHTTP_PROXY_INFO);
--            auto noProxyFound = !WinHttpQueryOption(hSession, WINHTTP_OPTION_PROXY, &proxyInfo, &proxyInfoSize) ||
--                                proxyInfo.dwAccessType == WINHTTP_ACCESS_TYPE_NO_PROXY;
--
--            // If no proxy was found automatically, use IE's proxy settings, if any
--            if (noProxyFound)
--            {
--                WINHTTP_CURRENT_USER_IE_PROXY_CONFIG ieProxy;
--                if (WinHttpGetIEProxyConfigForCurrentUser(&ieProxy) && ieProxy.lpszProxy != nullptr)
--                {
--                    WINHTTP_PROXY_INFO proxy;
--                    proxy.dwAccessType = WINHTTP_ACCESS_TYPE_NAMED_PROXY;
--                    proxy.lpszProxy = ieProxy.lpszProxy;
--                    proxy.lpszProxyBypass = ieProxy.lpszProxyBypass;
--                    WinHttpSetOption(hSession, WINHTTP_OPTION_PROXY, &proxy, sizeof(proxy));
--                }
--            }
--        }
 +		HINTERNET hSession = 0;
 +		auto vcpkg_proxy = System::get_environment_variable("VCPKG_PROXY");
 +		if ( vcpkg_proxy.get() && vcpkg_proxy.get()->length() > 1 ) {
@@ -98,15 +74,41 @@ index df6b1be09..8dc8d1a7e 100644
 +				}
 +			}
 +		}
- 
++
 +        // Do not let a stalled corporate proxy block the whole dependency
-+        // installation forever. Each WinHTTP phase gets its own 10-second
-+        // timeout; the setup script retries the resumable vcpkg install.
++        // installation forever. Resolve/connect/send get 30-second timeouts
++        // to fail fast on unreachable proxies; the receive timeout is 120s
++        // to allow large tool downloads (e.g. PowerShell Core ~50MB) through
++        // a slow corporate proxy without hitting ERROR_WINHTTP_TIMEOUT (12002).
++        // The setup script retries the resumable vcpkg install on failure.
 +        Checks::check_exit(VCPKG_LINE_INFO,
-+                           WinHttpSetTimeouts(hSession, 10000, 10000, 10000, 10000),
++                           WinHttpSetTimeouts(hSession, 30000, 30000, 30000, 120000),
 +                           "WinHttpSetTimeouts() failed: %d",
 +                           GetLastError());
-+
-+
+ 
+-        // Win7 IE Proxy fallback
+-        if (IsWindows7OrGreater() && !IsWindows8Point1OrGreater())
+-        {
+-            // First check if any proxy has been found automatically
+-            WINHTTP_PROXY_INFO proxyInfo;
+-            DWORD proxyInfoSize = sizeof(WINHTTP_PROXY_INFO);
+-            auto noProxyFound = !WinHttpQueryOption(hSession, WINHTTP_OPTION_PROXY, &proxyInfo, &proxyInfoSize) ||
+-                                proxyInfo.dwAccessType == WINHTTP_ACCESS_TYPE_NO_PROXY;
+-
+-            // If no proxy was found automatically, use IE's proxy settings, if any
+-            if (noProxyFound)
+-            {
+-                WINHTTP_CURRENT_USER_IE_PROXY_CONFIG ieProxy;
+-                if (WinHttpGetIEProxyConfigForCurrentUser(&ieProxy) && ieProxy.lpszProxy != nullptr)
+-                {
+-                    WINHTTP_PROXY_INFO proxy;
+-                    proxy.dwAccessType = WINHTTP_ACCESS_TYPE_NAMED_PROXY;
+-                    proxy.lpszProxy = ieProxy.lpszProxy;
+-                    proxy.lpszProxyBypass = ieProxy.lpszProxyBypass;
+-                    WinHttpSetOption(hSession, WINHTTP_OPTION_PROXY, &proxy, sizeof(proxy));
+-                }
+-            }
+-        }
+ 
          // Use Windows 10 defaults on Windows 7
          DWORD secure_protocols(WINHTTP_FLAG_SECURE_PROTOCOL_SSL3 | WINHTTP_FLAG_SECURE_PROTOCOL_TLS1 |
