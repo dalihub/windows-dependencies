@@ -8,6 +8,7 @@ PROJECT( ${name} LANGUAGES CXX )
 # Define options to CMake
 
 OPTION(ENABLE_DEBUG          "Enable Debug" OFF)
+OPTION(ENABLE_ASAN           "Enable AddressSanitizer" OFF)
 
 # Set up compiler definitions
 
@@ -23,6 +24,12 @@ IF( ENABLE_DEBUG )
 ENDIF()
 
 ADD_COMPILE_OPTIONS( /std:c++17 ) # c++17 support
+
+IF( ENABLE_ASAN )
+  MESSAGE( STATUS "AddressSanitizer: enabled" )
+  ADD_COMPILE_OPTIONS( /fsanitize=address /Zi )
+  SET( CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} /INCREMENTAL:NO" )
+ENDIF()
 
 SET( ROOT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 SET( SOURCE_DIR ${ROOT_SRC_DIR}/src )

@@ -6,7 +6,8 @@ param(
   [string]$VcpkgRoot = "",
   [switch]$SkipThirdParty,
   [switch]$Clean,
-  [int]$Jobs = 8
+  [int]$Jobs = 8,
+  [switch]$EnableASAN
 )
 
 $ErrorActionPreference = "Stop"
@@ -47,6 +48,12 @@ $Context = New-DaliBuildContext `
   -InstallPrefix $WorkspaceContext.SdkRoot
 Initialize-DaliBuildEnvironment -Context $Context
 $Common = Get-DaliCommonCMakeArguments -Context $Context -Configuration $Configuration
+
+if($EnableASAN)
+{
+  $Common += "-DENABLE_ASAN=ON"
+  Write-Host "AddressSanitizer enabled for windows-dependencies build" -ForegroundColor Yellow
+}
 
 Invoke-DaliCMakeProject `
   -Name "windows-dependencies" `

@@ -155,6 +155,68 @@ directory if it exists, `dali-env`, and `WindowsDependenciesSDK`, then run
 independent and may be retained to avoid downloading and rebuilding unchanged
 third-party inputs.
 
+## Building with AddressSanitizer (ASAN)
+
+AddressSanitizer detects memory errors such as buffer overflows, use-after-free,
+and heap corruption. The `-EnableASAN` switch instruments all native libraries
+with `/fsanitize=address`.
+
+### Prerequisites
+
+- Visual Studio 2022 with MSVC v143 (ASAN is built into MSVC; no separate
+  runtime installation is needed)
+- Debug configuration is recommended for ASAN builds
+
+### Build order
+
+ASAN requires every library in the link chain to be compiled with the same
+sanitizer flags. `-EnableASAN` on `install.ps1` automatically forces a source
+build because the pre-built published SDK is not ASAN-instrumented.
+
+```powershell
+# 1. Build windows-dependencies with ASAN (forces source build)
+cd <workspace>\windows-dependencies
+.\install.ps1 -EnableASAN -Configuration Debug
+
+# 2. Build dali-core with ASAN
+cd <workspace>\dali-core
+.\build\windows\build.ps1 -Configuration Debug -EnableASAN -Clean
+
+# 3. Build dali-adaptor with ASAN
+cd <workspace>\dali-adaptor
+.\build\windows\build.ps1 -Configuration Debug -EnableASAN -Clean
+
+# 4. Build dali-ui with ASAN
+cd <workspace>\dali-ui
+.\build\windows\build.ps1 -Configuration Debug -EnableASAN -Clean
+```
+
+### Build and run automated tests (UTC) with ASAN
+
+```powershell
+# Build and run dali-core UTCs
+cd <workspace>\dali-core\automated-tests
+.\build.ps1 -Configuration Debug -EnableASAN -Clean
+.\execute.ps1 -Configuration Debug
+
+# Build and run dali-adaptor UTCs
+cd <workspace>\dali-adaptor\automated-tests
+.\build.ps1 -Configuration Debug -EnableASAN -Clean
+.\execute.ps1 -Configuration Debug
+
+# Build and run dali-ui UTCs
+cd <workspace>\dali-ui\automated-tests
+.\build.ps1 -Configuration Debug -EnableASAN -Clean
+.\execute.ps1 -Configuration Debug
+```
+
+The `execute.ps1` script automatically copies `clang_rt.asan_dynamic-x86_64.dll`
+to the test executable directory so that ASAN can report source locations.
+
+When ASAN detects a memory error, the test process prints a diagnostic report
+to stderr and exits with a non-zero code. Test results and logs are written to
+`automated-tests\results\windows\<timestamp>\`.
+
 ## Build the dependency SDK from source
 
 Normal users should use `install.ps1`. SDK maintainers can build the public SDK

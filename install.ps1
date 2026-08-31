@@ -6,7 +6,8 @@ param(
   [string]$ReleaseRepository = "dalihub/windows-dependencies",
   [string]$ReleaseTag = "windows-sdk-latest",
   [switch]$BuildFromSource,
-  [int]$Jobs = 8
+  [int]$Jobs = 8,
+  [switch]$EnableASAN
 )
 
 $ErrorActionPreference = "Stop"
@@ -139,8 +140,12 @@ function Install-DownloadedSdk
   return $true
 }
 
+# When ASAN is enabled, we must build from source so that
+# dali-windows-dependencies.lib is compiled with /fsanitize=address.
+# The pre-built published SDK is not ASAN-instrumented and would cause
+# LNK2038 metadata mismatches.
 $InstalledRelease = $false
-if(-not $BuildFromSource)
+if(-not $BuildFromSource -and -not $EnableASAN)
 {
   $InstalledRelease = Install-DownloadedSdk
 }
@@ -156,6 +161,10 @@ if(-not $InstalledRelease)
   if($Proxy)
   {
     $BuildArguments.Proxy = $Proxy
+  }
+  if($EnableASAN)
+  {
+    $BuildArguments.EnableASAN = $true
   }
   & (Join-Path $ScriptRoot "build_windows_dependencies.ps1") @BuildArguments
 }
